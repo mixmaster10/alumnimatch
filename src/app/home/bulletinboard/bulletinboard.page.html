@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Bulletin Board</ion-title>
+    <ion-buttons slot="end" class="addPost" (click)="_handleNewPost()">
+      <ion-button>
+        <ion-icon icon-only style="font-size: x-large;" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar class="segments-toolbar">
+    <ion-segment mode="ios" [(ngModel)]="postType" (ionChange)="changePostType($event)">
+      <ion-segment-button mode="ios" value="other" appAM> Posts </ion-segment-button>
+      <ion-segment-button mode="ios" value="own" appAM> My Posts </ion-segment-button>
+      <ion-segment-button mode="ios" value="filter" appAM> Filter </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [ngSwitch]="postType">
+  <app-loading *ngIf="isLoading"></app-loading>
+  <ion-grid class="h-full" *ngSwitchDefault>
+    <ion-row *ngIf="!isLoading">
+      <div *ngIf="posts === undefined || posts.length === 0" style="width: 100%;">
+        <ion-col *ngIf="postType === 'other'" size="12" class="loading">
+          <ion-note>Be the first member in this network to post on the Bulletin Board! Start something amazing.</ion-note>
+        </ion-col>
+        <ion-button *ngIf="postType === 'other'" style="margin: auto" color="danger" expand="block" shape="round" (click)="_handleNewPost()">
+            Add the first post!
+        </ion-button>
+      <!-- </div>
+      <div *ngIf="postType === 'own'"> -->
+        <ion-col *ngIf="postType === 'own'" size="12" class="loading">
+          <ion-note>You haven't posted anything yet! Start something amazing.</ion-note>
+        </ion-col>
+        <ion-button *ngIf="postType === 'own'" style="margin: auto;" color="danger" expand="block" shape="round" (click)="_handleNewPost()">
+            Add your first post!
+        </ion-button>
+      <!-- </div>
+      <div *ngIf="postType === 'filter'"> -->
+        <ion-col *ngIf="postType === 'filter'" size="12" class="loading">
+          <ion-note>Be the first member in this network to post under this filter! Start something amazing.</ion-note>
+        </ion-col>
+        <ion-button *ngIf="postType === 'filter'" style="margin: auto" color="danger" expand="block" shape="round" (click)="_handleNewPost()">
+            Add the first post!
+        </ion-button>
+      </div>
+
+      <ion-col *ngFor="let post of posts; let i = index" size="12">
+        <ion-card class="ion-no-margin">
+          <ion-item *ngIf="postType === 'other'" lines="full">
+            <ion-avatar slot="start">
+              <ion-badge *ngIf="user && user.user.college && post.college !== user.user.college.id" appAM [theme]="post.college" class="different-alumni">
+                {{post.college.acronym || 'O'}}
+              </ion-badge>
+              <ion-img src="{{post.user.avatar}}">
+              </ion-img>
+              
+            </ion-avatar>
+
+            <ion-label>
+              <h3>{{post.user.first_name}} {{post.user.last_name}}</h3>
+              <p>{{post.created_at | relativeTime}}</p>
+            </ion-label>
+          </ion-item>
+
+          <iframe *ngIf="post.safeUrl" [src]="post.safeUrl" style="width: 100%;height:240px;"></iframe>
+          <div style="cursor: pointer;" (click)="composePost(post.id)">
+            <img *ngIf="post.photoUrl && !post.embed" onerror='this.src="assets/imgs/no-image.png"' style="background: #f2f2f2; height: 200px;object-fit: cover; cursor: pointer;" src="{{post.photoUrl}}" alt="" />
+            <ion-card-header class="ion-no-padding ion-no-margin">
+              <ion-card-title>{{post.title}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content button>
+              <p [innerHTML]="post.description | linkify"></p>
+              <div class="postType">
+                <ion-badge color="secondary" appAM>{{post.type.name}}</ion-badge>
+                <ion-badge color="secondary" appAM>{{post.category.name}}</ion-badge>
+              </div>
+            </ion-card-content>
+
+          </div>
+          
+          <ion-footer>
+            <ion-row>
+              <ion-col>
+                <button (click)="likePost(post.id)">
+                  <ion-icon name="thumbs-up" [class.active]="post.isLiked"></ion-icon>
+                  <ion-note>{{post.likes_count}} Likes</ion-note>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button style="cursor: default;">
+                  <ion-icon name="text"></ion-icon>
+                  <ion-note>{{post.comments_count}} Comments</ion-note>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button style="cursor: default;">
+                  <ion-icon name="time"></ion-icon>
+                  <ion-note>{{post.created_at | relativeTime}}</ion-note>
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-footer>
+        </ion-card>
+        <app-ad *ngIf="ad && i % 5 === 0 && i !== 0" [sponsor]="sponsor" [ad]="ad"></app-ad>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

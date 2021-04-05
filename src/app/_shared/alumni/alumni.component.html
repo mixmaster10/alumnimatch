@@ -1,0 +1,92 @@
+<!-- Same Univerisity -->
+<ion-item class="alumni" (click)="viewProfile()" *ngIf="user && user.college.id === currentUserCollege.id">
+  <div slot="start" class="match"  appAM>
+    <img [src]="user?.avatar || 'assets/imgs/user.png'" class="avatar" onerror="this.onerror=null;this.src='assets/imgs/user.png';" alt="">
+    <img src="assets/icon/check_friend.png" class="friend" *ngIf="user.is_friend && user.is_friend == 1">
+    <div class="percent">
+      <div>
+       <b> {{user?.match}}% </b> </div>
+    </div>
+  </div>
+  <ion-label class="info">
+    <h4 appAM>{{user?.first_name}} {{user?.last_name}} 
+      <ion-icon name="ios-radio-button-on" class="on-off-icon" [ngClass]="user?.online ? 'online' : 'offline'"></ion-icon>
+      <ion-icon *ngIf="detailIcon" name="md-arrow-round-forward" class="ion-float-right right-icon"></ion-icon>
+    </h4>
+    <ion-grid>
+     
+      <ion-row class="ion-align-items-center" *ngIf="user?.shares != undefined">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="ios-people" appAM></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Shared: {{ user?.shares }}</ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center" *ngIf="!user?.graduated">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="calendar" appAM></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Joined: {{ user?.verified_at | date }}</ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center" *ngIf="user?.graduated">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="calendar" appAM></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Graduated: {{ user?.graduated.year }}</ion-col>
+      </ion-row>
+       <ion-row class="ion-align-items-center" *ngIf="user?.distance != undefined">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="ios-pin" appAM></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Miles Away: {{ user?.distance | number : '.0-1'}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-label>
+</ion-item>
+
+<!-- Other University -->
+<ion-item class="alumni" (click)="viewProfile()" *ngIf="user && user.college.id !== currentUserCollege.id">
+  <div slot="start" class="match" appAM [theme]="user.college">
+    <ion-badge appAM [theme]="user.college" class="different-alumni">
+      {{user.college.acronym || 'O'}}
+    </ion-badge>
+    <img [src]="user?.avatar || 'assets/imgs/user.png'" class="avatar" onerror="this.onerror=null;this.src='assets/imgs/user.png';" alt="">
+    <img src="assets/icon/check_friend.png" class="friend" *ngIf="user.is_friend && user.is_friend == 1">
+    <div class="percent">
+      <div>
+       <b> {{user?.match}}% </b> </div>
+    </div>
+  </div>
+  <ion-label class="info">
+    <h4 appAM [theme]="user.college">{{user?.first_name}} {{user?.last_name}} 
+      <ion-icon name="ios-radio-button-on" class="on-off-icon" [ngClass]="user?.online ? 'online' : 'offline'"></ion-icon>
+      <ion-icon *ngIf="detailIcon" name="md-arrow-round-forward" class="ion-float-right right-icon"></ion-icon>
+    </h4>
+    <ion-grid>
+     
+      <ion-row class="ion-align-items-center" *ngIf="user?.shares != undefined">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="ios-people" appAM [theme]="user.college"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Shared: {{ user?.shares }}</ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center" *ngIf="!user?.graduated">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="calendar" appAM [theme]="user.college"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Joined: {{ user?.verified_at | date }}</ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center" *ngIf="user?.graduated">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="calendar" appAM [theme]="user.college"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Graduated: {{ user?.graduated.year }}</ion-col>
+      </ion-row>
+       <ion-row class="ion-align-items-center" *ngIf="user?.distance != undefined">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="ios-pin" appAM [theme]="user.college"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Miles Away: {{ user?.distance | number : '.0-1'}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-label>
+</ion-item>

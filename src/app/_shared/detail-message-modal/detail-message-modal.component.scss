@@ -1,0 +1,75 @@
+.title {
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.message_title {
+     font-size:16px;
+     font-weight:bold;
+     margin-left:8px;
+     display: inline;
+}
+.label_title {
+    color:#999;
+    font-size:16px;
+    font-weight: bold;
+    margin-right:8px;
+}
+.message_content {
+    font-size:14px;
+
+}
+.buttonArea {
+    margin:8px;
+    white-space: nowrap;
+}
+.btnReply {
+    background-color:rgb(127,177,40);
+    border:rgb(127,177,40) 2px solid;
+}
+.btnForward {
+    background-color: rgb(233,133,19);
+    border:rgb(233,133,19) 2px solid;
+}
+.btnTrash {
+    background-color: rgb(165, 34, 34);
+    border: rgb(165, 34, 34) 2px solid;
+    
+}
+.detailBtn {
+    font-size:14px;
+    color:#fff;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 16px;
+    height: 32px;
+    padding: 5px;
+}
+.detailIcon {
+    font-size:16px;
+    margin-right: 8px;
+}
+.clear {
+    border-bottom:#ddd 2px solid;
+    margin:7px 12px;
+}
+.notification_no {
+    position: absolute;
+    top:33px;
+    left:5px;
+    padding:0px 4px;
+    border-radius: 16px;
+    font-size:14px;
+    background-color:rgba(100,100,100,0.3);
+    color:#fff;
+}
+.notification {
+    display: inline;
+    padding-top:30px;
+    position: relative;
+}
+.lbl-from {
+    color:#999;
+    font-size:16px;
+    font-weight: bold;
+    margin-right:8px;
+}

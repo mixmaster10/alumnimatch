@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+      <ion-title>Invite Code Needed</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="ion-text-center ion-padding">
+    <img src="assets/imgs/login/invite-code-icon.png" class="thumb-img">
+    <h1 class="title-thanks">Got Your Invite Code?</h1>
+    <p class="description">
+    You must have an invite code from another alumni from your college in order to join.  
+     <span>Please type in your invite code below:</span>
+    </p>
+    <ion-item lines="none">
+      <ion-input type="number" full round placeholder="Add Invite Code" [(ngModel)]="inviteCode">
+      </ion-input>
+    </ion-item>
+    <ion-button class="nextBtn" expand="full" (click)="verifyInviteCode()">Submit</ion-button>
+    <p class="description">
+    FYI! Registration can take up to 5 minutes to complete. This info is used to match YOU with other college alumni. Have fun and imagine the people you will meet!
+<br><br>Community | Shared Passions | Legacy
+</div>
+</ion-content>

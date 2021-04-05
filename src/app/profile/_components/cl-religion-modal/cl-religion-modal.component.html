@@ -1,0 +1,143 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Your Spirituality</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-label class="am-label" position="stacked">What is your Religion or Spirituality?</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-select [(ngModel)]="data.religion" okText="CHOOSE" cancelText="CANCEL" placeholder="What is your Religion?" [interfaceOptions]="selectReligionOption">
+      <ion-select-option *ngFor="let item of religions; let i = index;" [value]="i">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div *ngIf="data.religion">
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label ion-margin-top" position="stacked">On scale of 1 to 10 how dedicated / invovled are you with this religion?</ion-label>
+      <ion-range [(ngModel)]="data.church" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': data.church === 0}">0</div>
+        <div [ngClass]="{'active': data.church === 1}">1</div>
+        <div [ngClass]="{'active': data.church === 2}">2</div>
+        <div [ngClass]="{'active': data.church === 3}">3</div>
+        <div [ngClass]="{'active': data.church === 4}">4</div>
+        <div [ngClass]="{'active': data.church === 5}">5</div>
+        <div [ngClass]="{'active': data.church === 6}">6</div>
+        <div [ngClass]="{'active': data.church === 7}">7</div>
+        <div [ngClass]="{'active': data.church === 8}">8</div>
+        <div [ngClass]="{'active': data.church === 9}">9</div>
+        <div [ngClass]="{'active': data.church === 10}">10</div>
+      </ion-row>
+    </ion-item>
+
+    <ion-label class="am-label ion-margin-top" position="stacked">How many years have you been within this religion?</ion-label>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.year" okText="CHOOSE" cancelText="CANCEL" placeholder="How many years have you been this religion?" [interfaceOptions]="selectReligionYearsOption">
+        <ion-select-option *ngFor="let item of years; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- <ion-label class="am-label ion-margin-top" position="stacked">How important is your religion for matching you to: </ion-label>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.important" okText="CHOOSE" cancelText="CANCEL" placeholder="How important is your religion for matching you to?" [interfaceOptions]="selectImportantOption">
+        <ion-select-option *ngFor="let item of importances; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label" position="stacked">On a scale from 1 to 10 how much do you want to be matched with others for romantic dating relationships with the same religion as you?</ion-label>
+      <ion-range [(ngModel)]="data.dating_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': data.dating_scale === 0}">0</div>
+        <div [ngClass]="{'active': data.dating_scale === 1}">1</div>
+        <div [ngClass]="{'active': data.dating_scale === 2}">2</div>
+        <div [ngClass]="{'active': data.dating_scale === 3}">3</div>
+        <div [ngClass]="{'active': data.dating_scale === 4}">4</div>
+        <div [ngClass]="{'active': data.dating_scale === 5}">5</div>
+        <div [ngClass]="{'active': data.dating_scale === 6}">6</div>
+        <div [ngClass]="{'active': data.dating_scale === 7}">7</div>
+        <div [ngClass]="{'active': data.dating_scale === 8}">8</div>
+        <div [ngClass]="{'active': data.dating_scale === 9}">9</div>
+        <div [ngClass]="{'active': data.dating_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label" position="stacked">On a scale from 1 to 10 how much do you want to be matched with others for making new friendships with the same religion as you?</ion-label>
+      <ion-range [(ngModel)]="data.friendship_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': data.friendship_scale === 0}">0</div>
+        <div [ngClass]="{'active': data.friendship_scale === 1}">1</div>
+        <div [ngClass]="{'active': data.friendship_scale === 2}">2</div>
+        <div [ngClass]="{'active': data.friendship_scale === 3}">3</div>
+        <div [ngClass]="{'active': data.friendship_scale === 4}">4</div>
+        <div [ngClass]="{'active': data.friendship_scale === 5}">5</div>
+        <div [ngClass]="{'active': data.friendship_scale === 6}">6</div>
+        <div [ngClass]="{'active': data.friendship_scale === 7}">7</div>
+        <div [ngClass]="{'active': data.friendship_scale === 8}">8</div>
+        <div [ngClass]="{'active': data.friendship_scale === 9}">9</div>
+        <div [ngClass]="{'active': data.friendship_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label" position="stacked">On a scale from 1 to 10 how much do you want to be matched with others for work / career type of relationships with the same religion as you?</ion-label>
+      <ion-range [(ngModel)]="data.work_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': data.work_scale === 0}">0</div>
+        <div [ngClass]="{'active': data.work_scale === 1}">1</div>
+        <div [ngClass]="{'active': data.work_scale === 2}">2</div>
+        <div [ngClass]="{'active': data.work_scale === 3}">3</div>
+        <div [ngClass]="{'active': data.work_scale === 4}">4</div>
+        <div [ngClass]="{'active': data.work_scale === 5}">5</div>
+        <div [ngClass]="{'active': data.work_scale === 6}">6</div>
+        <div [ngClass]="{'active': data.work_scale === 7}">7</div>
+        <div [ngClass]="{'active': data.work_scale === 8}">8</div>
+        <div [ngClass]="{'active': data.work_scale === 9}">9</div>
+        <div [ngClass]="{'active': data.work_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label" position="stacked">On a scale from 1 to 10 how much do you want to be matched with others for spiritual guidance and counseling with the same religion as you?</ion-label>
+      <ion-range [(ngModel)]="data.spiritual_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': data.spiritual_scale === 0}">0</div>
+        <div [ngClass]="{'active': data.spiritual_scale === 1}">1</div>
+        <div [ngClass]="{'active': data.spiritual_scale === 2}">2</div>
+        <div [ngClass]="{'active': data.spiritual_scale === 3}">3</div>
+        <div [ngClass]="{'active': data.spiritual_scale === 4}">4</div>
+        <div [ngClass]="{'active': data.spiritual_scale === 5}">5</div>
+        <div [ngClass]="{'active': data.spiritual_scale === 6}">6</div>
+        <div [ngClass]="{'active': data.spiritual_scale === 7}">7</div>
+        <div [ngClass]="{'active': data.spiritual_scale === 8}">8</div>
+        <div [ngClass]="{'active': data.spiritual_scale === 9}">9</div>
+        <div [ngClass]="{'active': data.spiritual_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label" position="stacked">On a scale from 1 to 10 how much do you want to be matched with others for In General with the same religion as you?</ion-label>
+      <ion-range [(ngModel)]="data.general_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': data.general_scale === 0}">0</div>
+        <div [ngClass]="{'active': data.general_scale === 1}">1</div>
+        <div [ngClass]="{'active': data.general_scale === 2}">2</div>
+        <div [ngClass]="{'active': data.general_scale === 3}">3</div>
+        <div [ngClass]="{'active': data.general_scale === 4}">4</div>
+        <div [ngClass]="{'active': data.general_scale === 5}">5</div>
+        <div [ngClass]="{'active': data.general_scale === 6}">6</div>
+        <div [ngClass]="{'active': data.general_scale === 7}">7</div>
+        <div [ngClass]="{'active': data.general_scale === 8}">8</div>
+        <div [ngClass]="{'active': data.general_scale === 9}">9</div>
+        <div [ngClass]="{'active': data.general_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+  </div>
+</ion-content>
+  
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,87 @@
+.segments-toolbar {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  --min-height: 24px;
+}
+
+.w3-animate-opacity {
+  animation: opac 0.8s;
+}
+@keyframes opac {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.addPost {
+  font-size: 23px;
+  margin-right: 10px;
+}
+ion-grid {
+  background: #f2f2f2;
+}
+ion-card {
+  background-color: #ffffff;
+  ion-card-header {
+    padding: 10px;
+    ion-card-title {
+      font-size: 16px;
+    }
+  }
+  ion-card-content {
+    padding: 0 10px 10px;
+  }
+  ion-footer {
+    border-top: 1px solid #ebebeb;
+    ion-col {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  ion-icon {
+    color: #acabab;
+    &.active {
+      color: #9a2221;
+    }
+  }
+  button {
+    background-color: transparent;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    ion-note {
+      font-size: 11px;
+      letter-spacing: 0.1px;
+      margin-top: 5px;
+    }
+  }
+  .postType {
+    margin-top: 6px;
+    ion-badge + ion-badge {
+      margin-left: 6px;
+    }
+  }
+}
+.h-full {
+  height: 100%;
+}
+.loading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.different-alumni {
+  border-radius: 10px;
+  position: absolute;
+  margin: -1% 0 0 -2%;
+  display: inline;
+  font-size: 10px;
+}

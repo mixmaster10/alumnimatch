@@ -1,0 +1,95 @@
+<ion-header no-border>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-close"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngIf="step !== 1" mode="md" (click)="_handlePrev()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="isLoading">
+  <app-loading *ngIf="isLoading"></app-loading>
+</ion-content>
+
+<ion-content class="center" *ngIf="!isLoading && isError">
+  <ion-note>Error: {{ errorMessage }}</ion-note>
+</ion-content>
+
+<ion-content *ngIf="!isLoading && !isError && (step === 1 || step === 2)">
+  <ion-radio-group *ngIf="step === 1" name="postTypeId" value="{{ post.postTypeId }}">
+    <ion-list class="ion-no-margin ion-no-padding">
+      <ion-item (ionSelect)="_handleSelection($event)" *ngFor="let type of postTypes" lines="full" class="item">
+        <ion-radio color="danger" value="{{ type.id }}" slot="start"></ion-radio>
+        <ion-label>
+          <h3 style="font-size: 14px; letter-spacing: 0.5px;">{{ type.name }}</h3>
+          <ion-note style="font-size: 12px; letter-spacing: 0.5px;" class="ion-text-wrap">{{ type.shortDescription }}</ion-note>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-radio-group>
+
+  <ion-radio-group *ngIf="step === 2" name="postCategoryId" value="{{ post.postCategoryId }}">
+    <ion-list class="ion-no-margin ion-no-padding">
+      <ion-item (ionSelect)="_handleSelection($event)" *ngFor="let type of postTypesCategory" lines="full" class="item">
+        <ion-radio color="danger" value="{{ type.id }}" slot="start"></ion-radio>
+        <ion-label>
+          <h3 style="font-size: 14px; letter-spacing: 0.5px;">{{ type.name }}</h3>
+          <ion-note style="font-size: 12px; letter-spacing: 0.5px;" class="ion-text-wrap">{{ type.shortDescription }}</ion-note>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-radio-group>
+</ion-content>
+
+<ion-content class="ion-padding ion-relative" *ngIf="!isLoading && !isError && step === 3">
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item class="am-control-item" lines="none">
+      <div>
+        <ion-input id="title" name ="title" [value]="post.title || ''" (ionInput)="_handleInputChange($event)" type="text" placeholder="Title" maxlength="150"></ion-input>
+        <ion-note class= "required hidden" name ="required">Required</ion-note>
+        <ion-note class="right">{{ post.title?.length || 0 }}/150</ion-note>
+      </div>
+    </ion-item>
+    <ion-item class="am-control-item ion-margin-top" lines="none">
+      <div>
+        <ion-textarea id="description" name ="description" [value]="post.description || ''" (ionInput)="_handleInputChange($event)" placeholder="Description (add a YouTube video link here instead of adding a photo)" rows="5" maxlength="300"></ion-textarea>
+        <ion-note class= "required hidden" name ="required">Required</ion-note>
+        <ion-note class="right">{{ post.description?.length || 0 }}/300</ion-note>
+      </div>
+    </ion-item>
+    <ion-note class= "required hidden" name ="required">Required</ion-note>
+    <!-- <ion-item class="am-control-item ion-margin-top" lines="none">
+      <div>
+        <ion-textarea id="summary" name ="summary"[value]="post.summary || ''" (ionInput)="_handleInputChange($event)" placeholder="Add summary" rows="3" maxlength="144"></ion-textarea>
+        <ion-note class= "required hidden" name ="required">Required</ion-note>
+        <ion-note class="right">{{ post.summary?.length || 0 }}/300</ion-note>
+      </div>
+    </ion-item> -->
+    <ion-item class="am-control-item" lines="none">
+      <div>
+        <div style="position: relative; text-align: center; color: black;">
+          <ion-img id="photoTest" (click)="takePhoto()" (ionError)="failure(this)" (ionImgDidLoad)="success()" class="ion-margin-to" [src]="post?.photoUrl || '/assets/imgs/no-image.png'"></ion-img>
+          <div style="position: absolute; top: 4px;">Add photo from device</div>
+        </div>
+        
+        <p style="text-align: center;">[or enter URL]</p>
+        <ion-input id="photoUrl" name ="photoUrl" [value]="post.photoUrl || ''" (ionInput)="_handleInputChange($event)" type="text" placeholder="Add URL Link"></ion-input>
+        <ion-note class= "required hidden" name ="required">Required</ion-note>
+        <ion-note>include image (png, jpeg, gif) with http:// or https://</ion-note>
+      </div>
+    </ion-item>
+  </ion-list>
+  <app-loading *ngIf="isSubmitting" class="loadingFull" isFull="{true}"></app-loading>
+</ion-content>
+
+<ion-footer *ngIf="!isLoading && !isError" appAM class="ion-no-border">
+  <ion-toolbar>
+    <ion-button disabled="{{ isSubmitting }}" appAM expand="block" (click)="(step === 3 && isValid()) ? _handlePublish() : _handleNext()" class="ion-no-margin">{{ isLast ? 'Publish' : 'Next' }}</ion-button>
+  </ion-toolbar>
+</ion-footer>

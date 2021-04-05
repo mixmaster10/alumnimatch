@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar appAM>
+      <ion-buttons slot="start">
+        <ion-button mode="md" (click)="dismiss()">
+          <ion-icon name="md-arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>Gender, Age & Ethnicity</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <p class="am-title">Please Select Your Gender:</p>
+    <ion-item class="am-control-item" lines="none">
+      <ion-select [(ngModel)]="gender" okText="CHOOSE" cancelText="CANCEL" placeholder="Please Select Your Gender:" [interfaceOptions]="selectGenderOption">
+        <ion-select-option *ngFor="let item of genders; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <p class="am-title">Choose Your Age Group:</p>
+    <ion-item class="am-control-item" lines="none">
+      <ion-select [(ngModel)]="age" okText="CHOOSE" cancelText="CANCEL" placeholder="Choose Your Age Group:" [interfaceOptions]="selectAgeOption">
+        <ion-select-option *ngFor="let age of agegroups; let i = index;" [value]="i">{{age}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <p class="am-title">What is your Ethnicity?</p>
+    <ion-item class="am-control-item" lines="none">
+      <ion-select [(ngModel)]="ethnicity.ethnicity" okText="CHOOSE" cancelText="CANCEL" placeholder="What is your Ethnicity?" [interfaceOptions]="selectEthnicityOption">
+        <ion-select-option *ngFor="let item of ethnicities; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="am-control-item" mode="ios">
+      <ion-label class="ion-padding-left">Ethnicity Privacy:</ion-label>
+      <ion-toggle appAM [(ngModel)]="ethnicity.privacy" mode="ios" slot="start"></ion-toggle>
+    </ion-item>
+    <ion-label class="am-label ion-margin-top">
+      By default your ethnicity is set to public, if you would like to this to be private only to you, turn the privacy switch to on.
+    </ion-label>
+  </ion-content>
+  
+  <ion-footer appAM class="btn-footer">
+    <ion-toolbar>
+      <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+    </ion-toolbar>
+  </ion-footer>

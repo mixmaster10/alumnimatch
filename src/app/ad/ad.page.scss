@@ -1,0 +1,109 @@
+.vertical-center {
+    .inner-scroll {
+      display: flex;
+      justify-content: center;
+      padding: 30px;
+    }
+  }
+  
+  .head {
+    font-size: 16px;
+    flex: 1 1 0%;
+    margin-left: 10px;
+  }
+  
+  .postType {
+    //   padding: 10px 0;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   width: 100%;
+    ion-badge {
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+    ion-badge + ion-badge {
+      margin-left: 5px;
+    }
+  }
+  .like {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    ion-icon {
+      font-size: 23px;
+      color: #c5c5c5;
+      &.active {
+        color: #9a2221;
+      }
+    }
+    ion-note {
+      margin-top: 3px;
+      font-size: 12px;
+    }
+  }
+  .img {
+    min-height: 160px;
+    background-color: #dedede;
+  }
+  ion-avatar {
+    width: 30px;
+    height: 30px;
+  }
+  .title {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .input-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+  ion-footer {
+    ion-toolbar {
+      --min-height: 40px;
+    }
+    ion-textarea {
+      font-size: 14px;
+    }
+    ion-button {
+      color: #9b2222;
+    }
+  }
+
+  .sm-sponsor {
+    //top: 25%;
+    //position: relative;
+    //text-align: center;
+    /* min-height: 76px;
+    min-width: 72px; */
+    padding-left: 3%;
+    //padding-top: 5%;
+    .sm-sponsor-avatar {
+  
+      //position: absolute;
+      border-radius: 50%;
+      //top: 0px;
+      //left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      background-color: #fff;
+      box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
+    }
+  
+    .sm-sponsor-match-rate {
+      position: absolute;
+
+      //top: 42px;
+      //left: 50%;
+      //padding-bottom: 5%;
+      margin-top: -2%;
+      transform: translateX(-50%);
+      border-radius: 12px;
+      padding: 2px 6px 0px 6px;
+      color: #fff;
+      font-size: 12px;
+    }
+  }

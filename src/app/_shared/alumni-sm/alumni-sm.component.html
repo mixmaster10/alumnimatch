@@ -1,0 +1,6 @@
+<div *ngIf="user.id !== -1" class="sm-friend" (click)="viewProfile()">
+  <img [src]="user.avatar || 'assets/imgs/user.png'" width="48" height="48" class="sm-friend-avatar" onerror="this.onerror=null; this.src='assets/imgs/user.png';" alt="">
+  <div appAM class="sm-friend-match-rate">{{user.match || 0}}%</div>
+  <ion-icon name="ios-radio-button-on" class="on-off-icon" [ngClass]="user?.online ? 'online' : 'offline'"></ion-icon>
+  <span class="sm-friend-first-name">{{user.first_name || user.last_name}}</span>
+</div>

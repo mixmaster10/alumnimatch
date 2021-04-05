@@ -1,0 +1,41 @@
+.description {
+    font-size: 16px;
+    text-align: justify;
+    span {
+        color: #09548a;
+        border-bottom: #09548a 1px solid;
+    }
+}
+ion-item {
+    --background: #ececec;
+    --border-radius: 4px;
+    --border-width: 1px;
+    --border-color: #ececec;
+    --padding-start: 0;
+    ion-input {
+        --color: #09548a;
+        font-size: 16px;
+        --padding-top: 0;
+        --padding-bottom: 0;
+        --padding-start: 16px;
+        --padding-end: 16px;
+    }
+    ion-textarea {
+        --color: #09548a;
+        font-size: 16px;
+        --padding-top: 8px;
+        --padding-bottom: 8px;
+        --padding-start: 16px;
+        --padding-end: 16px;
+    }
+}
+.nextBtn {
+    white-space: nowrap;
+    color: #ffffff;
+    font-size: 16px;
+    --background: #9b2121;
+    --background-hover: #9b2121;
+    --border-radius: 0;
+    box-shadow: 3px 3px 3px #925b5b;
+    height: 36px;
+}

@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "56173969666",
+    "firebase_url": "https://alumnimatch-f290c.firebaseio.com",
+    "project_id": "alumnimatch-f290c",
+    "storage_bucket": "alumnimatch-f290c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56173969666:android:524dacfda382777d",
+        "android_client_info": {
+          "package_name": "com.alumni.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56173969666-t96aqmimk2vfo92ilkjritg9ifa5m3sq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alumni.app",
+            "certificate_hash": "5e0de03d74176b4b484b70d04696b0ec0d1b6f32"
+          }
+        },
+        {
+          "client_id": "56173969666-9s73i0kh7r1iake3hhse0q9poup0brl3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alumni.app",
+            "certificate_hash": "e29d4a50b695a0c32af5376ee01facc2e50a09ee"
+          }
+        },
+        {
+          "client_id": "56173969666-a736jciru92neo14usq65uqa35vg7piu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoGB9F8_BWzl8XtNe0lV_h6NJpChLZnCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56173969666-a736jciru92neo14usq65uqa35vg7piu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "56173969666-71kk0u4d4chg9s9bdq9n3dfk8qpkch4c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alumni.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

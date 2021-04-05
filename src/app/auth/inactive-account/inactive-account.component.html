@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons>
+      <ion-button mode="md" (click)="goBack()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+      <ion-title>Account Disabled</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class=" ion-padding">
+  <form [formGroup]="ticketForm">
+    <p class="description">
+      You account has been disabled by AlumniMatch team.
+      <span>Please send ticket to contact support.</span>
+    </p>
+    <ion-item lines="none">
+      <ion-input formControlName="email" type="email" full round placeholder="Enter your email.">
+      </ion-input>
+    </ion-item>
+    <ion-item lines="none" class="ion-margin-top">
+      <ion-textarea formControlName="message" full round placeholder="Enter ticket message." rows="10">
+      </ion-textarea>
+    </ion-item>
+    <ion-button class="nextBtn ion-margin-top" expand="full" (click)="onSubmit()">Submit Ticket</ion-button>
+  </form>
+</ion-content>

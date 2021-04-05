@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" class="ion-no-margin btn-logo">
+        <img src="assets/imgs/logo-white.png" width="32" />
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      DashBoard
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false" menu="mainmenu" color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="banner" appAM>
+    <img appAM imageType="banner" class="banner" />
+    <div class="menuWrapper">
+      <div class="menu">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div class="menuItem">
+                <ion-icon name="person"></ion-icon>
+                <ion-label>Profile</ion-label>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="menuItem">
+                <ion-icon name="settings" slot="start"></ion-icon>
+                <ion-label>Settings</ion-label>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="menuItem">
+                <ion-icon name="speedometer"></ion-icon>
+                <ion-label>Leaderboard</ion-label>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="menuItem">
+                <ion-icon name="calendar"></ion-icon>
+                <ion-label>Events</ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="menuItem">
+                <ion-icon name="search"></ion-icon>
+                <ion-label>Search</ion-label>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="menuItem">
+                <ion-icon name="pin"></ion-icon>
+                <ion-label>Map</ion-label>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="menuItem">
+                <ion-icon name="md-contacts"></ion-icon>
+                <ion-label>Friends</ion-label>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="menuItem">
+                <ion-icon name="mail"></ion-icon>
+                <ion-label>Messages</ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+</ion-content>

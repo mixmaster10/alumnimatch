@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{user ? (user.first_name + ' ' + user.last_name) : 'Messages'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="div_spinner" *ngIf="loading">
+  <ion-spinner></ion-spinner>
+</div>
+
+<ion-content class="ion-padding" #content>
+  <div class="bt_load_more" *ngIf="startIdx > 0">
+    <ion-button (click)="loadMore()">Load more...</ion-button>
+  </div>
+  <ion-list *ngIf="messages_show">
+    <div class="message_wrapper" *ngFor="let msg of messages_show">
+      <div class="message_item" *ngIf="msg.sender==uid">
+        <img [src]="msg.sender==me_uid ? curUser.avatar : user.avatar" class="avatar" />
+        <div class="message_cont">
+          <p [innerHTML]="msg.message"></p>
+          <span class="time">{{msg.date | date: "dd MMM yyyy h:mm a"}}</span>
+        </div>
+      </div>
+      <div class="message_item right" *ngIf="msg.sender==me_uid">
+        <div class="message_cont">
+          <p [innerHTML]="msg.message"></p>
+          <span class="time">{{msg.date | date: "dd MMM yyyy h:mm a"}}</span>
+        </div>
+        <img [src]="msg.sender==me_uid ? curUser.avatar : user.avatar" class="avatar" />
+      </div>
+    </div>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <div class="div_footer">
+    <!-- <ion-button fill="clear" (click)="openImage()">
+      <ion-icon slot="icon-only" name="image" class="icon_image"></ion-icon>
+    </ion-button> -->
+    <ion-textarea style="padding: 0 2%;" autoGrow="true" #inpText [(ngModel)]="text" (keyup.enter)="sendCheck($event)" (keyup.control.enter)="sendCheck($event)" placeholder="Type message..."></ion-textarea>
+    <ion-button fill="clear" (click)="send()" [disabled]="!text">
+      <ion-icon slot="icon-only" name="send"></ion-icon>
+    </ion-button>
+  </div>
+</ion-footer>

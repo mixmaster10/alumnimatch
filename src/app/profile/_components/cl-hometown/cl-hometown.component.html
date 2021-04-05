@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Your Original Hometown</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p class="am-title">What is your Hometown - where are you orginally from?</p>
+  <ion-label class="am-label">Select Country</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-input type="text" placeholder="Country" [(ngModel)]="data.country"></ion-input>
+  </ion-item>
+  <ion-label class="am-label">Select State</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-input type="text" placeholder="State" [(ngModel)]="data.state"></ion-input>
+  </ion-item>
+  <ion-label class="am-label">Zip Code</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-input type="text" placeholder="Zip Code" [(ngModel)]="data.zip"></ion-input>
+  </ion-item>
+  <ion-item lines="none" class="am-action-item">
+    <ion-button (click)="selectLocation()" appAM class="am-btn-add" size="small" expand="fill">
+      <ion-icon name="map"></ion-icon> &nbsp;&nbsp;Select Location on a Map
+    </ion-button>
+  </ion-item>
+
+  <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+    <ion-label class="am-label ion-margin-top" position="stacked">How much do you want to be matched to alumni from the same hometown as you?</ion-label>
+    <ion-range [(ngModel)]="data.scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+    <ion-row class="miles">
+      <div [ngClass]="{'active': data.scale === 0}">0</div>
+      <div [ngClass]="{'active': data.scale === 1}">1</div>
+      <div [ngClass]="{'active': data.scale === 2}">2</div>
+      <div [ngClass]="{'active': data.scale === 3}">3</div>
+      <div [ngClass]="{'active': data.scale === 4}">4</div>
+      <div [ngClass]="{'active': data.scale === 5}">5</div>
+      <div [ngClass]="{'active': data.scale === 6}">6</div>
+      <div [ngClass]="{'active': data.scale === 7}">7</div>
+      <div [ngClass]="{'active': data.scale === 8}">8</div>
+      <div [ngClass]="{'active': data.scale === 9}">9</div>
+      <div [ngClass]="{'active': data.scale === 10}">10</div>
+    </ion-row>
+  </ion-item>
+
+  <ion-item class="am-control-item ion-padding-start">
+    <ion-label>Hometown Privacy:</ion-label>
+    <ion-toggle appAM [(ngModel)]="data.privacy" mode="ios"></ion-toggle>
+  </ion-item>
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-padding-start ion-padding-end">Your Alumni Network</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <p class="description">
+      You can select one <span class="social">alumni network</span>.
+     
+    </p>
+    <form [formGroup]="collegeForm">
+      <ion-label class="am-label" position="stacked">Select the COUNTRY of your college:</ion-label>
+      <ion-item class="am-control-item" lines="none">
+        <ion-select formControlName="country" okText="CHOOSE" cancelText="CANCEL" placeholder="Select Country" [interfaceOptions]="selectCountryOption">
+          <ion-select-option *ngFor="let country of countries" [value]="country.id">{{country.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-label class="am-label" position="stacked">Select the STATE:</ion-label>
+      <ion-item class="am-control-item" lines="none">
+        <ion-select formControlName="state" [disabled]="!collegeForm.controls.country.valid" okText="CHOOSE" cancelText="CANCEL" placeholder="Select State" [interfaceOptions]="selectStateOption" >
+          <ion-select-option *ngFor="let state of states" [value]="state.id">{{state.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-label class="am-label" position="stacked">Select Your College!</ion-label>
+      <ion-item class="am-control-item" lines="none">
+        <ion-input type="text" [value]="collegeForm.controls.college.value?.name || ''" [disabled]="!collegeForm.controls.state.valid" placeholder="College" readonly (click)="chooseCollege()" [disabled]="collegeForm.controls.college.disabled"></ion-input>
+      </ion-item>
+
+      <ion-button shape="round" expand="block" color="danger" class="am-btn ion-margin-top" (click)="onSubmit()">YES! I Am An Alumni Here</ion-button>
+
+      <ion-button fill="clear" expand="block" color="primary" class="ion-margin-top" (click)="showNoCollegeAlert()" style="white-space: normal;">I can't find my college in these colleges.</ion-button>
+    </form>
+</ion-content>

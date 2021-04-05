@@ -1,0 +1,7 @@
+<div class="ads">
+  <ion-slides [options]="slideOpts">
+    <ion-slide *ngFor="let ad of activeAds">
+      <app-ad-sm [sponsorAds]="sponsorAds" [company]="company" [ad]="ad"></app-ad-sm>
+    </ion-slide>
+  </ion-slides>
+</div>

@@ -1,0 +1,28 @@
+<ion-grid class="message" *ngIf="msg">
+  <ion-row>
+    <ion-col size="auto" class="message-alumni">
+      <app-alumni-sm [user]="msg.sender || msg.receiver"></app-alumni-sm>
+    </ion-col>
+    <ion-col class="message-content">
+      <div class="contents">
+        <h6 class="title" appAM>{{msg.title}}</h6>
+        <p class="content" *ngIf="msg.content.length > 180 && !msg.read_more">{{msg.content.substring(0, 180)}}&nbsp;&nbsp;&nbsp;<a (click)="msg.read_more = true; markAsRead(msg.id);" appAM>more</a></p>
+        <p class="content" *ngIf="msg.content.length > 180 && msg.read_more">{{msg.content}}&nbsp;&nbsp;&nbsp;<a (click)="msg.read_more = false;" appAM>less</a></p>
+        <p class="content" *ngIf="msg.content.length <= 180">{{msg.content}}</p>
+        <ion-grid class="time">
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto" class="ion-no-padding">
+              <img src="assets/icon/icn_msg_in_close.png" width="16" *ngIf="msg.read != 1 && msg.sender">
+              <img src="assets/icon/icn_msg_in_open.png" width="16" *ngIf="msg.read == 1 && msg.sender">
+            </ion-col>
+            <ion-col>
+              <p>
+                {{msg.updated_at | date: "dd MMM yyyy h:mm a"}}
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ad Data</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar class="segments-toolbar">
+    <ion-segment mode="ios" [(ngModel)]="segment" (ionChange)="changeSegment($event)">
+      <ion-segment-button mode="ios" value="interest" appAM>Interested</ion-segment-button>
+      <ion-segment-button mode="ios" value="comment" appAM>Commenters</ion-segment-button>
+      <ion-segment-button mode="ios" value="profile" appAM>Viewers</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [ngSwitch]="segment">
+  <ion-grid class="h-full">
+
+    <ion-list *ngSwitchCase="'interest'">
+      <div *ngIf="!interestedUsers || interestedUsers.length === 0" size="12" class="loading">
+        <ion-note>No users</ion-note>
+      </div>
+      <div *ngIf="interestedUsers && interestedUsers.length > 0">
+        <div *ngFor="let user of interestedUsers | matchOrder; let i = index">
+          <p *ngIf="user.interest.user_email"><ion-note>Email:</ion-note> {{user.interest.user_email}}</p>
+          <p *ngIf="user.interest.message"><ion-note>Message:</ion-note> {{ user.interest.message }}</p>
+          <app-alumni [user]="user" (profileClick)="viewProfile(user)"></app-alumni>
+        </div>
+      </div>
+    </ion-list>
+
+    <ion-list *ngIf="segment === 'comment'">
+      <div *ngIf="!commentedUsers || commentedUsers.length === 0" size="12" class="loading">
+        <ion-note>No users</ion-note>
+      </div>
+      <div *ngIf="commentedUsers && commentedUsers.length > 0">
+        <div *ngFor="let user of commentedUsers | matchOrder; let i = index">
+
+          <p *ngFor="let comment of user.comments"><ion-note>Comment: </ion-note>{{ comment }}</p>
+          <app-alumni [user]="user" (profileClick)="viewProfile(user)"></app-alumni>
+        </div>
+      </div>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'profile'">
+      <div *ngIf="!viewedProfileUsers || viewedProfileUsers.length === 0" size="12" class="loading">
+        <ion-note>No users</ion-note>
+      </div>
+      <div *ngIf="viewedProfileUsers && viewedProfileUsers.length > 0">
+        <div *ngFor="let user of viewedProfileUsers | matchOrder; let i = index">
+          <app-alumni [user]="user" (profileClick)="viewProfile(user)"></app-alumni>
+        </div>
+      </div>
+    </ion-list>
+
+  </ion-grid>
+</ion-content>

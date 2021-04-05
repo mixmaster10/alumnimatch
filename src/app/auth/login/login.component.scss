@@ -1,0 +1,48 @@
+ion-content {
+    --background: transparent;
+    background: url('src/assets/imgs/login/login_bg.png') 100%/100% no-repeat;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+img.logo {
+    width: 45%;
+}
+h1.title {
+    color: #ffffff;
+    font-weight: 500;
+    margin-top: 0px;
+}
+p.subtitle {
+    font-size: 18px;
+    color: #ffffff;
+    margin: 24px 24px 0px 24px;
+    text-align: left;
+}
+p.privacy {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 300;
+    width: 100%;
+    padding: 0px 36px;
+}
+p.support-text {
+    color: white;
+    span {
+        text-decoration: underline;;
+    }
+}
+@media screen and (max-height: 640px) {
+    p.privacy {
+        position: relative;
+        margin-top: 32px;
+        text-align: center;
+    }
+}
+@media screen and (min-height: 641px) {
+    p.privacy {
+        position: absolute;
+        left: 50%;
+        bottom: 8px;
+        transform: translateX(-50%);
+    }
+}

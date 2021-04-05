@@ -1,0 +1,271 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Your Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="top" appAM>
+    <img appAM imageType="banner" class="banner" appAM>
+    <div class="username typographica">
+      {{user?.first_name}} {{user?.last_name}}
+    </div>
+    <div class="btn-left top-btn" (click)="editProfile()">
+      <ion-fab-button appAM size="small">
+        <ion-icon name="md-paper"></ion-icon>
+      </ion-fab-button>
+      <p>Edit<br>Profile</p>
+    </div>
+    <div class="btn-right top-btn" (click)="takePhoto()">
+      <ion-fab-button appAM size="small">
+        <ion-icon name="md-camera"></ion-icon>
+      </ion-fab-button>
+      <p>Change<br>Photo</p>
+    </div>
+  </div>
+  <div class="avatar">
+    <img [src]="user?.avatar || 'assets/imgs/user.png'" #avatar  onerror="this.onerror=null;this.src='assets/imgs/user.png';" alt="{{user?.first_name}}">
+  </div>
+  <div class="main">
+    <div *ngIf="friends?.length">
+      <h6 class="title">{{user.friends_count || 0}} Friends / <span appAM>{{friends?.length || 0}} Shared Friends</span></h6>
+      <app-alumni-slides [users]="friends"></app-alumni-slides>
+    </div>
+    
+    <ion-grid class="global-info">
+      <ion-row>
+        <ion-col>
+          <img src="assets/icon/icn_college.png">
+          <p appAM>{{user?.graduated.year}}</p>
+        </ion-col>
+        <ion-col>
+          <img src="assets/icon/icn_shared.png">
+          <p appAM>{{friends?.length || 0}} Shared<br>Friends</p>
+        </ion-col>
+        <ion-col>
+          <img src="assets/icon/icn_eye.png">
+          <p appAM>{{user?.visits_count || 0}} Profile<br>Views</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <div class="detail-info">
+      <ion-toolbar class="segments-toolbar">
+        <ion-segment scrollable [(ngModel)]="psegment" mode="ios" (ionChange)="segmentChanged($event)">
+          <ion-segment-button mode="ios" value="ps" appAM>
+            Past School
+          </ion-segment-button>
+          <ion-segment-button mode="ios" value="cl" appAM>
+            Current Life
+          </ion-segment-button>
+          <ion-segment-button mode="ios" value="friends" appAM>
+            Friends
+          </ion-segment-button>
+          <ion-segment-button mode="ios" value="work" appAM>
+            Work and Career 
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+      <div [ngSwitch]="psegment" class="ion-padding-start ion-padding-end segments-content">
+        <ion-list *ngSwitchCase="'ps'">
+          <p appAM class="am-title">Degrees</p>
+          <ion-item *ngFor="let degree of ps?.degrees" class="ion-no-padding btn-item" button (click)="findSimilarUsers('Degree', degree.degree)">
+            <ion-icon slot="start" name="ios-school" appAM></ion-icon>
+            <ion-label color="dark">
+              <h4>{{DEGREE_TYPES[degree.type]}} - {{degree.year}}</h4>
+              <p>{{degree.degree.name}}</p>
+            </ion-label>
+          </ion-item>
+          <p *ngIf="ps?.orgs" class="am-title" appAM>Student Orgs</p>
+          <ion-item *ngFor="let org of ps?.orgs" class="ion-no-padding btn-item" button (click)="findSimilarUsers('Organization', org.org)">
+            <ion-icon slot="start" name="ios-people" appAM></ion-icon>
+            <ion-label color="dark">
+              <h4>{{org.org.name}}</h4>
+            </ion-label>
+          </ion-item>
+          <p *ngIf="ps?.athlete" class="am-title" appAM>Athletics</p>
+          <ion-item *ngIf="ps?.athlete" class="ion-no-padding">
+            <ion-icon slot="start" name="ios-tennisball" appAM></ion-icon>
+            <ion-label color="dark">
+              <h4 *ngIf="ps.athlete.athlete">{{ps.athlete.athlete.name}}</h4>
+              <p>{{ATHLETE_MEMBERS[ps.athlete.member]}} <span *ngIf="ATHLETE_POSITIONS[ps.athlete.position]">/ {{ATHLETE_POSITIONS[ps.athlete.position]}}</span></p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'cl'">
+          <ion-item *ngIf="cl?.gender_age" class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Gender</p>
+              <p>{{GENDERS[cl?.gender_age.gender]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.gender_age" class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Age Group</p>
+              <p>{{AGEGROUPS[cl?.gender_age.age]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.ethnicity" class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Ethnicity</p>
+              <p>{{ETHNICITIES[cl?.ethnicity.ethnicity]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.speak_languages[0]" class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Languages You Speak</p>
+              <p *ngFor="let language of cl?.speak_languages">{{LANGUAGES[language.language]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.learn_languages[0]" class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Language Learning</p>
+              <p *ngFor="let language of cl?.learn_languages">{{LANGUAGES[language.language]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Spirituality</p>
+              <p>{{RELIGIONS[cl?.religion.religion]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Relationship</p>
+              <p>{{RELATIONSHIPS[cl?.relationship.relationship]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.home" class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Home Base</p>
+              <p>{{cl?.home.zip}} {{cl?.home.state}} {{cl?.home.country}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.hometown" class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Hometown</p>
+              <p>{{cl?.hometown.zip}} {{cl?.hometown.state}} {{cl?.hometown.country}}</p>
+            </ion-label>
+          </ion-item>
+          <!-- <ion-item class="ion-no-padding">
+            <ion-label color="dark">
+              <h4 appAM>Health</h4>
+              <p>Mental Excercise: {{MENTAL_EXERCISES[cl?.health.mental]}}</p>
+              <p>Physical Excercise: {{PHYSICAL_EXERCISES[cl?.health.physical]}}</p>
+            </ion-label>
+          </ion-item> -->
+          <ion-item class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Hobbies & Interests</p>
+              <p *ngFor="let hobby of cl?.hobbies">{{hobby.hobby.name}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">Causes</p>
+              <p *ngFor="let cause of cl?.causes">{{CAUSES[cause.cause]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.school" class="ion-no-padding">
+            <ion-label color="dark">
+              <p appAM class="am-title">School Related Questions</p>
+              <p>{{cl?.school.member ? 'Paying Member' : 'Not Paying Member'}}</p>
+              <p *ngIf="cl?.school.member">Satisfaction level: {{SATIS_LEVELS[cl?.school.satis_level]}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+        <!-- Friends -->
+        <ion-list *ngSwitchCase="'friends'">
+          <app-alumni *ngFor="let friend of friends | matchOrder" (profileClick)="viewProfile(friend)" [user]="friend"></app-alumni>
+        </ion-list>
+
+        <!-- Work Life -->
+        <ion-list *ngSwitchCase="'work'">
+          <ng-container  *ngIf="cl?.work">
+            <ion-item *ngIf="cl.work.work_title != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Work Title</p>
+                <p>{{WORK_TITLES[cl.work.work_title]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.work_for != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Organization Type</p>
+                <p>{{WORK_FOR[cl.work.work_for]}}</p>
+              </ion-label>
+            </ion-item> 
+            <ion-item *ngIf="cl?.industry[0]" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Industries</p>
+                <p *ngFor="let item of cl?.industry">{{item.industry.name}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.buying_stuff != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Buying Stuff</p>
+                <p>{{BUYING_STUFFS[cl.work.buying_stuff]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.customer != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Customer</p>
+                <p>{{CUSTOMERS[cl.work.customer]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.employment_status != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Employment Status</p>
+                <p>{{EMPLOYMENT_STATUSES[cl.work.employment_status]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.hire_full_count != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Hire Per Month</p>
+                <p>{{HIRE_FULL_COUNT[cl.work.hire_full_count]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.hire_full_for != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">You Hired For</p>
+                <p>{{HIRE_FULL_FOR[cl.work.hire_full_for]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.hire_intern_count != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Hire Interns Per Month</p>
+                <p>{{HIRE_INTERN_COUNT[cl.work.hire_intern_count]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.own_business != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Business</p>
+                <p>{{OWN_BUSINESS[cl.work.own_business]}}</p>
+              </ion-label>
+            </ion-item> 
+            <ion-item *ngIf="cl.work.review_plan != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Review Plan</p>
+                <p>{{REVIEW_PLANS[cl.work.review_plan]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.wealth != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p appAM class="am-title">Wealth</p>
+                <p>{{WEALTHS[cl.work.wealth]}}</p>
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+      </div>
+    </div>
+    <ion-button color="danger" expand="block" shape="round" (click)="removeAccount()">
+      Remove Account
+    </ion-button>
+  </div>
+</ion-content>

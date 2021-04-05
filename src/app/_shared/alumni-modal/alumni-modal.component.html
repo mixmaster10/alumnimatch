@@ -1,0 +1,86 @@
+<ion-content class="ion-padding">
+  <ion-item class="alumni" *ngIf="user">
+    <div slot="start" class="match" (click)="viewProfile()" appAM>
+      <img [src]="user?.avatar || 'assets/imgs/user.png'" class="avatar" onerror="this.onerror=null;this.src='assets/imgs/user.png';" alt="">
+      <img src="assets/icon/check_friend.png" class="friend" *ngIf="user.is_friend && user.is_friend == 1">
+      <div class="percent" id="percent">
+        <div>
+        <b> {{user?.match || 'N/A'}}% </b> </div>
+      </div>
+    </div>
+    <ion-label class="info">
+      <h4 appAM (click)="viewProfile()">{{user?.first_name}} {{user?.last_name}}
+        <ion-icon name="ios-radio-button-on" class="on-off-icon" [ngClass]="user?.online ? 'online' : 'offline'"></ion-icon>
+      </h4>
+      <ion-grid>
+      
+        <ion-row class="ion-align-items-center" *ngIf="user?.shares != undefined">
+          <ion-col size="auto" class="ion-no-padding">
+            <ion-icon name="ios-people" appAM></ion-icon>
+          </ion-col>
+          <ion-col class="ion-no-padding">Shared: {{ user?.shares }}</ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center" *ngIf="!user?.graduated">
+          <ion-col size="auto" class="ion-no-padding">
+            <ion-icon name="calendar" appAM></ion-icon>
+          </ion-col>
+          <ion-col class="ion-no-padding">Joined: {{ user?.verified_at | date }}</ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center" *ngIf="user?.graduated">
+          <ion-col size="auto" class="ion-no-padding">
+            <ion-icon name="calendar" appAM></ion-icon>
+          </ion-col>
+          <ion-col class="ion-no-padding">Graduated: {{ user?.graduated.year }}</ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center" *ngIf="user?.distance != undefined">
+          <ion-col size="auto" class="ion-no-padding">
+            <ion-icon name="ios-pin" appAM></ion-icon>
+          </ion-col>
+          <ion-col class="ion-no-padding">Miles Away: {{ user?.distance | number : '.0-1'}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-label>
+  </ion-item>
+
+
+  <ion-grid *ngIf="isLoading" class="loading">
+    <ion-col size="auto">
+      <ion-thumbnail>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+    </ion-col>
+    <ion-col size="auto">
+      <ion-thumbnail>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+    </ion-col>
+    <ion-col size="auto">
+      <ion-thumbnail>
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+    </ion-col>
+  </ion-grid>
+  <div *ngIf="!isLoading">
+    <app-alumni-slides *ngIf="user?.friends" [users]="user.friends"></app-alumni-slides>
+    <p *ngIf="!user?.friends || !user?.friends.length" class="no-friends">No friends exists</p>
+  </div>
+  
+  <ion-grid class="ion-no-padding ion-no-margin">
+    <ion-row>
+      <ion-col class="ion-no-padding ion-no-margin">
+        <ion-item lines="none" class="am-action-item">
+          <ion-button class="am-btn" size="small" expand="block" color="success" shape="outline" (click)="viewProfile()">
+            View Profile
+          </ion-button>
+        </ion-item>
+      </ion-col>
+      <ion-col class="ion-no-padding ion-no-margin">
+        <ion-item lines="none" class="am-action-item">
+          <ion-button class="am-btn" size="small" expand="block" color="danger" shape="outline" (click)="sendMessage()">
+            Send Message
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

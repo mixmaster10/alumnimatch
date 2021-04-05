@@ -1,0 +1,133 @@
+// .messages {
+//     margin: 8px 16px 32px 8px;
+// }
+// .message {
+//     margin: 8px 0 0;
+//     padding: 0;
+//     .message-alumni {
+//         padding-top: 12px;
+//     }
+//     .message-content {
+//         border-bottom-width: 1px;
+//         border-bottom-style: solid;
+//         .contents {
+//             display: grid;
+//         }
+//         .title {
+//             margin: 0px;
+//             white-space: nowrap; 
+//             overflow: hidden;
+//             text-overflow: ellipsis;
+//         }
+//         .content {
+//             margin: 4px 0px 0px 0px;
+//             font-size: 14px;
+//             white-space: normal; 
+//             overflow: hidden;
+//             text-overflow: ellipsis;
+//             text-align: justify;
+//             a {
+//                 text-decoration: underline;
+//             }
+//         }
+//         .time {
+//             font-style: italic;
+//             font-size: 12px;
+//             font-weight: bold;
+//             margin: 4px 0 0;
+//             padding: 0;
+//             img {
+//                 margin-right: 8px;
+//             }
+//             p {
+//                 margin: 0px;
+//             }
+//             ion-col {
+//                 padding-left: 0;
+//                 padding-top: 0;
+//                 padding-bottom: 0;
+//             }
+//         }
+//     }
+//     .avatar {
+//         width: 48px;
+//         height: 48px;
+//         background-color: #fff;
+//         border-radius: 50%;
+//         box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
+//     }
+// }
+
+.message_item {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+    .avatar {
+        width: 48px;
+        height: 48px;
+        background-color: #fff;
+        border-radius: 50%;
+    }
+    .message_cont {
+        margin-left: 16px;
+        p {
+            margin: 0px;
+            background: #9b2121;
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 20px;
+            white-space: pre-line;
+        }
+        span.time {
+            display: block;
+            font-size: 12px;
+            color: #aaa;
+            padding-top: 5px;
+        }
+    }
+    &.right {
+        float: right;
+        justify-content: flex-end;
+        .message_cont {
+            margin-left: 0px;
+            margin-right: 16px;
+            p {
+                background: #eee;
+                color: #000;
+            }
+            span.time {
+                text-align: right;
+            }
+        }
+    }
+}
+.bt_load_more {
+    opacity: 0.9;
+    text-align: center;
+    padding-bottom: 20px;
+    ion-button {
+        --background: #9b2121;
+        --border-radius: 12px;
+        font-size: 12px;
+    }
+}
+.div_footer {
+    position: relative;
+    display: flex;
+    padding-bottom: 8px;
+    ion-textarea {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-left: 5px;
+    }
+    ion-button {
+        --padding-start: 5px;
+        --padding-end: 5px;
+        .icon_image {
+            color: #555;
+        }
+    }
+}

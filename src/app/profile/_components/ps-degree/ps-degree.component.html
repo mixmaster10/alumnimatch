@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Your Academic Degree</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-start ion-padding-end">
+  <p class="am-title" position="stacked">Your Degree:</p>
+  <div *ngFor="let item of data; let i = index;" class="mb-2">
+    <ion-label class="am-label">Select your degree type:</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-select [(ngModel)]="item.type" okText="CHOOSE" cancelText="CANCEL" placeholder="Select degree Type" [interfaceOptions]="selectDegreeTypeOption">
+        <ion-select-option [value]="0">Bachelors</ion-select-option>
+        <ion-select-option [value]="1">Masters</ion-select-option>
+        <ion-select-option [value]="2">Doctoral</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-label class="am-label">Select your degree:</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-input type="text" [value]="item.degree?.name" placeholder="Select degree name" readonly (click)="selectDegree(item)"></ion-input>
+    </ion-item>
+    <ion-label *ngIf="item.degree && ACADEMICS.includes(item.degree.id)" class="am-label">Select IBC</ion-label>
+    <ion-item *ngIf="item.degree && ACADEMICS.includes(item.degree.id)" class="am-control-item" lines="none">
+      <ion-input type="text" [value]="item.ibc?.name" placeholder="Select IBC" readonly (click)="selectIBC(item)"></ion-input>
+    </ion-item>
+    <ion-label class="am-label">Select the year you graduated:</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-select [(ngModel)]="item.year" okText="CHOOSE" cancelText="CANCEL" placeholder="Select year graduated" [interfaceOptions]="selectYearOption">
+        <ion-select-option *ngFor="let year of YEARS" [value]="year">{{year}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!-- <ion-item class="am-control-item">
+      <ion-datetime [value]="item.year" displayFormat="YYYY" pickerFormat="YYYY" placeholder="Select year graduated" (ionChange)="changeYear(item, $event)"></ion-datetime>
+    </ion-item> -->
+  </div>
+  <ion-item *ngIf="data[0].degree && data[0].type >= 0 && data[0].year" lines="none" class="am-action-item">
+    <ion-button (click)="data = [{}]" class="am-btn-add" size="small" expand="fill" color="danger" fill="outline">
+      Remove This Degree
+    </ion-button>
+  </ion-item>
+  <ion-item lines="none" class="am-action-item">
+    <ion-button (click)="addDegree()" appAM class="am-btn-add" size="small" expand="fill">
+      <ion-icon name="add-circle"></ion-icon> &nbsp;&nbsp;Add Another Degree
+    </ion-button>
+  </ion-item>
+  
+</ion-content>
+  
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,30 @@
+<ion-content>
+  <ion-router-outlet id="homecontent"></ion-router-outlet>
+  <ion-menu side="end" mode="md" menuId="mainmenu" contentId="homecontent" auto-hide="true">
+    <ion-header>
+      <ion-toolbar appAM>
+        <ion-title>AlumniMatch</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item *ngFor="let page of pages" [button]="page.title !== 'Profile'" detail="false" mode="ios" (click)="onClickMenu(page)">
+          <ion-icon [name]="page.icon" slot="start" appAM></ion-icon>
+          <ion-label *ngIf="page.title !== 'Profile'">{{page.title}}</ion-label>
+          <ion-label *ngIf="page.title === 'Profile'" class="ion-no-margin">
+            <ion-button fill="clear" expand="block" class="main-button" (click)="viewProfile()">
+              <span class="ion-float-left">{{page.title}}</span>
+            </ion-button>
+          </ion-label>
+          <ion-button (click)="editProfile()" appAM class="sub" *ngIf="page.title === 'Profile'" slot="end" size="small">
+            EDIT
+          </ion-button>
+          <ion-badge appAM *ngIf="page.title === 'Events'">{{user?.events_count || 0}}</ion-badge>
+          <ion-badge appAM *ngIf="page.title === 'Messages' && messageService.unreads">{{messageService.unreads}}</ion-badge>
+          <ion-badge appAM *ngIf="page.title === 'Friends' && user?.freq_count">{{user?.freq_count}}</ion-badge>
+        </ion-item>
+      </ion-list>
+     <!--  <app-ad *ngIf="ad" [sponsor]="sponsor" [ad]="ad"></app-ad> -->
+    </ion-content>
+  </ion-menu>
+</ion-content>

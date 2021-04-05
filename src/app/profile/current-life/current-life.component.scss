@@ -1,0 +1,15 @@
+.sub-profile-btn-list {
+    ion-item {
+        --border-radius: 4px;
+        ion-icon {
+            color: #fff;
+        }
+    }
+}
+.btn-active {
+    --background: var(--ion-color-success) !important;
+    --background-activated: var(--ion-color-success) !important;
+    --background-focused: var(--ion-color-success) !important;
+    --background-hover: var(--ion-color-success) !important;
+    color: #fff !important;
+}

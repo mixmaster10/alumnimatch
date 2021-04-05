@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Languages You Are Learning</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <p class="am-title" position="stacked">What languages are you trying or wanting to learn?</p>
+    <div *ngFor="let language of data.languages; let i = index;" class="mb-2">
+      <ion-item class="am-action-item" lines="none">
+        <ion-item class="am-control-item" lines="none">
+          <ion-select [(ngModel)]="modelLanguages" (ngModelChange)="setLanguages($event)" [selectedText]="languages[language.language]" multiple="true" okText="CHOOSE" cancelText="CANCEL" placeholder="What languages are you trying to learn?" [interfaceOptions]="selectLearnLanguageOption">
+            <ion-select-option *ngFor="let item of languages; let i = index;" [value]="i">{{item}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-fab-button (click)="removeLanguage(language.language)" appAM class="am-control-action" size="small" slot=end>
+          <ion-icon name="remove"></ion-icon>
+        </ion-fab-button>
+      </ion-item>
+      <ion-item class="am-control-item am-control-range-item">
+        <ion-label class="am-label" position="stacked">On scale of 1 to 10, how fluent are you? (10 being full fluency)</ion-label>
+        <ion-range [(ngModel)]="data.languages[i].fluent" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.languages[i].fluent === 0}">0</div>
+          <div [ngClass]="{'active': data.languages[i].fluent === 1}">1</div>
+          <div [ngClass]="{'active': data.languages[i].fluent === 2}">2</div>
+          <div [ngClass]="{'active': data.languages[i].fluent === 3}">3</div>
+          <div [ngClass]="{'active': data.languages[i].fluent === 4}">4</div>
+          <div [ngClass]="{'active': data.languages[i].fluent === 5}">5</div>
+          <div [ngClass]="{'active': data.languages[i].fluent === 6}">6</div>
+          <div [ngClass]="{'active': data.languages[i].fluent === 7}">7</div>
+          <div [ngClass]="{'active': data.languages[i].fluent === 8}">8</div>
+          <div [ngClass]="{'active': data.languages[i].fluent === 9}">9</div>
+          <div [ngClass]="{'active': data.languages[i].fluent === 10}">10</div>
+        </ion-row>
+      </ion-item>
+    </div>
+    <ion-item lines="none" *ngIf="data.languages.length === 0" class="am-action-item">
+      <ion-button (click)="addLanguage()" appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon name="add-circle"></ion-icon> &nbsp;&nbsp;Add A Language
+      </ion-button>
+    </ion-item>
+
+    <div *ngIf="this.data.languages.length && this.data.languages[0].language !== undefined" class="ion-margin-top">
+      <p class="am-title" position="stacked">Learning Language Match Scales:</p>
+      <ion-item class="am-control-item am-control-range-item ion-margin-top" lines="none">
+        <ion-label class="am-label" position="stacked">On scale of 1 to 10, how much do you want to be matched with other alumni that are fluent in this language?</ion-label>
+        <ion-range [(ngModel)]="data.ranges.fluent" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.ranges.fluent === 0}">0</div>
+          <div [ngClass]="{'active': data.ranges.fluent === 1}">1</div>
+          <div [ngClass]="{'active': data.ranges.fluent === 2}">2</div>
+          <div [ngClass]="{'active': data.ranges.fluent === 3}">3</div>
+          <div [ngClass]="{'active': data.ranges.fluent === 4}">4</div>
+          <div [ngClass]="{'active': data.ranges.fluent === 5}">5</div>
+          <div [ngClass]="{'active': data.ranges.fluent === 6}">6</div>
+          <div [ngClass]="{'active': data.ranges.fluent === 7}">7</div>
+          <div [ngClass]="{'active': data.ranges.fluent === 8}">8</div>
+          <div [ngClass]="{'active': data.ranges.fluent === 9}">9</div>
+          <div [ngClass]="{'active': data.ranges.fluent === 10}">10</div>
+        </ion-row>
+      </ion-item>
+      <ion-item class="am-control-item am-control-range-item" lines="none">
+        <ion-label class="am-label" position="stacked">On scale of 1 to 10, how much do you want to be matched with other alumni that are learning this language around your speaking level?</ion-label>
+        <ion-range [(ngModel)]="data.ranges.level" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.ranges.level === 0}">0</div>
+          <div [ngClass]="{'active': data.ranges.level === 1}">1</div>
+          <div [ngClass]="{'active': data.ranges.level === 2}">2</div>
+          <div [ngClass]="{'active': data.ranges.level === 3}">3</div>
+          <div [ngClass]="{'active': data.ranges.level === 4}">4</div>
+          <div [ngClass]="{'active': data.ranges.level === 5}">5</div>
+          <div [ngClass]="{'active': data.ranges.level === 6}">6</div>
+          <div [ngClass]="{'active': data.ranges.level === 7}">7</div>
+          <div [ngClass]="{'active': data.ranges.level === 8}">8</div>
+          <div [ngClass]="{'active': data.ranges.level === 9}">9</div>
+          <div [ngClass]="{'active': data.ranges.level === 10}">10</div>
+        </ion-row>
+      </ion-item>
+      <ion-item class="am-control-item am-control-range-item" lines="none">
+        <ion-label class="am-label" position="stacked">On scale of 1 to 10, how much do you want to be matched with other alumni that COULD TEACH YOU this language that have a higher skill level than you?</ion-label>
+        <ion-range [(ngModel)]="data.ranges.tutor" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.ranges.tutor === 0}">0</div>
+          <div [ngClass]="{'active': data.ranges.tutor === 1}">1</div>
+          <div [ngClass]="{'active': data.ranges.tutor === 2}">2</div>
+          <div [ngClass]="{'active': data.ranges.tutor === 3}">3</div>
+          <div [ngClass]="{'active': data.ranges.tutor === 4}">4</div>
+          <div [ngClass]="{'active': data.ranges.tutor === 5}">5</div>
+          <div [ngClass]="{'active': data.ranges.tutor === 6}">6</div>
+          <div [ngClass]="{'active': data.ranges.tutor === 7}">7</div>
+          <div [ngClass]="{'active': data.ranges.tutor === 8}">8</div>
+          <div [ngClass]="{'active': data.ranges.tutor === 9}">9</div>
+          <div [ngClass]="{'active': data.ranges.tutor === 10}">10</div>
+        </ion-row>
+      </ion-item>
+      <ion-item class="am-control-item am-control-range-item" lines="none">
+        <ion-label class="am-label" position="stacked">On scale of 1 to 10, how much do you want to be matched with other alumni that YOU CAN TEACH this language that have a lower skill level thank you?</ion-label>
+        <ion-range [(ngModel)]="data.ranges.teach" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.ranges.teach === 0}">0</div>
+          <div [ngClass]="{'active': data.ranges.teach === 1}">1</div>
+          <div [ngClass]="{'active': data.ranges.teach === 2}">2</div>
+          <div [ngClass]="{'active': data.ranges.teach === 3}">3</div>
+          <div [ngClass]="{'active': data.ranges.teach === 4}">4</div>
+          <div [ngClass]="{'active': data.ranges.teach === 5}">5</div>
+          <div [ngClass]="{'active': data.ranges.teach === 6}">6</div>
+          <div [ngClass]="{'active': data.ranges.teach === 7}">7</div>
+          <div [ngClass]="{'active': data.ranges.teach === 8}">8</div>
+          <div [ngClass]="{'active': data.ranges.teach === 9}">9</div>
+          <div [ngClass]="{'active': data.ranges.teach === 10}">10</div>
+        </ion-row>
+      </ion-item>
+    </div>
+    
+</ion-content>
+  
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

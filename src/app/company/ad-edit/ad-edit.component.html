@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+      <!-- <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+    <ion-title>{{newAd ? 'Create' : 'Edit'}} Ad</ion-title>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="presentOptionsPopover($event)">
+        <ion-icon icon-only name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-relative">
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item class="am-control-item" lines="none"> <!-- Title of Ad -->
+      <div>
+        <ion-label position="stacked">Ad Title</ion-label>
+        <ion-input name="title" [value]="ad?.title || ''" (ionInput)="_handleInputChange($event)" type="text" placeholder="BOGO - Buy One Get One" maxlength="140"></ion-input>
+        <ion-note class="right">{{ ad?.title.length || 0 }}/140</ion-note>
+      </div>
+    </ion-item>
+
+    <ion-item class="am-control-item ion-margin-top" lines="none"> <!-- Description -->
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea name="description" [value]="ad?.description || ''" (ionInput)="_handleInputChange($event)" type="text" placeholder="Buy a pizza, get a pizza for free!" rows="5" maxlength="144"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="am-control-item ion-margin-top" lines="none"> <!-- Web Link -->
+      <div>
+        <ion-label position="stacked">Web Link</ion-label>
+        <ion-textarea name="websiteLink" [value]="ad?.websiteLink || ''" (ionInput)="_handleInputChange($event)"  type="url" placeholder="http://alumnimatch.co"></ion-textarea>
+        <!-- <ion-note class="right">{{ user.sponsor.creator.name?.length || 0 }}/300</ion-note> -->
+      </div>
+    </ion-item>
+
+    <!-- <ion-item class="am-control-item ion-margin-top" lines="none">
+      <div>
+        <ion-label position="stacked">End Date (YYYY-MM-DD)</ion-label>
+        <ion-input name="endDate" [value]="ad?.endDate || ''" (ionInput)="_handleInputChange($event)"  type="text" placeholder="2021-01-01"></ion-input>
+      </div>
+    </ion-item> -->
+
+    <ion-item class="am-control-item ion-margin-top" lines="none"> <!-- Leads -->
+      <div>
+        <ion-row class="ion-no-padding">
+          <ion-col class="ion-no-padding">
+            <ion-label class="ion-no-padding">
+              <h6 class="title">Leads Balance: {{company.leadsBalance}}</h6>
+              <p class="description">Leads Remaining: {{ad?.leadsRemaining || 0}}/{{ad?.totalLeads || 0}}</p>
+            </ion-label>
+          </ion-col>
+          <!-- <ion-col size="auto" class="ion-no-padding">
+            <ion-button appAM (click)="purchaseLeads()">
+              <ion-icon icon-only name="add"></ion-icon>
+            </ion-button>
+          </ion-col> -->
+        </ion-row>
+        <ion-label position="stacked">Leads to Add</ion-label>
+        <ion-input name="leadsToAdd" [value]="leadsToAdd" (ionInput)="_handleInputChange($event)" type="number" placeholder="0"></ion-input>
+      </div>
+    </ion-item>
+    
+    <ion-item class="am-control-item" lines="none"> <!-- Company Logo -->
+      <div>
+        <ion-label position="stacked">Photo Url</ion-label>
+        <ion-input name="photoUrl" [value]="ad?.photoUrl" (ionInput)="_handleInputChange($event)" type="text" placeholder="https://photo.url"></ion-input>
+        <ion-note>include image (png, jepg, gif) with http:// or https://</ion-note>
+        <p style="text-align: center;">[OR pick image]</p>
+        <img (click)="takePhoto()" class="ion-margin-to" [src]="ad?.photoUrl || '/assets/imgs/no-image.png'">
+      </div>
+    </ion-item>
+
+    <!-- <ion-list>
+      <ion-item button mode="md" appAM (click)="selectAudience()" class="audience-item" lines="none">
+        <ion-label>{{ad?.audience || 'Audience'}}</ion-label>
+        <ion-icon name="md-arrow-round-forward" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list> -->
+
+    <div class="active-toggle">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="auto">
+            Active: <span>{{ad?.active ? 'YES' : 'NO'}}</span>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-toggle appAM disabled="{{(ad?.leadsRemaining ? ad.leadsRemaining === 0 : true) && (leadsToAdd ? 1 > leadsToAdd : true)}}" [ngModel]="ad?.active || false" mode="ios" (ngModelChange)="toggleActive($event)"></ion-toggle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </ion-list>
+  <app-loading *ngIf="isSubmitting" class="loadingFull" isFull="{true}"></app-loading>
+</ion-content>
+
+<ion-footer appAM class="ion-no-border">
+  <ion-toolbar>
+    <ion-button disabled="{{ isSubmitting }}" appAM expand="block" (click)="saveDetails()" class="ion-no-margin">Save</ion-button>
+  </ion-toolbar>
+</ion-footer>
+
+

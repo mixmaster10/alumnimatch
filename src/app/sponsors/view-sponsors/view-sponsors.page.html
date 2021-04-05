@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+
+      <!-- <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+    <ion-title>Sponsors</ion-title>
+  </ion-toolbar>
+  <ion-toolbar class="segments-toolbar">
+    <ion-segment scrollable [(ngModel)]="sponsorSegment" mode="ios" (ionChange)="segmentChanged($event)">
+      <ion-segment-button mode="ios" value="all" appAM>
+        All
+      </ion-segment-button>
+      <!-- <ion-segment-button mode="ios" value="requests" appAM>
+        Request
+      </ion-segment-button> -->
+      <!-- <ion-segment-button mode="ios" value="suggests" appAM>
+        Suggests
+      </ion-segment-button> -->
+      <ion-segment-button mode="ios" value="interacted" appAM>
+        Interacted
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" [ngSwitch]="sponsorSegment">
+
+  <ion-list *ngSwitchCase="'all'">
+    <div class="ion-text-center" (click)="getAllSponsors()">
+      <ion-button size="small" appAM class="load-more">Load More</ion-button>
+    </div>
+  </ion-list>
+  <ion-list *ngSwitchCase="'interacted'">
+    <div class="ion-text-center" (click)="getInteracteds()">
+      <ion-button size="small" appAM class="load-more">Load More</ion-button>
+    </div>
+  </ion-list>
+</ion-content>

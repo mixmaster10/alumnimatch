@@ -1,0 +1,59 @@
+.messages {
+    margin: 8px 16px 32px 8px;
+}
+.message {
+    margin: 8px 0 0;
+    padding: 0;
+    .message-alumni {
+        padding-top: 12px;
+    }
+    .message-content {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        .contents {
+            display: grid;
+        }
+        .title {
+            margin: 0px;
+            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .content {
+            margin: 4px 0px 0px 0px;
+            font-size: 14px;
+            white-space: normal; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: justify;
+            a {
+                text-decoration: underline;
+            }
+        }
+        .time {
+            font-style: italic;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 4px 0 0;
+            padding: 0;
+            img {
+                margin-right: 8px;
+            }
+            p {
+                margin: 0px;
+            }
+            ion-col {
+                padding-left: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+    .avatar {
+        width: 48px;
+        height: 48px;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
+    }
+}

@@ -1,0 +1,82 @@
+.alumni {
+    --padding-start: 0;
+    --background: transparent;
+    .match {
+        text-align: center;
+        color:#fff;
+        background-color: rgb(21, 135, 241);
+        border-top-left-radius: 56px;
+        border-top-right-radius: 56px;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+        padding-bottom:5px;
+        margin-bottom:0px !important;
+        position: relative;
+        .avatar {
+            width:46px;
+            height: 46px;
+            border-radius: 50%;
+            margin:4px;
+            margin-bottom:3px;
+            background-color: white;
+        }
+        .friend {
+            position: absolute;
+            width: 10px;
+            top: 32px;
+            right: 3px;
+        }
+        .percent {
+            font-size:12px;
+            ion-icon.on-off-icon {
+                font-size: 10px;
+                vertical-align: 1px;
+            }
+            .offline {
+                color: #e68684;
+            }
+            .online {
+                color: rgb(135, 226, 162);
+            }
+        }
+    }
+    .info {
+        margin: 4px 0px;
+        h4 {
+            margin-top: 4px !important;
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            position: relative;
+            padding-right: 28px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            ion-icon {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 18px;
+            }
+        }
+        ion-grid {
+            margin: 0;
+            padding: 0;
+            ion-row {
+                ion-col:first-child {
+                    padding: 0;
+                    ion-icon {
+                        font-size: 15px;
+                        margin-top: 3px;
+                    }
+                }
+                ion-col:last-child {
+                    padding: 0px 0px 0px 8px;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+

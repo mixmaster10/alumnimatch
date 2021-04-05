@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Your Married Partner</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p class="am-title">Please enter your married partner's info and we will invite that person to join and link their account to yours as married and from the same college!</p>
+  <form [formGroup]="partnerForm" class="ion-margin-top">
+    <ion-label class="am-label">Email Address:</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-input type="email" formControlName="email" placeholder="Email Address*"></ion-input>
+    </ion-item>
+    <ion-label class="am-label ion-margin-top">Phone Number:</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-input type="tel" formControlName="phone" placeholder="Phone number*"></ion-input>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

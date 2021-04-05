@@ -1,0 +1,305 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{user ? (user?.first_name + ' ' + user?.last_name) : 'Detail User'}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="presentOptionsPopover($event)">
+        <ion-icon icon-only name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="top" appAM>
+    <img appAM imageType="banner" class="banner" appAM onerror="this.onerror=null;this.src='assets/imgs/banner.png';" alt="">
+    <div class="btn-left top-btn" *ngIf="!user?.is_friend" (click)="addasfriend()">
+      <ion-fab-button size="small" appAM>
+        <img src="assets/icon/icn_add_friend.png">
+      </ion-fab-button>
+      <p>Add As<br> Friend</p>
+    </div>
+    <div class="btn-left top-btn" *ngIf="user?.is_friend == 20">
+      <ion-fab-button size="small" appAM>
+        <ion-icon name="ios-clock"></ion-icon>
+      </ion-fab-button>
+      <p>Pending</p>
+    </div>
+    <div class="btn-left top-btn" *ngIf="user?.is_friend == 1">
+      <ion-fab-button size="small" appAM>
+        <ion-icon name="ios-heart"></ion-icon>
+      </ion-fab-button>
+      <p>Is Friend</p>
+    </div>
+    <div class="btn-left top-btn" *ngIf="user?.is_friend == 10" (click)="approve()">
+      <ion-fab-button size="small" appAM>
+        <ion-icon name="md-checkmark-circle-outline"></ion-icon>
+      </ion-fab-button>
+      <p>Approve<br>Friend Request</p>
+    </div>
+    <div class="btn-right top-btn" (click)="sendMessage()">
+      <ion-fab-button size="small" appAM>
+          <img src="assets/icon/icn_message.png">
+      </ion-fab-button>
+      <p>Send<br>Message</p>
+    </div>
+    <div class="btn-center top-btn" (click)="video()">
+      <ion-fab-button size="small" appAM>
+        <ion-icon name="videocam"></ion-icon>
+      </ion-fab-button>
+      <p>Zoom Video</p>
+    </div>
+  </div>
+  <div class="avatar">
+    <img [src]="user?.avatar || 'assets/imgs/user.png'"  onerror="this.onerror=null;this.src='assets/imgs/user.png';" alt="">
+    <div class="match-rate" appAM>
+      {{user?.match}}% Match
+    </div>
+  </div>
+  <div class="main">
+    <h6 class="title">{{user?.friends_count}} Friends / <span appAM>{{friends?.length || 0}} Shared Friends</span></h6>
+    <app-alumni-slides [users]="friends"></app-alumni-slides>
+    
+    <ion-grid class="global">
+      <ion-row>
+        <ion-col col-4>
+          <img src="assets/icon/icn_college.png">
+          <p appAM>
+            {{DEGREES[user?.graduated.degree]?.name}}
+          </p>
+        </ion-col>
+        <ion-col col-4>
+          <img src="assets/icon/icn_shared.png">
+          <p appAM>{{friends?.length || '0'}} Shared<br>Friends</p>
+        </ion-col>
+        <ion-col col-4>
+          <img src="assets/icon/icn_eye.png">
+          <p appAM>{{user?.visits_count || '0'}} Profile<br>Views</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="detail-info">
+      <ion-toolbar class="segments-toolbar">
+        <ion-segment scrollable [(ngModel)]="psegment" mode="ios">
+          <ion-segment-button mode="ios" value="ps" appAM>
+            College Life
+          </ion-segment-button>
+          <ion-segment-button mode="ios" value="cl" appAM>
+            Current Reality
+          </ion-segment-button>
+          <ion-segment-button mode="ios" value="friends" appAM>
+            Friends
+          </ion-segment-button>
+          <ion-segment-button mode="ios" value="work" appAM>
+            Work and Career 
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+
+      <div [ngSwitch]="psegment" class="ion-padding-start ion-padding-end segments-content">
+        <!-- Schooling -->
+        <ion-list *ngSwitchCase="'ps'">
+          <p class="am-title" appAM>Degree</p>
+          <ion-item *ngFor="let degree of ps?.degrees" class="ion-no-padding btn-item">
+            <ion-icon slot="start" name="ios-school" appAM></ion-icon>
+            <ion-label color="dark">
+              <h4 appAM [checkForCommonality]="{a: degree, b: currentUserData?.ps?.degrees, field: 'type'}">{{DEGREE_TYPES[degree.type]}} - <span appAM [checkForCommonality]="{a: degree, b: currentUserData?.ps?.degrees, field: 'year'}">{{degree.year}}</span></h4>
+              <p appAM [checkForCommonality]="{a: degree, b: currentUserData?.ps?.degrees, field: ['degree']}">{{degree.degree.name}}</p>
+            </ion-label>
+          </ion-item>
+          <p class="am-title" appAM>Orgs</p>
+          <ion-item *ngFor="let org of ps?.orgs" class="ion-no-padding btn-item">
+            <ion-icon slot="start" name="ios-people" appAM></ion-icon>
+            <ion-label color="dark">
+              <h4 appAM [checkForCommonality]="{a: org, b: currentUserData?.ps?.orgs, field: ['org']}">{{org.org.name}}</h4>
+            </ion-label>
+          </ion-item>
+          <p *ngIf="ps?.athlete" class="am-title" appAM>Athletics</p>
+          <ion-item *ngIf="ps?.athlete" class="ion-no-padding">
+            <ion-icon slot="start" name="ios-tennisball" appAM></ion-icon>
+            <ion-label color="dark">
+              <h4 appAM [checkForCommonality]="{a: ps?.athlete.athlete?.name, b: currentUserData?.ps?.athlete.athlete?.name}">{{ps.athlete.athlete?.name}}</h4>
+              <p appAM [checkForCommonality]="{a: ps?.athlete.member, b: currentUserData?.ps?.athlete.member}">{{ATHLETE_MEMBERS[ps.athlete.member]}} <span *ngIf="ATHLETE_POSITIONS[ps.athlete.position]" appAM [checkForCommonality]="{a: ps?.athlete.position, b: currentUserData?.ps?.athlete.position}">/ {{ATHLETE_POSITIONS[ps.athlete.position]}}</span></p>
+            </ion-label> 
+          </ion-item>
+        </ion-list>
+
+        <!-- Current Life -->
+        <ion-list *ngSwitchCase="'cl'">
+          <ion-item *ngIf="cl?.gender_age" class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Gender</p>
+              <p appAM [checkForCommonality]="{a: cl?.gender_age.gender, b: currentUserData?.cl?.gender_age.gender}">{{GENDERS[cl?.gender_age.gender]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.gender_age" class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Age Group</p>
+              <p appAM [checkForCommonality]="{a: cl?.gender_age.age, b: currentUserData?.cl?.gender_age.age}">{{AGEGROUPS[cl?.gender_age.age]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.ethnicity" class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Ethnicity</p>
+              <p appAM [checkForCommonality]="{a: cl?.ethnicity.ethnicity, b: currentUserData?.cl?.ethnicity.ethnicity}">{{ETHNICITIES[cl?.ethnicity.ethnicity]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Language Spoken</p>
+              <p *ngFor="let language of cl?.speak_languages" appAM [checkForCommonality]="{a: language, b: currentUserData?.cl?.speak_languages, field: 'language'}">{{LANGUAGES[language.language]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.learn_languages" class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Language Learning</p>
+              <p *ngFor="let language of cl?.learn_languages" appAM [checkForCommonality]="{a: language, b: currentUserData?.cl?.learn_languages, field: 'language'}">{{LANGUAGES[language.language]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Spirituality</p>
+              <p appAM [checkForCommonality]="{a: cl?.religion.religion, b: currentUserData?.cl?.religion.religion}">{{RELIGIONS[cl?.religion.religion]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Relationship</p>
+              <p appAM [checkForCommonality]="{a: cl?.relationship.relationship, b: currentUserData?.cl?.relationship.relationship}">{{RELATIONSHIPS[cl?.relationship.relationship]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.home" class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Home Base</p>
+              <p appAM [checkForCommonality]="{a: cl?.home.zip, b: currentUserData?.cl?.home.zip}">{{cl?.home.zip}}</p>
+              <p appAM [checkForCommonality]="{a: cl?.home.state, b: currentUserData?.cl?.home.state}">{{cl?.home.state}}</p>
+              <p appAM [checkForCommonality]="{a: cl?.home.country, b: currentUserData?.cl?.home.country}">{{cl?.home.country}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.hometown" class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Home Town</p>
+              <p appAM [checkForCommonality]="{a: cl?.hometown.zip, b: currentUserData?.cl?.hometown.zip}">{{cl?.hometown.zip}}</p>
+              <p appAM [checkForCommonality]="{a: cl?.hometown.state, b: currentUserData?.cl?.hometown.state}">{{cl?.hometown.state}}</p>
+              <p appAM [checkForCommonality]="{a: cl?.hometown.country, b: currentUserData?.cl?.hometown.country}">{{cl?.hometown.country}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Interests</p>
+              <p *ngFor="let hobby of cl?.hobbies" appAM [checkForCommonality]="{a: hobby, b: currentUserData?.cl?.hobbies, field: ['hobby']}" >{{hobby.hobby.name}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Causes</p>
+              <div *ngFor="let cause of cl?.causes">
+                <p appAM [checkForCommonality]="{a: cause, b: currentUserData?.cl?.causes, field: 'cause'}">{{CAUSES[cause.cause]}}</p>
+              </div>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="cl?.school" class="ion-no-padding">
+            <ion-label color="dark">
+              <p class="am-title" appAM>Association Questions</p>
+              <p appAM [checkForCommonality]="{a: cl?.school.member, b: currentUserData?.cl?.school.member}">{{cl?.school.member ? 'Paying Member' : 'Not Paying Member'}}</p>
+              <p *ngIf="cl?.school.member">Satisfaction level: {{SATIS_LEVELS[cl?.school.satis_level]}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+        <!-- Friends -->
+        <ion-list *ngSwitchCase="'friends'">
+          <app-alumni *ngFor="let friend of friends | matchOrder" [user]="friend" (profileClick)="viewProfile(friend)" ></app-alumni>
+        </ion-list>
+
+        <!-- Work Life -->
+        <ion-list *ngSwitchCase="'work'">
+          <ng-container  *ngIf="cl?.work">
+            <ion-item *ngIf="cl.work.work_title != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Work Title</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.work_title, b: currentUserData?.cl?.work.work_title}">{{WORK_TITLES[cl.work.work_title]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.work_for != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Organization Type</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.work_for, b: currentUserData?.cl?.work.work_for}">{{WORK_FOR[cl.work.work_for]}}</p>
+              </ion-label>
+            </ion-item> 
+
+            <ion-item *ngIf="cl.industries != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Industries</p>
+                <p *ngFor="let industry of cl?.industries" appAM [checkForCommonality]="{a: industry, b: currentUserData?.cl?.industry, field: ['industry']}" >{{industry.industry.name}}</p>
+<!--                 <p appAM [checkForCommonality]="{a: cl?.industries, b: currentUserData?.cl?.industries}">{{WORK_FOR[cl.industries]}}</p>
+ -->              </ion-label>
+            </ion-item> 
+
+            <ion-item *ngIf="cl.work.buying_stuff != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Buying Stuff</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.buying_stuff, b: currentUserData?.cl?.work.buying_stuff}">{{BUYING_STUFFS[cl.work.buying_stuff]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.customer != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Customer</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.customer, b: currentUserData?.cl?.work.customer}">{{CUSTOMERS[cl.work.customer]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.employment_status != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Employment Status</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.employment_status, b: currentUserData?.cl?.work.employment_status}">{{EMPLOYMENT_STATUSES[cl.work.employment_status]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.hire_full_count != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Hire Per Month</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.hire_full_count, b: currentUserData?.cl?.work.hire_full_count}">{{HIRE_FULL_COUNT[cl.work.hire_full_count]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.hire_full_for != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>You Hired For</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.hire_full_for, b: currentUserData?.cl?.work.hire_full_for}">{{HIRE_FULL_FOR[cl.work.hire_full_for]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.hire_intern_count != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Hire Interns Per Month</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.hire_intern_count, b: currentUserData?.cl?.work.hire_intern_count}">{{HIRE_INTERN_COUNT[cl.work.hire_intern_count]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.own_business != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Business</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.own_business, b: currentUserData?.cl?.work.own_business}">{{OWN_BUSINESS[cl.work.own_business]}}</p>
+              </ion-label>
+            </ion-item> 
+            <ion-item *ngIf="cl.work.review_plan != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Review Plan</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.review_plan, b: currentUserData?.cl?.work.review_plan}">{{REVIEW_PLANS[cl.work.review_plan]}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="cl.work.wealth != null" class="ion-no-padding">
+              <ion-label color="dark">
+                <p class="am-title" appAM>Wealth</p>
+                <p appAM [checkForCommonality]="{a: cl?.work.wealth, b: currentUserData?.cl?.work.wealth}">{{WEALTHS[cl.work.wealth]}}</p>
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+
+      </div>
+    </div>
+    <!-- <ion-button color="danger" expand="block" shape="round" (click)="block()">
+      Block User
+    </ion-button> -->
+  </div>
+</ion-content>

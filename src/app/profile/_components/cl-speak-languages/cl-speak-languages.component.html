@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Languages You Speak</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <p class="am-title" position="stacked">What language(s) do you speak fluently?</p>
+    <div *ngFor="let language of data; let i = index;" class="mb-2">
+      <ion-item class="am-action-item">
+        <ion-item class="am-control-item" lines="none">
+          <ion-select [(ngModel)]="data" [selectedText]="languages[language]" multiple="true" okText="CHOOSE" cancelText="CANCEL" placeholder="What languages do you speak fluently?" [interfaceOptions]="selectLanguageOption">
+            <ion-select-option *ngFor="let item of languages; let i = index;" [value]="i">{{item}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-fab-button (click)="removeLanguage(language)" appAM class="am-control-action" size="small" slot=end><!-- data.single.foods = data.single.foods.splice(i, 1); -->
+          <ion-icon name="remove"></ion-icon>
+        </ion-fab-button>
+      </ion-item>
+    </div>
+    <ion-item *ngIf="!data || data.length === 0" lines="none" class="am-action-item">
+      <ion-button appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon name="add-circle" class="readjust-item-text"></ion-icon> &nbsp;&nbsp;Select Languages
+        <ion-select class="remove-caret" [(ngModel)]="data" multiple="true" okText="CHOOSE" cancelText="CANCEL" [interfaceOptions]="selectLanguageOption">
+          <ion-select-option *ngFor="let item of languages; let i = index;" [value]="i">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-button>
+    </ion-item>
+
+   <!--  <ion-item lines="none" *ngIf="!data.single.foods || data.single.foods.length === 0" class="am-action-item">
+      <ion-button appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon name="add-circle" class="readjust-item-text"></ion-icon> &nbsp;&nbsp;Add Your Foods
+        <ion-select class="remove-caret" [(ngModel)]="data.single.foods" multiple="true" okText="CHOOSE" cancelText="CANCEL" [interfaceOptions]="selectSingleFoodOption">
+          <ion-select-option *ngFor="let f of foods; let j = index;" [value]="j">{{f}}</ion-select-option>
+        </ion-select>
+      </ion-button>
+    </ion-item> -->
+
+</ion-content>
+  
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

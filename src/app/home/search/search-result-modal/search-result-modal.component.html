@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Search Results</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <app-alumni *ngFor="let user of users | matchOrder" [user]="user" (profileClick)="viewProfile(user)"></app-alumni>
+  <app-alumni-loading *ngIf="is_load === 1;"></app-alumni-loading>
+  <div class="ion-text-center" *ngIf="is_load === 0" (click)="getSearchResult()">
+    <ion-button size="small" appAM class="load-more">LOAD MORE</ion-button>
+  </div>
+</ion-content>

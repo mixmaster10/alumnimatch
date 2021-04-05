@@ -1,0 +1,23 @@
+
+<ion-content appAM>
+  <p class="ion-padding">
+    Do you want to let this advertiser know your email address or anything else about your interest?
+  </p>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="text" [(ngModel)]="email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Additional Info</ion-label>
+    <ion-textarea type="text" [(ngModel)]="additionalInfo" placeholder="Please give me a call @ 111-222-3344"></ion-textarea>
+  </ion-item>
+</ion-content>
+
+<ion-footer >
+  <ion-button slot="start" appAM (click)="onCancel()">
+    Cancel
+  </ion-button>
+  <ion-button slot="end" appAM (click)="onSubmit()">
+    Submit
+  </ion-button>
+</ion-footer>

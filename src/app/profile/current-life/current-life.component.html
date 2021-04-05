@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="goBack()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Current Life</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-start ion-padding-end">
+
+  <ion-list class="sub-profile-btn-list">
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('gender-age-ethnicity')">
+      Your Gender, Age, Ethnicity
+      <ion-icon *ngIf="!completes?.gae" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.gae" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('speak-language')">
+      Languages You Speak
+      <ion-icon *ngIf="!completes?.speak" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.speak" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+    <!-- <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('learn-language')">
+      Languages You Are Learning
+      <ion-icon *ngIf="!completes?.learn" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.learn" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item> -->
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('religion')">
+      Religion & Spirituality
+      <ion-icon *ngIf="!completes?.religion" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.religion" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('relationship')">
+      Family & Romantic Partners
+      <ion-icon *ngIf="!completes?.relationship" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.relationship" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('work-career')">
+      Work and Career
+      <ion-icon *ngIf="!completes?.career" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.career" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+    <!-- <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('home')">
+      Your Home Base
+      <ion-icon *ngIf="!completes?.home" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.home" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item> -->
+    <!-- <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('hometown')">
+      Your Home Town
+      <ion-icon *ngIf="!completes?.hometown" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.hometown" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item> -->
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('hobby')">
+      Hobbies and Interests
+      <ion-icon *ngIf="!completes?.hobbies" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.hobbies" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('cause')">
+      Causes
+      <ion-icon *ngIf="!completes?.causes" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.causes" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+    <!-- <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('school')">
+      Your Alumni Association
+      <ion-icon *ngIf="!completes?.school" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.school" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item> -->
+
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('activities')">
+      Miscellaneous Questions
+      <ion-icon *ngIf="!completes?.activities" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.activities" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer *ngIf="!verified" appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button
+      appAM (click)="onSubmit()" expand="block" class="ion-no-margin"
+      [disabled]="!completes?.gae || !completes?.speak || !completes?.religion || !completes?.relationship || !completes?.career || !completes?.hobbies || !completes?.causes || !completes?.activities"
+      [ngClass]="completes?.gae && completes?.speak && completes?.religion && completes?.relationship && completes?.career && completes?.hobbies && completes?.causes && completes?.activities ? 'btn-active' : ''">
+      Completion of Current Life info !
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Alumni Near You</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <agm-map
+    *ngIf="center"
+    [latitude]="center.lat"
+    [longitude]="center.lng"
+    [zoom]="16"
+    [mapTypeId]="'hybrid'"
+    [disableDefaultUI]="true"
+    [disableDoubleClickZoom]="true"
+    (mapReady)="mapReady($event)">
+    <agm-marker-cluster [averageCenter]="true" [styles]="clusterer_styles">
+      <agm-overlay
+        *ngFor="let user of nears;let i=index"
+        [latitude]  = "user.coordinate.lat"
+        [longitude] = "user.coordinate.lng">
+        <div class="marker">
+          <div class="user" (click)="showAlumniModal(user)">
+            <img appAM [src]="user.avatar || 'assets/imgs/user.png'" width="48" height="48" class="avatar" onerror="this.onerror=null; this.src='assets/imgs/user.png';" alt="">
+            <div appAM class="triangle"></div>
+            <div appAM class="match-rate">{{user.match || 0}}%</div>
+          </div>
+        </div>
+      </agm-overlay>
+    </agm-marker-cluster>
+  </agm-map>
+  <div class="btn-open">
+    <ion-button fill="clear" size="small" class="ion-no-margin ion-no-padding" (click)="this.is_hide = !this.is_hide;">
+      <span *ngIf="is_hide"><ion-icon name="ios-arrow-up" class="ion-margin-end" *ngIf="is_hide"></ion-icon>Open List</span>
+      <span *ngIf="!is_hide"><ion-icon name="ios-arrow-down" class="ion-margin-end" *ngIf="!is_hide"></ion-icon>Close List</span>
+    </ion-button>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div class="mini-update" [hidden]="is_hide">
+    <ion-grid class="pos-top">
+        <ion-row class="ion-align-items-center">
+            <ion-col>
+                <div class="near-title">Alumni Near You!</div>
+            </ion-col>
+            <ion-col size="auto">
+              <ion-button shape="round" (click)="updateLocation()" size="small" color="success" class="btn-update">
+                <img src="assets/icon/map.png" class="map_icon"> Update Location
+              </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <div class="near-list">
+        <ion-list class="ion-padding-start">
+            <app-alumni *ngFor="let near of nears" [user]="near" (profileClick)="viewProfile($event)"></app-alumni>
+        </ion-list>
+    </div>
+  </div>
+</ion-footer>

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Invite Code</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p class="am-title" appAM>Invite Code</p>
+  <ion-item class="am-control-item" lines="none">
+    <ion-input type="number" [value]="code" placeholder="Invite Code" readonly class="ion-text-center"></ion-input>
+  </ion-item>
+  <ion-label class="am-label ion-margin-top ion-margin-bottom" appAM *ngIf="expired">
+    Invite code is availble until {{expired | date : 'MM/dd/yyyy hh:mm:ss a'}} 
+  </ion-label>
+
+  <ion-item lines="none" class="am-action-item ion-margin-top">
+    <ion-button class="am-btn-add" size="small" expand="fill" appAM (click)="refreshCode()">
+      Refresh Invite Code
+    </ion-button>
+  </ion-item>
+</ion-content>

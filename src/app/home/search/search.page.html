@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>People Search</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="outline" size="small" class="btn-clear" mode="md" color="light" (click)="clearFilters()">CLEAR</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-label class="am-label" appAM>Keyword:</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-input type="text" placeholder="Enter a keyword" [(ngModel)]="keyword"></ion-input>
+  </ion-item>
+
+  <ion-label class="am-label" appAM>Degree or Academic Major:</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-input type="text" [value]="degree?.name" placeholder="Select degree" readonly (click)="selectDegree()"></ion-input>
+  </ion-item>
+
+  <ion-label class="am-label" appAM>Industry:</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-input type="text" [value]="industry?.name" placeholder="Select industry" readonly (click)="selectIndustry()"></ion-input>
+  </ion-item>
+
+  <ion-label class="am-label" appAM>Athletic Organization:</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-input type="text" [value]="org?.name" placeholder="Select organization" readonly (click)="selectOrg()"></ion-input>
+  </ion-item>
+  
+  <ion-label class="am-label" appAM>Zipcode:</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-input type="number" placeholder="Enter zip code" [(ngModel)]="zip"></ion-input>
+  </ion-item>
+
+  <ion-label class="am-label" appAM>Religion:</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-select [(ngModel)]="religion" okText="SELECT" cancelText="CANCEL" placeholder="Select religion" [interfaceOptions]="selectReligionOption">
+      <ion-select-option *ngFor="let item of RELIGIONS; let i = index;" [value]="i">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-label class="am-label" appAM>Work Status:</ion-label>
+  <ion-item class="am-control-item mb-2" lines="none">
+    <ion-select [(ngModel)]="work_status" okText="SELECT" cancelText="CANCEL" placeholder="Select employment status" [interfaceOptions]="selectEmploymentStatusOption">
+      <ion-select-option *ngFor="let item of EMPLOYMENT_STATUSES; let i = index;" [value]="i">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-label class="am-label" appAM>Relationship Status:</ion-label>
+  <ion-item class="am-control-item ion-margin-bottom" lines="none">
+    <ion-select [(ngModel)]="relationship" okText="SELECT" cancelText="CANCEL" placeholder="Relationship Status:" [interfaceOptions]="selectRelationshipOption">
+      <ion-select-option *ngFor="let item of RELATIONSHIPS; let i = index;" [value]="i">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-label class="am-label" appAM>Gender:</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-select [(ngModel)]="gender" okText="SELECT" cancelText="CANCEL" placeholder="Select Gender:" [interfaceOptions]="selectGenderOption">
+      <ion-select-option *ngFor="let item of GENDERS; let i = index;" [value]="i">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button appAM (click)="onSubmit()" expand="block" class="ion-no-margin">Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

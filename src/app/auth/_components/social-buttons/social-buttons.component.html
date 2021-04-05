@@ -1,0 +1,26 @@
+<div class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-fab-button class="btn-facebook" (click)="clickSc('facebook')">
+          <ion-icon name="logo-facebook"></ion-icon>
+        </ion-fab-button>
+      </ion-col>
+      <ion-col class="text-center">
+        <ion-fab-button class="btn-twitter" (click)="clickSc('twitter')">
+          <ion-icon name="logo-twitter"></ion-icon>
+        </ion-fab-button>
+      </ion-col>
+      <ion-col class="ion-text-left">
+        <ion-fab-button class="btn-google" (click)="clickSc('google')">
+          <ion-icon name="logo-google"></ion-icon>
+        </ion-fab-button>
+      </ion-col>
+      <ion-col class="ion-text-left" *ngIf="isIosMobile">
+        <ion-fab-button class="btn-apple" (click)="clickSc('apple')">
+          <ion-icon name="logo-apple"></ion-icon>
+        </ion-fab-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

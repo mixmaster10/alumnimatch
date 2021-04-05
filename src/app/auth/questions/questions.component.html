@@ -1,0 +1,207 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons *ngIf="data" slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-padding-start ion-padding-end">Miscellaneous Questions</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <!-- <p class="description">
+    Please answer these <span class="social">questions</span>.
+    
+  </p> -->
+  <form [class.mb-50]="data" [formGroup]="form">
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Did one of your parents graduate from your alma mater?</ion-label>
+      <ion-checkbox mode="md" appAM formControlName="parents_from_alma"></ion-checkbox>
+    </ion-item>
+    
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Did one of your siblings graduate from your alma mater?</ion-label>
+      <ion-checkbox mode="md" appAM formControlName="siblings_from_alma"></ion-checkbox>
+    </ion-item>
+    
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Do you play video games?</ion-label>
+      <ion-checkbox mode="md" appAM formControlName="play_video_games"></ion-checkbox>
+    </ion-item>
+    
+    
+    <ion-item  *ngIf="form.value.play_video_games"  class="am-control-item" lines="none">
+      <ion-label class="am-label" position="stacked">How often you play video games?</ion-label>
+      <ion-select formControlName="video_games_frequency" okText="CHOOSE" cancelText="CANCEL" placeholder="Select video game frequency" >
+        <ion-select-option *ngFor="let item of constants.PLAY_GAME_FREQUENCY; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item  *ngIf="form.value.play_video_games"  class="am-control-item" lines="none">
+      <ion-label class="am-label" position="stacked">What categories are your favorite?</ion-label>
+      <ion-select formControlName="video_games_categories" okText="CHOOSE" cancelText="CANCEL" placeholder="Select video game type" >
+        <ion-select-option *ngFor="let item of constants.GAME_CATEGORY; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ng-container  *ngIf="form.value.play_video_games" >
+      <p class="am-title">What titles are your favorite?</p>
+      <ion-item class="am-action-item" lines="none" *ngFor="let item of form.value.video_games_fav_title; let i = index;">
+        <ion-item class="am-control-item" lines="none">
+          <ion-input type="text" [value]="constants.GAME_TITLE[item]" placeholder="Select item" readonly></ion-input>
+        </ion-item>
+        
+        <ion-fab-button (click)="remove_game(i)" appAM class="am-control-action" size="small" slot=end>
+          <ion-icon name="remove"></ion-icon>
+        </ion-fab-button>
+      </ion-item>
+      <ion-item lines="none" class="am-action-item">
+        <ion-button (click)="openSelect('games')" appAM class="am-btn-add" size="small" expand="fill">
+          <ion-icon name="create"></ion-icon> &nbsp;&nbsp;Select Your Titles
+        </ion-button>
+      </ion-item>
+    </ng-container>
+    
+    <!-- <ng-container >
+      <p class="am-title">What sports or athletic stuff do you play?</p>
+      <ion-item class="am-action-item" lines="none" *ngFor="let item of form.value.athletic_stuff_you_play; let i = index;">
+        <ion-item class="am-control-item" lines="none">
+          <ion-input type="text" [value]="constants.SPORTS[item]" placeholder="Select item" readonly></ion-input>
+        </ion-item>
+        
+        <ion-fab-button (click)="remove_sport(i)" appAM class="am-control-action" size="small" slot=end>
+          <ion-icon name="remove"></ion-icon>
+        </ion-fab-button>
+      </ion-item>
+      <ion-item lines="none" class="am-action-item">
+        <ion-button (click)="openSelect('sports')" appAM class="am-btn-add" size="small" expand="fill">
+          <ion-icon name="create"></ion-icon> &nbsp;&nbsp;Select Your Sports
+        </ion-button>
+      </ion-item>
+    </ng-container> -->
+    
+    
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Do you have an Exotic pet?</ion-label>
+      <ion-checkbox mode="md" appAM formControlName="have_exotic_pet"></ion-checkbox>
+    </ion-item>
+    
+    
+    <ion-item  *ngIf="form.value.have_exotic_pet"  class="am-control-item" lines="none">
+      <ion-label class="am-label" position="stacked">What type of pet?</ion-label>
+      <ion-select formControlName="pet" okText="CHOOSE" cancelText="CANCEL" placeholder="Select Pet" >
+        <ion-select-option *ngFor="let item of constants.PETS_LIST; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label ion-margin-top" position="stacked">How big of a fan are you of your alma mater’s football team?</ion-label>
+      <ion-range formControlName="fan_of_alma_football" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 0}">0</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 1}">1</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 2}">2</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 3}">3</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 4}">4</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 5}">5</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 6}">6</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 7}">7</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 8}">8</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 9}">9</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_football === 10}">10</div>
+      </ion-row>
+    </ion-item>
+    
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label ion-margin-top" position="stacked">How big of a fan are you of your alma mater’s basketball team?</ion-label>
+      <ion-range formControlName="fan_of_alma_basketball" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 0}">0</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 1}">1</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 2}">2</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 3}">3</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 4}">4</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 5}">5</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 6}">6</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 7}">7</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 8}">8</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 9}">9</div>
+        <div [ngClass]="{'active': form.value.fan_of_alma_basketball === 10}">10</div>
+      </ion-row>
+    </ion-item>
+    
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Are or were you in the US Military?</ion-label>
+      <ion-checkbox mode="md" appAM formControlName="in_us_military"></ion-checkbox>
+    </ion-item>
+    
+    
+    <ion-item  *ngIf="form.value.in_us_military"  class="am-control-item" lines="none">
+      <ion-label class="am-label" position="stacked">Which branch do you most identify with ?</ion-label>
+      <ion-select formControlName="military_type" okText="CHOOSE" cancelText="CANCEL" placeholder="Select military type" >
+        <ion-select-option *ngFor="let item of constants.MILITARY_TYPE; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item *ngIf="form.value.military_type" (click)="openSearchModel()" class="am-control-item" lines="none">
+      <ion-label  class="am-label" position="stacked">Input your MOS code</ion-label>
+      <ion-input mode="md" formControlName="military_code" placeholder="Code" ></ion-input>
+    </ion-item>
+    
+    <ion-item   class="am-control-item" lines="none">
+      <ion-label class="am-label" position="stacked">Are you a spouse, dependent, or caregiver of someone in the US Military?</ion-label>
+      <ion-select formControlName="dependent_us_military_person" okText="CHOOSE" cancelText="CANCEL" placeholder="Select dependent  or caregiver of someone in the US Military" >
+        <ion-select-option *ngFor="let item of constants.DEPENDENT_PERSON; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    
+    <!-- <ion-item  class="am-control-item" lines="none">
+      <ion-label class="am-label" position="stacked">What instruments do you play or sing?</ion-label>
+      <ion-select formControlName="instrument" okText="CHOOSE" cancelText="CANCEL" placeholder="Select instrument" >
+        <ion-select-option *ngFor="let item of constants.MUSICAL; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+    
+    <ion-item  class="am-control-item" lines="none">
+      <ion-label class="am-label" position="stacked">How long have you lived here in your current home base?</ion-label>
+      <ion-select formControlName="long_have_lived_here" okText="CHOOSE" cancelText="CANCEL" placeholder="Select living year" >
+        <ion-select-option *ngFor="let item of constants.LIVED_YEARS; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item lines="none" class="am-action-item">
+      <ion-label class="am-label" position="stacked">What Country/City/State do you want to<br> travel  to most in your life before you die?</ion-label>
+      <ion-button (click)="getLocation()" appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon name="map"></ion-icon> &nbsp;&nbsp;Select Location on a Map
+      </ion-button>
+    </ion-item>
+    
+    <ion-item  class="am-control-item" lines="none">
+      <ion-label class="am-label" position="stacked">What Country do you want to travel to most in your life before you die?</ion-label>
+      <ion-input mode="md" formControlName="country_to_travel" placeholder="Country" ></ion-input>
+    </ion-item> 
+    
+    <ion-item  class="am-control-item" lines="none">
+      <ion-label class="am-label" position="stacked">What State do you want to travel to most in your life before you die?</ion-label>
+      <ion-input mode="md" formControlName="state_to_travel" placeholder="State" ></ion-input>
+    </ion-item> 
+    
+    <ion-item  class="am-control-item" lines="none">
+      <ion-label class="am-label" position="stacked">What City do you want to travel to most in your life before you die?</ion-label>
+      <ion-input mode="md" formControlName="city_to_travel" placeholder="City" ></ion-input>
+    </ion-item>
+    
+    <ion-button *ngIf="!data" shape="round" expand="block" color="danger" [disabled]="!form.valid" class="am-btn ion-margin-top" (click)="onSubmit()">Next</ion-button>
+  </form>
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button [disabled]="!form.valid" (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>  
+  </ion-toolbar>
+</ion-footer>

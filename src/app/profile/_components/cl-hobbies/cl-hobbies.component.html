@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Hobbies & Interests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p class="am-title">You will be matched with other alumni who share similar hobbies and interests as you do. </p>
+  <div *ngFor="let item of data; let i = index;">
+    <ion-item class="am-action-item" lines="none">
+      <ion-item class="am-control-item" lines="none">
+        <ion-input type="text" [value]="item.hobby.name" placeholder="Select hobby" readonly (click)="selectHobby()"></ion-input>
+      </ion-item>
+      <ion-fab-button (click)="removeHobby(i)" appAM class="am-control-action" size="small" slot=end>
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label ion-margin-top" position="stacked">On scale of 1 to 10, what skill level are you at this hobby? 1 being beginner and 10 being professional expert level.</ion-label>
+      <ion-range [(ngModel)]="item.skill_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': item.skill_scale === 0}">0</div>
+        <div [ngClass]="{'active': item.skill_scale === 1}">1</div>
+        <div [ngClass]="{'active': item.skill_scale === 2}">2</div>
+        <div [ngClass]="{'active': item.skill_scale === 3}">3</div>
+        <div [ngClass]="{'active': item.skill_scale === 4}">4</div>
+        <div [ngClass]="{'active': item.skill_scale === 5}">5</div>
+        <div [ngClass]="{'active': item.skill_scale === 6}">6</div>
+        <div [ngClass]="{'active': item.skill_scale === 7}">7</div>
+        <div [ngClass]="{'active': item.skill_scale === 8}">8</div>
+        <div [ngClass]="{'active': item.skill_scale === 9}">9</div>
+        <div [ngClass]="{'active': item.skill_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label ion-margin-top" position="stacked">On scale of 1 to 10, how much do you want to be matched with other alumni who can help teach you to improve within this hobby / interest?</ion-label>
+      <ion-range [(ngModel)]="item.match_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': item.match_scale === 0}">0</div>
+        <div [ngClass]="{'active': item.match_scale === 1}">1</div>
+        <div [ngClass]="{'active': item.match_scale === 2}">2</div>
+        <div [ngClass]="{'active': item.match_scale === 3}">3</div>
+        <div [ngClass]="{'active': item.match_scale === 4}">4</div>
+        <div [ngClass]="{'active': item.match_scale === 5}">5</div>
+        <div [ngClass]="{'active': item.match_scale === 6}">6</div>
+        <div [ngClass]="{'active': item.match_scale === 7}">7</div>
+        <div [ngClass]="{'active': item.match_scale === 8}">8</div>
+        <div [ngClass]="{'active': item.match_scale === 9}">9</div>
+        <div [ngClass]="{'active': item.match_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label ion-margin-top" position="stacked">On a scale of 1 to 10, how much do you want to teach other alumni about this interest / hobby?</ion-label>
+      <ion-range [(ngModel)]="item.teach_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': item.teach_scale === 0}">0</div>
+        <div [ngClass]="{'active': item.teach_scale === 1}">1</div>
+        <div [ngClass]="{'active': item.teach_scale === 2}">2</div>
+        <div [ngClass]="{'active': item.teach_scale === 3}">3</div>
+        <div [ngClass]="{'active': item.teach_scale === 4}">4</div>
+        <div [ngClass]="{'active': item.teach_scale === 5}">5</div>
+        <div [ngClass]="{'active': item.teach_scale === 6}">6</div>
+        <div [ngClass]="{'active': item.teach_scale === 7}">7</div>
+        <div [ngClass]="{'active': item.teach_scale === 8}">8</div>
+        <div [ngClass]="{'active': item.teach_scale === 9}">9</div>
+        <div [ngClass]="{'active': item.teach_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+  </div>
+  <ion-item lines="none" class="am-action-item">
+    <ion-button (click)="selectHobby()" appAM class="am-btn-add" size="small" expand="fill">
+      <ion-icon name="create"></ion-icon> &nbsp;&nbsp;Select Your Hobbies or Interests
+    </ion-button>
+  </ion-item>
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

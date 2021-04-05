@@ -1,0 +1,100 @@
+ion-content {
+    overflow: hidden;
+}
+.h-50 {
+    width: 100%;
+}
+.h-50:first-child { 
+    height: 50%;
+    .top-row {
+        height: 100%;
+    }
+    .w-50:first-child {
+        background: url('src/assets/imgs/login/loginbg_left.png');
+        background-size: 100% 100%;
+    }
+    .w-50:last-child {
+        background: url('src/assets/imgs/login/loginbg_right.png');
+        background-size: 100% 100%;
+    }
+    .w-50 {
+        height: 100%;
+        position: relative;
+        img.top-img {
+            position: absolute;
+            bottom: 50%;
+            width: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .top-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 0px;
+        }
+        .top-btn {
+            position: absolute;
+            top: calc(50% + 50px);
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            color: #ffffff;
+            font-size: 16px;
+            height: 36px;
+            width: 120px;
+        }
+        .top-btn.login {
+            background: var(--ion-color-warning);
+            box-shadow: 3px 3px 3px #848655;
+        }
+        .top-btn.join {
+            background: var(--ion-color-primary);
+            box-shadow: 3px 3px 3px #697b64;
+        }
+    }
+}
+.h-50:last-child { 
+    position: relative;
+    min-height: 50%;
+    background: var(--ion-color-primary);
+    // background: url('src/assets/imgs/login/loginbg_bottom.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    .bottom-list {
+        margin-top: 32px;
+        margin-bottom: 0px;
+        background: transparent;
+    }
+    .sub-item {
+        background: transparent;
+        --background: transparent;
+        padding-left: 0px;
+        img.bottom-img {
+            margin: 0px;
+            display: flex;
+            float: left;
+            margin-right: 16px;
+        }
+        .description {
+            font-size: 14px;
+            color: #fff;
+            line-height: 18px;
+            padding-left: 48px;
+            span {
+                text-decoration: underline;
+            }
+        }
+    }
+    .center-img {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}

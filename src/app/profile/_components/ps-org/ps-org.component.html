@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Past Student Organizations</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-start ion-padding-end">
+  <p class="am-title" position="stacked">Please select one or more student organizations you were in during college: (you will be matched with other alumni in the same orgs!)</p>
+  <div *ngFor="let org of data; let i = index;" class="mb-2">
+    <ion-item class="am-action-item" lines="none">
+      <ion-item class="am-control-item" lines="none">
+        <ion-input type="text" [value]="org.name" placeholder="Select organization" readonly (click)="selectOrg()"></ion-input>
+      </ion-item>
+      <ion-fab-button (click)="data.splice(i, 1)" appAM class="am-control-action" size="small" slot=end>
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+  </div>
+  <ion-item lines="none" class="am-action-item">
+    <ion-button (click)="selectOrg()" appAM class="am-btn-add" size="small" expand="fill">
+      <ion-icon name="create"></ion-icon> &nbsp;&nbsp;Add A Student Org
+    </ion-button>
+  </ion-item>
+  <!-- <ion-item lines="none" class="am-action-item">
+    <ion-button (click)="data = [{}]" class="am-btn-add" size="small" expand="fill" color="danger" fill="outline">
+      Remove this Org
+    </ion-button>
+  </ion-item> -->
+</ion-content>
+  
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

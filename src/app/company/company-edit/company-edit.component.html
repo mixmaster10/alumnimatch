@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+
+      <!-- <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+    <ion-title>{{verified ? 'Edit' : 'Create'}} Company</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-relative">
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item class="am-control-item" lines="none"> <!-- Name of Company -->
+      <div>
+        <ion-label position="stacked">Company Name</ion-label>
+        <ion-input name="companyName" [value]="company?.companyName" (ionInput)="_handleInputChange($event)" type="text" placeholder="AlumniMatch"></ion-input>
+        <ion-note class="right">{{ company?.companyName.length || 0 }}/150</ion-note>
+      </div>
+    </ion-item>
+
+    <ion-item class="am-control-item ion-margin-top" lines="none"> <!-- Title of Creator -->
+      <div>
+        <ion-label position="stacked">Title of the Person creating the company</ion-label>
+        <ion-textarea name="creatorTitle" [value]="company?.creatorTitle" (ionInput)="_handleInputChange($event)" placeholder="CEO" type="text"></ion-textarea>
+      </div>
+    </ion-item>
+
+    <ion-item class="am-control-item ion-margin-top" lines="none"> <!-- Created Date -->
+      <div>
+        <ion-label position="stacked">Company started on (YYYY-MM-DD)</ion-label>
+        <ion-textarea name="companyStartedOn" [value]="company?.companyStartedOn || ''" (ionInput)="_handleInputChange($event)"  type="text" placeholder="2020-10-05"></ion-textarea>
+      </div>
+    </ion-item>
+
+    <ion-item class="am-control-item ion-margin-top" lines="none"> <!-- Description -->
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea name="description" [value]="company?.description || ''" (ionInput)="_handleInputChange($event)" type="text" placeholder="We match alumni!" rows="5" maxlength="144"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="am-control-item ion-margin-top" lines="none"> <!-- Website -->
+      <div>
+        <ion-label position="stacked">Web Link</ion-label>
+        <ion-textarea name="websiteLink" [value]="company?.websiteLink || ''" (ionInput)="_handleInputChange($event)"  type="url" placeholder="http://alumnimatch.co"></ion-textarea>
+      </div>
+    </ion-item>
+
+    <ion-item class="am-control-item ion-margin-top" lines="none"> <!-- Video -->
+      <div>
+        <ion-label position="stacked">Link to a video</ion-label>
+        <ion-textarea name="videoLink" [value]="company?.videoLink || ''" (ionInput)="_handleInputChange($event)"  type="url" placeholder="http://link-to-a-video.com"></ion-textarea>
+      </div>
+    </ion-item>
+
+    <ion-item class="am-control-item" lines="none"> <!-- Company Logo -->
+      <div>
+        <ion-label position="stacked">Company Logo</ion-label>
+        <ion-input name="photoUrl" [value]="company?.photoUrl || ''" (ionInput)="_handleInputChange($event)" type="text" placeholder="https://link-to.logo"></ion-input>
+        <ion-note>include image (png, jepg, gif) with http:// or https://</ion-note>
+        <p style="text-align: center;">[OR pick image]</p>
+        <img (click)="takePhoto()" class="ion-margin-to" [src]="company?.photoUrl || '/assets/imgs/no-image.png'">
+      </div>
+    </ion-item>
+
+  </ion-list>
+  <app-loading *ngIf="isSubmitting" class="loadingFull" isFull="{true}"></app-loading>
+</ion-content>
+
+<ion-footer *ngIf="verified " appAM class="ion-no-border">
+  <ion-toolbar>
+    <ion-button disabled="{{ isSubmitting }}" appAM expand="block" (click)="saveDetails()" class="ion-no-margin">Save</ion-button>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer *ngIf="!verified " appAM class="ion-no-border">
+  <ion-toolbar>
+    <ion-button disabled="{{ isSubmitting }}" appAM expand="block" (click)="purchasePage()" class="ion-no-margin">To Payment</ion-button>
+  </ion-toolbar>
+</ion-footer>

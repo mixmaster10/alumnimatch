@@ -1,0 +1,6 @@
+<div *ngIf="(ad?.active && sponsorAds) || !sponsorAds" class="sm-ad" (click)="adClicked()">
+  <img src="{{ad.photoUrl || 'assets/imgs/no-image.png'}}" width="48" height="48" class="sm-ad-photo" onerror="this.onerror=null; this.src='assets/imgs/user.png';" alt="">
+  <div *ngIf="!sponsorAds" appAM class="sm-ad-leads">{{ad.leadsRemaining}}/{{ad.totalLeads}}</div>
+  <ion-icon *ngIf="!sponsorAds" name="ios-radio-button-on" class="active-inactive-icon" [ngClass]="ad?.active ? 'active' : 'inactive'"></ion-icon>
+  <span class="sm-ad-title">{{ad?.title}}</span>
+</div>

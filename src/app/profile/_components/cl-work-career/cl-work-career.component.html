@@ -1,0 +1,285 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Work and Career</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <p class="am-title">Select a work title that describes you best?</p>
+  <ion-item class="am-control-item mb-2" lines="none">
+    <ion-select [(ngModel)]="data.work_title" okText="CHOOSE" cancelText="CANCEL" placeholder="Select title at work" [interfaceOptions]="selectWorkTItleOption">
+      <ion-select-option *ngFor="let item of work_titles; let i = index;" [value]="i">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+    <ion-label class="am-label ion-margin-top" position="stacked">On a scale of 1 to 10, how much do you want to be matched with other alumni that have the same title as you?</ion-label>
+    <ion-range [(ngModel)]="data.work_title_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+    <ion-row class="miles">
+      <div [ngClass]="{'active': data.work_title_scale === 0}">0</div>
+      <div [ngClass]="{'active': data.work_title_scale === 1}">1</div>
+      <div [ngClass]="{'active': data.work_title_scale === 2}">2</div>
+      <div [ngClass]="{'active': data.work_title_scale === 3}">3</div>
+      <div [ngClass]="{'active': data.work_title_scale === 4}">4</div>
+      <div [ngClass]="{'active': data.work_title_scale === 5}">5</div>
+      <div [ngClass]="{'active': data.work_title_scale === 6}">6</div>
+      <div [ngClass]="{'active': data.work_title_scale === 7}">7</div>
+      <div [ngClass]="{'active': data.work_title_scale === 8}">8</div>
+      <div [ngClass]="{'active': data.work_title_scale === 9}">9</div>
+      <div [ngClass]="{'active': data.work_title_scale === 10}">10</div>
+    </ion-row>
+  </ion-item>
+
+  <p class="am-title">Please choose one or more industries you consider yourself a part of:</p>
+  <ion-item class="am-action-item" lines="none" *ngFor="let industry of data.industries; let i = index;">
+    <ion-item class="am-control-item" lines="none">
+      <ion-input type="text" [value]="industry.name" placeholder="Select industry" readonly (click)="selectIndustry(i)"></ion-input>
+    </ion-item>
+    <ion-fab-button (click)="data.industries.splice(i, 1)" appAM class="am-control-action" size="small" slot=end>
+      <ion-icon name="remove"></ion-icon>
+    </ion-fab-button>
+  </ion-item>
+  <ion-item lines="none" class="am-action-item">
+    <ion-button (click)="selectIndustry(null)" appAM class="am-btn-add" size="small" expand="fill">
+      <ion-icon name="create"></ion-icon> &nbsp;&nbsp;Select Your Industries
+    </ion-button>
+  </ion-item>
+
+  <div *ngIf="verified">
+    <p class="am-title">What is your current employment / work status?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.employment_status" okText="CHOOSE" cancelText="CANCEL" placeholder="Select employment status" [interfaceOptions]="selectEmploymentStatusOption">
+        <ion-select-option *ngFor="let item of employment_statuses; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <p class="am-title">What type of organization do you work for?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.work_for" okText="CHOOSE" cancelText="CANCEL" placeholder="Select type of organization" [interfaceOptions]="selectWorkForOption">
+        <ion-select-option *ngFor="let item of work_fors; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <p class="am-title">What cities do you primarily do business in?</p>
+    <ion-item class="am-action-item" lines="none" *ngFor="let pos of data.business_cities; let i = index;">
+      <ion-item class="am-control-item" lines="none">
+        <ion-input type="text" placeholder="City" [value]="(pos.city ? pos.city + ', ' : '') + (pos.state ? pos.state + ', ' : '') + pos.country" readonly></ion-input>
+      </ion-item>
+      <ion-fab-button (click)="data.business_cities.splice(i, 1)" appAM class="am-control-action" size="small" slot=end>
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+    <ion-item lines="none" class="am-action-item">
+      <ion-button (click)="addCity('business')" appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon name="add-circle"></ion-icon> &nbsp;&nbsp;{{data.business_cities?.length ? 'Add Another Business City' : 'Add A Business City'}}
+      </ion-button>
+    </ion-item>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.privacy_business_city" mode="ios"></ion-toggle>
+    </ion-item>
+  
+    <p class="am-title">What cities do you travel often to for work?</p>
+    <ion-item class="am-action-item" lines="none" *ngFor="let pos of data.travel_cities; let i = index;">
+      <ion-item class="am-control-item" lines="none">
+        <ion-input type="text" placeholder="City" [value]="(pos.city ? pos.city + ', ' : '') + (pos.state ? pos.state + ', ' : '') + pos.country" readonly></ion-input>
+      </ion-item>
+      <ion-fab-button (click)="data.travel_cities.splice(i, 1)" appAM class="am-control-action" size="small" slot=end>
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+    <ion-item lines="none" class="am-action-item">
+      <ion-button (click)="addCity('travel')" appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon name="add-circle"></ion-icon> &nbsp;&nbsp;{{data.travel_cities?.length ? 'Add Another Travel City' : 'Add A Travel City'}}
+      </ion-button>
+    </ion-item>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.privacy_travel_city" mode="ios"></ion-toggle>
+    </ion-item>
+  
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Do you hire people for full-time jobs with benefits?</ion-label>
+      <ion-checkbox mode="md" appAM [(ngModel)]="data.hire_full"></ion-checkbox>
+    </ion-item>
+    <div *ngIf="data.hire_full">
+      <ion-label class="am-label ion-margin-top" position="stacked">How many full-time people do you hire per month?</ion-label>
+      <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.hire_full_count" okText="CHOOSE" cancelText="CANCEL" placeholder="Select counts" [interfaceOptions]="selectHireCountOption">
+          <ion-select-option *ngFor="let item of hire_monthly; let i = index;" [value]="i">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item mode="md" class="am-control-item">
+        <ion-label class="am-label ion-padding-end">Do you currently have full-time jobs available, which you are trying to fill now?</ion-label>
+        <ion-checkbox mode="md" appAM [(ngModel)]="data.hire_full_looking"></ion-checkbox>
+      </ion-item>
+      <ion-label class="am-label ion-margin-top" position="stacked">Are you hiring for your team specifically or for your organization as whole?</ion-label>
+      <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.hire_full_for" okText="CHOOSE" cancelText="CANCEL" placeholder="Hiring for..." [interfaceOptions]="selectHireForOption">
+          <ion-select-option *ngFor="let item of hire_fors; let i = index;" [value]="i">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.privacy_hire_full" mode="ios"></ion-toggle>
+    </ion-item>
+   
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Do you hire people for 1099 contractor gigs?</ion-label>
+      <ion-checkbox mode="md" appAM [(ngModel)]="data.hire_gig"></ion-checkbox>
+    </ion-item>
+    <div *ngIf="data.hire_gig">
+      <ion-label class="am-label ion-margin-top" position="stacked">How many contractor projects do you usually have available per yearly quarter?</ion-label>
+      <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.hire_gig_count" okText="CHOOSE" cancelText="CANCEL" placeholder="Select counts" [interfaceOptions]="selectGIGCountOption">
+          <ion-select-option *ngFor="let item of gig_projects; let i = index;" [value]="i">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.privacy_hire_gig" mode="ios"></ion-toggle>
+    </ion-item> 
+  
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Do you hire interns?</ion-label>
+      <ion-checkbox mode="md" appAM [(ngModel)]="data.hire_intern"></ion-checkbox>
+    </ion-item>
+    <div *ngIf="data.hire_intern">
+      <ion-label class="am-label ion-margin-top" position="stacked">How many interns do you usually need per month?</ion-label>
+      <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.hire_intern_count" okText="CHOOSE" cancelText="CANCEL" placeholder="Select counts" [interfaceOptions]="selectHireCountOption">
+          <ion-select-option *ngFor="let item of hire_monthly; let i = index;" [value]="i">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item mode="md" class="am-control-item">
+        <ion-label class="am-label ion-padding-end">Are you currently looking for interns?</ion-label>
+        <ion-checkbox mode="md" appAM [(ngModel)]="data.hire_intern_looking"></ion-checkbox>
+      </ion-item>
+      <ion-label class="am-label ion-margin-top" position="stacked">Are you hiring for your team specifically or for your organization as whole?</ion-label>
+      <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.hire_intern_for" okText="CHOOSE" cancelText="CANCEL" placeholder="Hiring for..." [interfaceOptions]="selectHireForOption">
+          <ion-select-option *ngFor="let item of hire_fors; let i = index;" [value]="i">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.privacy_hire_intern" mode="ios"></ion-toggle>
+    </ion-item>
+  
+    <p class="am-title">Have you ever wanted to own your own business or organization?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.own_business" okText="CHOOSE" cancelText="CANCEL" placeholder="Have you ever wanted to own your own business?" [interfaceOptions]="selectOwnBusinessOption">
+        <ion-select-option *ngFor="let item of own_businesses; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="data.own_business === 0">
+      <ion-item mode="md" class="am-control-item">
+        <ion-label class="am-label ion-padding-end ion-text-left">Are you looking for investors?</ion-label>
+        <ion-checkbox mode="md" appAM [(ngModel)]="data.seeking_investment"></ion-checkbox>
+      </ion-item>
+  
+      <ion-label class="am-label ion-margin-top" position="stacked"> Select one or more of the items which you BUY on a regular basis for your work:</ion-label>
+      <ion-item class="am-action-item" lines="none" *ngFor="let item of data.buying_stuff; let i = index;">
+        <ion-item class="am-control-item" lines="none">
+          <ion-select [(ngModel)]="data.buying_stuff" [selectedText]="buying_stuffs[item]" multiple="true" okText="CHOOSE" cancelText="CANCEL" placeholder="Buying stuff?" [interfaceOptions]="selectStuffOption">
+            <ion-select-option *ngFor="let buyItem of buying_stuffs; let j = index;" [value]="j">{{buyItem}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-fab-button (click)="removeBuyItem(item)" appAM class="am-control-action" size="small" slot=end>
+          <ion-icon name="remove"></ion-icon>
+        </ion-fab-button>
+      </ion-item>
+      <ion-item lines="none" *ngIf="!data.buying_stuff || data.buying_stuff.length === 0" class="am-action-item">
+        
+        <ion-button appAM class="am-btn-add" size="small" expand="fill">
+          <ion-icon name="add-circle" class="readjust-item-text"></ion-icon> &nbsp;&nbsp;Add Items You Buy
+          <ion-select class="remove-caret" [(ngModel)]="data.buying_stuff" multiple="true" okText="CHOOSE" cancelText="CANCEL" [interfaceOptions]="selectStuffOption">
+            <ion-select-option *ngFor="let buyItem of buying_stuffs; let j = index;" [value]="j">{{buyItem}}</ion-select-option>
+          </ion-select>
+        </ion-button>
+      </ion-item>
+  
+      <ion-label class="am-label ion-margin-top" position="stacked">Select one or more of the items which you SELL on a regular basis for your work:</ion-label>
+      <!-- <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.customer" okText="CHOOSE" multiple="true" cancelText="CANCEL" placeholder="Select kind of customer" [interfaceOptions]="selectCustomerOption">
+          <ion-select-option *ngFor="let item of customers; let i = index;" [value]="i">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item> -->
+  
+      <ion-item class="am-action-item" lines="none" *ngFor="let item of data.customer; let i = index;">
+        <ion-item class="am-control-item" lines="none">
+          <ion-select [(ngModel)]="data.customer" [selectedText]="customers[item]" multiple="true" okText="CHOOSE" cancelText="CANCEL" placeholder="Select kind of customer" [interfaceOptions]="selectCustomerOption">
+            <ion-select-option *ngFor="let sellItem of customers; let j = index;" [value]="j">{{sellItem}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-fab-button (click)="removeSellItem(item)" appAM class="am-control-action" size="small" slot=end>
+          <ion-icon name="remove"></ion-icon>
+        </ion-fab-button>
+      </ion-item>
+      <ion-item lines="none" *ngIf="!data.customer || data.customer.length === 0" class="am-action-item">
+        
+        <ion-button appAM class="am-btn-add" size="small" expand="fill">
+          <ion-icon name="add-circle" class="readjust-item-text"></ion-icon> &nbsp;&nbsp;Add Items You Sell
+          <ion-select class="remove-caret" [(ngModel)]="data.customer" multiple="true" okText="CHOOSE" cancelText="CANCEL" [interfaceOptions]="selectCustomerOption">
+            <ion-select-option *ngFor="let sellItem of customers; let j = index;" [value]="j">{{sellItem}}</ion-select-option>
+          </ion-select>
+        </ion-button>
+      </ion-item>
+  
+    </div>
+  
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Are you an angel investor? (this is private)</ion-label>
+      <ion-checkbox mode="md" appAM [(ngModel)]="data.investor"></ion-checkbox>
+    </ion-item>
+    <div *ngIf="data.investor">
+      <ion-label class="am-label ion-margin-top" position="stacked">Please select your net wealth range: (this is private)</ion-label>
+      <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.wealth" okText="CHOOSE" cancelText="CANCEL" placeholder="Select your net wealth category" [interfaceOptions]="selectNetWealthOption">
+          <ion-select-option *ngFor="let item of wealths; let i = index;" [value]="i">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+        <ion-label class="am-label ion-margin-top" position="stacked">On a scale of 1 to 10 how much do you want to be matched with others with the same wealth range as you?</ion-label>
+        <ion-range [(ngModel)]="data.wealth_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.wealth_scale === 0}">0</div>
+          <div [ngClass]="{'active': data.wealth_scale === 1}">1</div>
+          <div [ngClass]="{'active': data.wealth_scale === 2}">2</div>
+          <div [ngClass]="{'active': data.wealth_scale === 3}">3</div>
+          <div [ngClass]="{'active': data.wealth_scale === 4}">4</div>
+          <div [ngClass]="{'active': data.wealth_scale === 5}">5</div>
+          <div [ngClass]="{'active': data.wealth_scale === 6}">6</div>
+          <div [ngClass]="{'active': data.wealth_scale === 7}">7</div>
+          <div [ngClass]="{'active': data.wealth_scale === 8}">8</div>
+          <div [ngClass]="{'active': data.wealth_scale === 9}">9</div>
+          <div [ngClass]="{'active': data.wealth_scale === 10}">10</div>
+        </ion-row>
+      </ion-item>
+      <ion-label class="am-label ion-margin-top" position="stacked">Do you want to be connected with other college alumni seeking investors?</ion-label>
+      <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.review_plan" okText="CHOOSE" cancelText="CANCEL" placeholder="Select reviewing business plans" [interfaceOptions]="selectReviewPlanOption">
+          <ion-select-option *ngFor="let item of review_plans; let i = index;" [value]="i">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Privacy Switch:</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.privacy_investor" mode="ios"></ion-toggle>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

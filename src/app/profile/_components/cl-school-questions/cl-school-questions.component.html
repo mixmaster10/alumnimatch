@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Alumni Association Questions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item mode="md" class="am-control-item">
+    <ion-label class="am-title ion-padding-end">Check the box on the right if you are a paying member of your college's official alumni association:</ion-label>
+    <ion-checkbox mode="md" appAM [(ngModel)]="data.member"></ion-checkbox>
+  </ion-item>
+  <div *ngIf="data.member">
+    <ion-label class="am-label ion-margin-top">What is your satisfaction level with your college's official alumni association? (10 being best / highest)</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-select [(ngModel)]="data.satis_level" okText="CHOOSE" cancelText="CANCEL" placeholder="what is your satisfaction level?" [interfaceOptions]="selectSatisLevelOption">
+        <ion-select-option *ngFor="let item of satis_levels; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

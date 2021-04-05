@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="goBack()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Past School</ion-title>
+    <ion-buttons slot="end">
+      <!-- <ion-button fill="outline" shape="round" mode="md" size="small" color="light" (click)="next()">Skip</ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-start ion-padding-end">
+  <ion-list class="sub-profile-btn-list">
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('colleges')">
+      Join other College Networks
+      <ion-icon *ngIf="!completes?.colleges" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.colleges" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('degree')">
+      Your Degree Info
+      <ion-icon *ngIf="!completes?.degrees" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.degrees" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('org')">
+      Student Organizations you were in
+      <ion-icon *ngIf="!completes?.orgs" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.orgs" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item button appAM mode="md" lines="none" class="ion-margin-top" (click)="openSubProfile('athlete')">
+      Were you an athlete
+      <ion-icon *ngIf="!completes?.athletes" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.athletes" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer *ngIf="!verified" appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button
+     appAM (click)="onSubmit()" expand="block" class="ion-no-margin"
+     [disabled]="!completes?.degrees || !completes?.orgs || !completes?.athletes"
+     [ngClass]="completes?.degrees && completes?.orgs && completes?.athletes ? 'btn-active' : ''">
+     Go to Final Questions!
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

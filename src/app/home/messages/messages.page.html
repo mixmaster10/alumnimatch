@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Message Central</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list style="text-align:center" *ngIf='!(messages.length > 0)'>
+    <h2 class="ion-text-center">Start Connecting With Alumni!</h2>
+    <ion-button mode="md" (click)="toFriends()">Find a Friend</ion-button>
+  </ion-list>
+  <ion-list>
+    <div *ngFor="let msg of messages; let i = index" >
+      <div class="message_item" [ngClass]="{'bold':msg.unreadMessagesCount > 0}" tappable (click)="goMessage(msg)">
+        <ion-badge *ngIf="msg.unreadMessagesCount">{{msg.unreadMessagesCount}}</ion-badge>
+        <app-alumni-sm [user]="msg.user"></app-alumni-sm>
+        <div class="message_cont">
+          <div class="title">{{msg.user.first_name}} {{msg.user.last_name}}</div>
+          <div class="msg" [innerHTML]="msg.msg.message"></div>
+          <span class="time">{{msg.msg.date | date: "dd MMM yyyy h:mm a"}}</span>
+        </div>
+      </div>
+
+      <app-ad *ngIf="ad && ((i % 5 === 0 && ad && i !== 0) || (5 > messages.length && i === messages.length - 1))" [sponsor]="sponsor" [ad]="ad"></app-ad>
+
+    </div>
+
+  </ion-list>
+</ion-content>
+
+<!--
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Message Central</ion-title>
+    <ion-buttons slot="end">
+      <ion-badge class="unread-badge" *ngIf="user?.unread_num > 0">{{user?.unread_num}} new</ion-badge>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="messages">
+    <ion-grid class="message" *ngFor="let msg of messages">
+      <ion-row>
+        <ion-col size="auto" class="message-alumni">
+          <app-alumni-sm [user]="msg.sender || msg.receiver"></app-alumni-sm>
+        </ion-col>
+        <ion-col class="message-content">
+          <ion-grid class="ion-no-margin ion-no-padding view-all">
+            <ion-row class="ion-align-items-center">
+              <ion-col class="ion-no-padding">
+                <span *ngIf="msg.unread_count && msg.unread_count > 0" class="unread-num" appAM>{{msg.unread_count}} {{msg.unread_count > 1 ? 'unread messages' : 'unread message'}}</span>
+              </ion-col>
+              <ion-col size="auto" class="ion-no-padding">
+                <ion-button size="small" class="view-all" appAM (click)="viewMessages(msg.sender || msg.receiver)">view all <ion-icon name="ios-arrow-round-forward"></ion-icon></ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <div class="contents">
+            <h6 class="title" appAM>{{msg.title}}</h6>
+            <p class="content" *ngIf="msg.content.length > 180 && !msg.read_more">{{msg.content.substring(0, 180)}}&nbsp;&nbsp;&nbsp;<a (click)="msg.read_more = true; markAsRead(msg)" appAM>MORE</a></p>
+            <p class="content" *ngIf="msg.content.length > 180 && msg.read_more">{{msg.content}}&nbsp;&nbsp;&nbsp;<a (click)="msg.read_more = false" appAM>less</a></p>
+            <p class="content" *ngIf="msg.content.length <= 180">{{msg.content}}</p>
+            <ion-grid class="time">
+              <ion-row class="ion-align-items-center">
+                <ion-col size="auto" class="ion-no-padding">
+                  <img src="assets/icon/icn_msg_in_close.png" width="16" *ngIf="msg.read != 1 && msg.sender">
+                  <img src="assets/icon/icn_msg_in_open.png" width="16" *ngIf="msg.read == 1 && msg.sender">
+                </ion-col>
+                <ion-col>
+                  <p>
+                    {{msg.updated_at | date: "dd MMM yyyy h:mm a"}}
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-button (click)="composeMsg()" size="small" class="ion-margin-end">
+      Compose Message <ion-icon name="ios-send"></ion-icon>
+    </ion-button>
+  </ion-fab>
+</ion-content>
+-->

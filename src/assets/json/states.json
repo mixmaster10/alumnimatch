@@ -1,0 +1,1107 @@
+[
+    {
+        "id": "1",
+        "name": "Alabama",
+        "country_id": "1"
+    },
+    {
+        "id": "2",
+        "name": "Alaska",
+        "country_id": "1"
+    },
+    {
+        "id": "3",
+        "name": "Arizona",
+        "country_id": "1"
+    },
+    {
+        "id": "4",
+        "name": "Arkansas",
+        "country_id": "1"
+    },
+    {
+        "id": "5",
+        "name": "California",
+        "country_id": "1"
+    },
+    {
+        "id": "6",
+        "name": "Colorado",
+        "country_id": "1"
+    },
+    {
+        "id": "7",
+        "name": "Connecticut",
+        "country_id": "1"
+    },
+    {
+        "id": "8",
+        "name": "Delaware",
+        "country_id": "1"
+    },
+    {
+        "id": "9",
+        "name": "Florida",
+        "country_id": "1"
+    },
+    {
+        "id": "10",
+        "name": "Georgia",
+        "country_id": "1"
+    },
+    {
+        "id": "11",
+        "name": "Hawaii",
+        "country_id": "1"
+    },
+    {
+        "id": "12",
+        "name": "Idaho",
+        "country_id": "1"
+    },
+    {
+        "id": "13",
+        "name": "Illinois",
+        "country_id": "1"
+    },
+    {
+        "id": "14",
+        "name": "Indiana",
+        "country_id": "1"
+    },
+    {
+        "id": "15",
+        "name": "Iowa",
+        "country_id": "1"
+    },
+    {
+        "id": "16",
+        "name": "Kansas",
+        "country_id": "1"
+    },
+    {
+        "id": "17",
+        "name": "Kentucky",
+        "country_id": "1"
+    },
+    {
+        "id": "18",
+        "name": "Louisiana",
+        "country_id": "1"
+    },
+    {
+        "id": "19",
+        "name": "Maine",
+        "country_id": "1"
+    },
+    {
+        "id": "20",
+        "name": "Maryland",
+        "country_id": "1"
+    },
+    {
+        "id": "21",
+        "name": "Massachusetts",
+        "country_id": "1"
+    },
+    {
+        "id": "22",
+        "name": "Michigan",
+        "country_id": "1"
+    },
+    {
+        "id": "23",
+        "name": "Minnesota",
+        "country_id": "1"
+    },
+    {
+        "id": "24",
+        "name": "Mississippi",
+        "country_id": "1"
+    },
+    {
+        "id": "25",
+        "name": "Missouri",
+        "country_id": "1"
+    },
+    {
+        "id": "26",
+        "name": "Montana",
+        "country_id": "1"
+    },
+    {
+        "id": "27",
+        "name": "Nebraska",
+        "country_id": "1"
+    },
+    {
+        "id": "28",
+        "name": "Nevada",
+        "country_id": "1"
+    },
+    {
+        "id": "29",
+        "name": "New Hampshire",
+        "country_id": "1"
+    },
+    {
+        "id": "30",
+        "name": "New Jersey",
+        "country_id": "1"
+    },
+    {
+        "id": "31",
+        "name": "New Mexico",
+        "country_id": "1"
+    },
+    {
+        "id": "32",
+        "name": "New York",
+        "country_id": "1"
+    },
+    {
+        "id": "33",
+        "name": "North Carolina",
+        "country_id": "1"
+    },
+    {
+        "id": "34",
+        "name": "North Dakota",
+        "country_id": "1"
+    },
+    {
+        "id": "35",
+        "name": "Ohio",
+        "country_id": "1"
+    },
+    {
+        "id": "36",
+        "name": "Oklahoma",
+        "country_id": "1"
+    },
+    {
+        "id": "37",
+        "name": "Oregon",
+        "country_id": "1"
+    },
+    {
+        "id": "38",
+        "name": "Pennsylvania",
+        "country_id": "1"
+    },
+    {
+        "id": "39",
+        "name": "Rhode Island",
+        "country_id": "1"
+    },
+    {
+        "id": "40",
+        "name": "South Carolina",
+        "country_id": "1"
+    },
+    {
+        "id": "41",
+        "name": "South Dakota",
+        "country_id": "1"
+    },
+    {
+        "id": "42",
+        "name": "Tennessee",
+        "country_id": "1"
+    },
+    {
+        "id": "43",
+        "name": "Texas",
+        "country_id": "1"
+    },
+    {
+        "id": "44",
+        "name": "Utah",
+        "country_id": "1"
+    },
+    {
+        "id": "45",
+        "name": "Vermont",
+        "country_id": "1"
+    },
+    {
+        "id": "46",
+        "name": "Virginia",
+        "country_id": "1"
+    },
+    {
+        "id": "47",
+        "name": "Washington",
+        "country_id": "1"
+    },
+    {
+        "id": "48",
+        "name": "West Virginia",
+        "country_id": "1"
+    },
+    {
+        "id": "49",
+        "name": "Wisconsin",
+        "country_id": "1"
+    },
+    {
+        "id": "50",
+        "name": "Wyoming",
+        "country_id": "1"
+    },
+    {
+        "id": "51",
+        "name": "District of Columbia",
+        "country_id": "1"
+    },
+    {
+        "id": "52",
+        "name": "Puerto Rico",
+        "country_id": "1"
+    },
+    {
+        "id": "53",
+        "name": "Guam",
+        "country_id": "1"
+    },
+    {
+        "id": "54",
+        "name": "Andhra Pradesh",
+        "country_id": "2"
+    },
+    {
+        "id": "55",
+        "name": "Arunachai Pradesh",
+        "country_id": "2"
+    },
+    {
+        "id": "56",
+        "name": "Assam",
+        "country_id": "2"
+    },
+    {
+        "id": "57",
+        "name": "Bihar",
+        "country_id": "2"
+    },
+    {
+        "id": "58",
+        "name": "Chhattisgarh",
+        "country_id": "2"
+    },
+    {
+        "id": "59",
+        "name": "Goa",
+        "country_id": "2"
+    },
+    {
+        "id": "60",
+        "name": "Gujarat",
+        "country_id": "2"
+    },
+    {
+        "id": "61",
+        "name": "Haryana",
+        "country_id": "2"
+    },
+    {
+        "id": "62",
+        "name": "Himachal Pradesh",
+        "country_id": "2"
+    },
+    {
+        "id": "63",
+        "name": "Jammu and Kashmir",
+        "country_id": "2"
+    },
+    {
+        "id": "64",
+        "name": "Jharkhand",
+        "country_id": "2"
+    },
+    {
+        "id": "65",
+        "name": "Karnataka",
+        "country_id": "2"
+    },
+    {
+        "id": "66",
+        "name": "Kerala",
+        "country_id": "2"
+    },
+    {
+        "id": "67",
+        "name": "Madhya Pradesh",
+        "country_id": "2"
+    },
+    {
+        "id": "68",
+        "name": "Maharashtra",
+        "country_id": "2"
+    },
+    {
+        "id": "69",
+        "name": "Manipur",
+        "country_id": "2"
+    },
+    {
+        "id": "70",
+        "name": "Meghalaya",
+        "country_id": "2"
+    },
+    {
+        "id": "71",
+        "name": "Mizoram",
+        "country_id": "2"
+    },
+    {
+        "id": "72",
+        "name": "Nagaland",
+        "country_id": "2"
+    },
+    {
+        "id": "73",
+        "name": "Odisha",
+        "country_id": "2"
+    },
+    {
+        "id": "74",
+        "name": "Punjab",
+        "country_id": "2"
+    },
+    {
+        "id": "75",
+        "name": "Rajasthan",
+        "country_id": "2"
+    },
+    {
+        "id": "76",
+        "name": "Sikkim",
+        "country_id": "2"
+    },
+    {
+        "id": "77",
+        "name": "Tamil Nadu",
+        "country_id": "2"
+    },
+    {
+        "id": "78",
+        "name": "Telangana",
+        "country_id": "2"
+    },
+    {
+        "id": "79",
+        "name": "Tripura",
+        "country_id": "2"
+    },
+    {
+        "id": "80",
+        "name": "Uttar Pradesh",
+        "country_id": "2"
+    },
+    {
+        "id": "81",
+        "name": "Uttarakhand",
+        "country_id": "2"
+    },
+    {
+        "id": "82",
+        "name": "West Bengal",
+        "country_id": "2"
+    },
+    {
+        "id": "83",
+        "name": "Azad Jammu and Kashmir",
+        "country_id": "3"
+    },
+    {
+        "id": "84",
+        "name": "Balochistan",
+        "country_id": "3"
+    },
+    {
+        "id": "85",
+        "name": "Federally Administered Tribal Areas",
+        "country_id": "3"
+    },
+    {
+        "id": "86",
+        "name": "Gilgit-Baltistan",
+        "country_id": "3"
+    },
+    {
+        "id": "87",
+        "name": "Islamabad Capital Territory",
+        "country_id": "3"
+    },
+    {
+        "id": "88",
+        "name": "Khyber Pakhtunkhwa",
+        "country_id": "3"
+    },
+    {
+        "id": "89",
+        "name": "Punjab",
+        "country_id": "3"
+    },
+    {
+        "id": "90",
+        "name": "Sindh",
+        "country_id": "3"
+    },
+    {
+        "id": "91",
+        "name": "Luzon",
+        "country_id": "4"
+    },
+    {
+        "id": "92",
+        "name": "Visayas",
+        "country_id": "4"
+    },
+    {
+        "id": "93",
+        "name": "Mindanao",
+        "country_id": "4"
+    },
+    {
+        "id": "94",
+        "name": "Abia",
+        "country_id": "5"
+    },
+    {
+        "id": "95",
+        "name": "Adamawa",
+        "country_id": "5"
+    },
+    {
+        "id": "96",
+        "name": "Anambra",
+        "country_id": "5"
+    },
+    {
+        "id": "97",
+        "name": "Akwa",
+        "country_id": "5"
+    },
+    {
+        "id": "98",
+        "name": "Ibom",
+        "country_id": "5"
+    },
+    {
+        "id": "99",
+        "name": "Bauchi",
+        "country_id": "5"
+    },
+    {
+        "id": "100",
+        "name": "Bayelsa",
+        "country_id": "5"
+    },
+    {
+        "id": "101",
+        "name": "Benue",
+        "country_id": "5"
+    },
+    {
+        "id": "102",
+        "name": "Borno",
+        "country_id": "5"
+    },
+    {
+        "id": "103",
+        "name": "Cross River",
+        "country_id": "5"
+    },
+    {
+        "id": "104",
+        "name": "Delta",
+        "country_id": "5"
+    },
+    {
+        "id": "105",
+        "name": "Ebonyi",
+        "country_id": "5"
+    },
+    {
+        "id": "106",
+        "name": "Enugu",
+        "country_id": "5"
+    },
+    {
+        "id": "107",
+        "name": "Edo",
+        "country_id": "5"
+    },
+    {
+        "id": "108",
+        "name": "Ekiti",
+        "country_id": "5"
+    },
+    {
+        "id": "109",
+        "name": "Gombe",
+        "country_id": "5"
+    },
+    {
+        "id": "110",
+        "name": "Imo",
+        "country_id": "5"
+    },
+    {
+        "id": "111",
+        "name": "Jigawa",
+        "country_id": "5"
+    },
+    {
+        "id": "112",
+        "name": "Kaduna",
+        "country_id": "5"
+    },
+    {
+        "id": "113",
+        "name": "Kano",
+        "country_id": "5"
+    },
+    {
+        "id": "114",
+        "name": "Katsina",
+        "country_id": "5"
+    },
+    {
+        "id": "115",
+        "name": "Kebbi",
+        "country_id": "5"
+    },
+    {
+        "id": "116",
+        "name": "Kogi",
+        "country_id": "5"
+    },
+    {
+        "id": "117",
+        "name": "Kwara",
+        "country_id": "5"
+    },
+    {
+        "id": "118",
+        "name": "Lagos",
+        "country_id": "5"
+    },
+    {
+        "id": "119",
+        "name": "Nasarawa",
+        "country_id": "5"
+    },
+    {
+        "id": "120",
+        "name": "Niger",
+        "country_id": "5"
+    },
+    {
+        "id": "121",
+        "name": "Ogun",
+        "country_id": "5"
+    },
+    {
+        "id": "122",
+        "name": "Ondo",
+        "country_id": "5"
+    },
+    {
+        "id": "123",
+        "name": "Osun",
+        "country_id": "5"
+    },
+    {
+        "id": "124",
+        "name": "Oyo",
+        "country_id": "5"
+    },
+    {
+        "id": "125",
+        "name": "Plateau",
+        "country_id": "5"
+    },
+    {
+        "id": "126",
+        "name": "Rivers",
+        "country_id": "5"
+    },
+    {
+        "id": "127",
+        "name": "Sokoto",
+        "country_id": "5"
+    },
+    {
+        "id": "128",
+        "name": "Taraba",
+        "country_id": "5"
+    },
+    {
+        "id": "129",
+        "name": "Yobe",
+        "country_id": "5"
+    },
+    {
+        "id": "130",
+        "name": "Zamfara",
+        "country_id": "5"
+    },
+    {
+        "id": "131",
+        "name": "England",
+        "country_id": "6"
+    },
+    {
+        "id": "132",
+        "name": "Scotland",
+        "country_id": "6"
+    },
+    {
+        "id": "133",
+        "name": "Wales",
+        "country_id": "6"
+    },
+    {
+        "id": "134",
+        "name": "Northern Ireland",
+        "country_id": "6"
+    },
+    {
+        "id": "135",
+        "name": "Ångermanland",
+        "country_id": "7"
+    },
+    {
+        "id": "136",
+        "name": "Blekinge",
+        "country_id": "7"
+    },
+    {
+        "id": "137",
+        "name": "Bohuslän",
+        "country_id": "7"
+    },
+    {
+        "id": "138",
+        "name": "Dalarna",
+        "country_id": "7"
+    },
+    {
+        "id": "139",
+        "name": "Dalsland",
+        "country_id": "7"
+    },
+    {
+        "id": "140",
+        "name": "Gotland",
+        "country_id": "7"
+    },
+    {
+        "id": "141",
+        "name": "Gästrikland",
+        "country_id": "7"
+    },
+    {
+        "id": "142",
+        "name": "Halland",
+        "country_id": "7"
+    },
+    {
+        "id": "143",
+        "name": "Hälsingland",
+        "country_id": "7"
+    },
+    {
+        "id": "144",
+        "name": "Härjedalen",
+        "country_id": "7"
+    },
+    {
+        "id": "145",
+        "name": "Jämtland",
+        "country_id": "7"
+    },
+    {
+        "id": "146",
+        "name": "Lappland",
+        "country_id": "7"
+    },
+    {
+        "id": "147",
+        "name": "Medelpad",
+        "country_id": "7"
+    },
+    {
+        "id": "148",
+        "name": "Norrbotten",
+        "country_id": "7"
+    },
+    {
+        "id": "149",
+        "name": "Närke",
+        "country_id": "7"
+    },
+    {
+        "id": "150",
+        "name": "Öland",
+        "country_id": "7"
+    },
+    {
+        "id": "151",
+        "name": "Östergötland",
+        "country_id": "7"
+    },
+    {
+        "id": "152",
+        "name": "Skåne",
+        "country_id": "7"
+    },
+    {
+        "id": "153",
+        "name": "Småland",
+        "country_id": "7"
+    },
+    {
+        "id": "154",
+        "name": "Södermanland",
+        "country_id": "7"
+    },
+    {
+        "id": "155",
+        "name": "Uppland",
+        "country_id": "7"
+    },
+    {
+        "id": "156",
+        "name": "Värmland",
+        "country_id": "7"
+    },
+    {
+        "id": "157",
+        "name": "Västmanland",
+        "country_id": "7"
+    },
+    {
+        "id": "158",
+        "name": "Västerbotten",
+        "country_id": "7"
+    },
+    {
+        "id": "159",
+        "name": "Västergötland",
+        "country_id": "7"
+    },
+    {
+        "id": "160",
+        "name": "Drenthe",
+        "country_id": "8"
+    },
+    {
+        "id": "161",
+        "name": "Flevoland",
+        "country_id": "8"
+    },
+    {
+        "id": "162",
+        "name": "Friesland",
+        "country_id": "8"
+    },
+    {
+        "id": "163",
+        "name": "Gelderland",
+        "country_id": "8"
+    },
+    {
+        "id": "164",
+        "name": "Groningen",
+        "country_id": "8"
+    },
+    {
+        "id": "165",
+        "name": "Limburg",
+        "country_id": "8"
+    },
+    {
+        "id": "166",
+        "name": "North Brabant",
+        "country_id": "8"
+    },
+    {
+        "id": "167",
+        "name": "North Holland",
+        "country_id": "8"
+    },
+    {
+        "id": "168",
+        "name": "Overijssel",
+        "country_id": "8"
+    },
+    {
+        "id": "169",
+        "name": "South Holland",
+        "country_id": "8"
+    },
+    {
+        "id": "170",
+        "name": "Utrecht",
+        "country_id": "8"
+    },
+    {
+        "id": "171",
+        "name": "Zeeland",
+        "country_id": "8"
+    },
+    {
+        "id": "172",
+        "name": "Hovedstaden",
+        "country_id": "9"
+    },
+    {
+        "id": "173",
+        "name": "Midtjylland",
+        "country_id": "9"
+    },
+    {
+        "id": "174",
+        "name": "Nordjylland",
+        "country_id": "9"
+    },
+    {
+        "id": "175",
+        "name": "Sjælland",
+        "country_id": "9"
+    },
+    {
+        "id": "176",
+        "name": "Syddanmark",
+        "country_id": "9"
+    },
+    {
+        "id": "177",
+        "name": "Nord-Noreg",
+        "country_id": "10"
+    },
+    {
+        "id": "178",
+        "name": "Midt-Noreg",
+        "country_id": "10"
+    },
+    {
+        "id": "179",
+        "name": "Agder",
+        "country_id": "10"
+    },
+    {
+        "id": "180",
+        "name": "Vestlandet",
+        "country_id": "10"
+    },
+    {
+        "id": "181",
+        "name": "Austlandet",
+        "country_id": "10"
+    },
+    {
+        "id": "182",
+        "name": "Espoo",
+        "country_id": "11"
+    },
+    {
+        "id": "183",
+        "name": "Tampere",
+        "country_id": "11"
+    },
+    {
+        "id": "184",
+        "name": "Vantaa",
+        "country_id": "11"
+    },
+    {
+        "id": "185",
+        "name": "Oulu",
+        "country_id": "11"
+    },
+    {
+        "id": "186",
+        "name": "Turku",
+        "country_id": "11"
+    },
+    {
+        "id": "187",
+        "name": "Jyväskylä",
+        "country_id": "11"
+    },
+    {
+        "id": "188",
+        "name": "Lahti",
+        "country_id": "11"
+    },
+    {
+        "id": "189",
+        "name": "Kuopio",
+        "country_id": "11"
+    },
+    {
+        "id": "190",
+        "name": "Kouvola",
+        "country_id": "11"
+    },
+    {
+        "id": "191",
+        "name": "Pori",
+        "country_id": "11"
+    },
+    {
+        "id": "192",
+        "name": "Joensuu",
+        "country_id": "11"
+    },
+    {
+        "id": "193",
+        "name": "Lappeenranta",
+        "country_id": "11"
+    },
+    {
+        "id": "194",
+        "name": "Hämeenlinna",
+        "country_id": "11"
+    },
+    {
+        "id": "195",
+        "name": "Vaasa",
+        "country_id": "11"
+    },
+    {
+        "id": "196",
+        "name": "Baden-Württemberg",
+        "country_id": "12"
+    },
+    {
+        "id": "197",
+        "name": "Bavaria",
+        "country_id": "12"
+    },
+    {
+        "id": "198",
+        "name": "Berlin",
+        "country_id": "12"
+    },
+    {
+        "id": "199",
+        "name": "Brandenburg",
+        "country_id": "12"
+    },
+    {
+        "id": "200",
+        "name": "Bremen",
+        "country_id": "12"
+    },
+    {
+        "id": "201",
+        "name": "Hamburg",
+        "country_id": "12"
+    },
+    {
+        "id": "202",
+        "name": "Hesse",
+        "country_id": "12"
+    },
+    {
+        "id": "203",
+        "name": "Lower Saxony",
+        "country_id": "12"
+    },
+    {
+        "id": "204",
+        "name": "Mecklenburg-Vorpommern",
+        "country_id": "12"
+    },
+    {
+        "id": "205",
+        "name": "North Rhine- Westphalia",
+        "country_id": "12"
+    },
+    {
+        "id": "206",
+        "name": "Rhineland-Palatinate",
+        "country_id": "12"
+    },
+    {
+        "id": "207",
+        "name": "Saarland",
+        "country_id": "12"
+    },
+    {
+        "id": "208",
+        "name": "Saxony",
+        "country_id": "12"
+    },
+    {
+        "id": "209",
+        "name": "Saxony-Anhalt",
+        "country_id": "12"
+    },
+    {
+        "id": "210",
+        "name": "Schleswig-Holstein",
+        "country_id": "12"
+    },
+    {
+        "id": "211",
+        "name": "Thuringia",
+        "country_id": "12"
+    },
+    {
+        "id": "212",
+        "name": "Ontario",
+        "country_id": "13"
+    },
+    {
+        "id": "213",
+        "name": "Quebec",
+        "country_id": "13"
+    },
+    {
+        "id": "214",
+        "name": "Nova Scotia",
+        "country_id": "13"
+    },
+    {
+        "id": "215",
+        "name": "New Brunswick",
+        "country_id": "13"
+    },
+    {
+        "id": "216",
+        "name": "Manitoba",
+        "country_id": "13"
+    },
+    {
+        "id": "217",
+        "name": "British Columbia",
+        "country_id": "13"
+    },
+    {
+        "id": "218",
+        "name": "Prince Edward Island",
+        "country_id": "13"
+    },
+    {
+        "id": "219",
+        "name": "Saskatchewan",
+        "country_id": "13"
+    },
+    {
+        "id": "220",
+        "name": "Alberta",
+        "country_id": "13"
+    },
+    {
+        "id": "221",
+        "name": "Newfoundland and Labrador",
+        "country_id": "13"
+    }
+]

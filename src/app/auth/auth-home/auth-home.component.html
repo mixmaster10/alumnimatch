@@ -1,0 +1,91 @@
+<ion-header></ion-header>
+<ion-content class="ion-no-padding ion-no-margin"  no-bounce>
+  <ion-grid class="h-50 ion-no-padding ion-no-margin">
+    <ion-row class="top-row ion-no-padding ion-no-margin">
+      <ion-col class="w-50 ion-no-padding ion-no-margin">
+        <img class="top-img" src="assets/imgs/login/icn_execting_member.png">
+        <p class="top-title">Current Members</p>
+        <button ion-button class="top-btn login" (click)="next(0)">Sign In</button>
+      </ion-col>
+      <ion-col class="w-50 ion-no-padding ion-no-margin">
+        <img class="top-img" src="assets/imgs/login/icn_new_member.png">
+        <p class="top-title">New Members</p>
+        <button ion-button class="top-btn join" (click)="next(1)">Join Up</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-row class="h-50 ion-no-padding ion-no-margin">
+    <img src="assets/imgs/login/icn_loader.png" width="100" height="100" class="center-img">
+
+    <ion-list class="bottom-list ion-padding">
+      <h5 style="text-align: center; color: aliceblue;">Welcome to AlumniMatch!</h5>
+ 
+      <div class="sub-item">
+        <div item-start>
+          <img class="bottom-img" src="assets/imgs/login/icn_logomini.png" width="28" height="28">
+        </div>
+        <div item-content class="description">
+          AlumniMatch instantly matches and connects you with other college alumni in a free and easy to use app! Interact within a private community of people that went to the same college(s) as you did! 
+
+          <br><br>
+          All Members are matched based on shared:
+          <ul style="padding-left: 5%;">
+          <table>
+            <tr>
+              <td style="width: 30%;">
+                <li>Past college degree
+              </td>
+              <td style="width: 30%">
+                <li>Family life
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%;">
+                <li>Hobbies and interests
+              </td>
+              <td style="width: 50%">
+                <li>Career and work goals 
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%;">
+                <li>Pet ownership
+              </td>
+              <td style="width: 50%">
+                <li>Spirituality
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%;">
+                <li>Past student organizations
+              </td>
+              
+            </tr>
+          </table>
+          </ul>
+
+        </div>
+      </div>
+      <div class="sub-item ion-margin-top">
+        <div item-start>
+          <img class="bottom-img" src="assets/imgs/login/icn_logomini.png" width="28" height="28">
+        </div>
+        <div item-content class="description">
+          Imagine the alumni you will meet! 
+          <br><br>
+          AlumniMatch never shares your information outside of the platform, and members can easily remove their account anytime. Also, members can make specific profile answers invisible to everyone or block users completely for privacy protection.
+          </div>
+      </div>
+      <div class="sub-item ion-margin-top">
+        <div item-start>
+          <img class="bottom-img" src="assets/imgs/login/icn_logomini.png" width="28" height="28">
+        </div>
+        <div item-content class="description">
+          Learn more at <a style="color:aquamarine;" href="https://www.alumnimatch.co">www.alumnimatch.co</a>
+          <br><br>
+          Get matched today on our free and easy to use mobile and web app. Sign in or join up above.
+        </div>
+      </div>
+    </ion-list>
+  </ion-row>
+</ion-content>

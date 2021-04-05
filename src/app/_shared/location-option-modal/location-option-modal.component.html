@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar appAM mode="ios">
+    <ion-title>Turn on Approximate Location</ion-title>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-start ion-padding-end">
+  <p class="am-title">
+    Enable other college alumni to see your approximate (within 1 mile) location on the map when you turn your location on! 
+  </p>
+  <ion-grid class="question">
+    <ion-row>
+      <!-- <ion-col size="auto">
+        <div class="number" appAM>1</div>
+      </ion-col> -->
+      <ion-col>
+        <ion-label class="am-label">
+         Select the number of miles away from you, other alumni can approximately view you on the map:
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item class="am-control-item" lines="none">
+    <ion-select [(ngModel)]="radius" okText="Select" cancelText="Cancel" placeholder="Select radius" [interfaceOptions]="selectRadiusOption">
+      <ion-select-option *ngFor="let r of miles;" [value]="r">{{r}} {{r > 1 ? 'miles' : 'mile'}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <!-- <ion-grid class="question">
+    <ion-row>
+      <ion-col size="auto">
+        <div class="number" appAM>2</div>
+      </ion-col>
+      <ion-col>
+        <ion-label class="am-label">
+          Choose which audience will know of your location:
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item class="am-control-item" lines="none">
+    <ion-select [(ngModel)]="radius" okText="Select" cancelText="Cancel" placeholder="Select audience" [interfaceOptions]="selectAudienceOption">
+      <ion-select-option [value]="1">All college alumni</ion-select-option>
+      <ion-select-option [value]="2">Only my friends</ion-select-option>
+      <ion-select-option [value]="3">Choose individual users/groups</ion-select-option>
+    </ion-select>
+  </ion-item> -->
+  <!-- <ion-grid class="question">
+    <ion-row>
+      <ion-col size="auto">
+        <div class="number" appAM>2</div>
+      </ion-col>
+      <ion-col>
+        <ion-label class="am-label">
+          Approximate or Exact?
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item class="am-control-item" lines="none">
+    <ion-select [(ngModel)]="approximate" okText="Select" cancelText="Cancel" placeholder="Select approximate" [interfaceOptions]="selectApproximateOption">
+      <ion-select-option [value]="1">Use my exact location</ion-select-option>
+      <ion-select-option [value]="0">Use my approximate location</ion-select-option>
+    </ion-select>
+  </ion-item> -->
+  <ion-item lines="none" class="am-action-item">
+    <ion-button (click)="onSubmit()" class="am-btn-add" size="small" expand="fill" color="success">
+      Update My Location
+    </ion-button>
+  </ion-item>
+</ion-content>

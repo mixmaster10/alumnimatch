@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Compose Message</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p class="am-title">Send Message To:</p>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="messageTo" (ionChange)="changeMessageTo($event)">
+      <ion-item lines="full">
+        <ion-label>All friends</ion-label>
+        <ion-radio appAM mode="md" value="all"></ion-radio>
+      </ion-item>
+      <ion-item [lines]="messageTo === 'radius' ? 'none' : 'full'">
+        <ion-label>In distance arround me <span *ngIf="messageTo === 'radius'">({{RADIUSDATA[radius]}} {{radius > 1 ? 'miles' : 'mile'}})</span></ion-label>
+        <ion-radio appAM mode="md" value="radius"></ion-radio>
+      </ion-item>
+      <ion-item mode="md" class="radius-item" *ngIf="messageTo === 'radius'">
+        <ion-range appAM [(ngModel)]="radius" min="0" max="4" mode="md" step="1" snaps="true" ticks="false" class="ion-no-padding">
+          <ion-text appAM slot="start">1</ion-text>
+          <ion-text appAM slot="end">20</ion-text>
+        </ion-range>
+      </ion-item>
+      <ion-item lines="full" (click)="selectUsers()">
+        <ion-label>Send to specific friends <span *ngIf="messageTo === 'users'">({{users.length}} selected)</span></ion-label>
+        <ion-radio appAM mode="md" value="users"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  
+  <form [formGroup]="msgForm" (submit)="onSubmit()">
+    <!-- <ion-item class="am-control-item" lines="none">
+      <ion-input type="text" placeholder="Title" formControlName="title"></ion-input>
+    </ion-item> -->
+    <ion-item class="am-control-item ion-margin-top" lines="none">
+      <ion-textarea placeholder="content here" rows="5" maxlength="144" formControlName="content"></ion-textarea> 
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button appAM (click)="onSubmit()" expand="block" class="ion-no-margin" [disabled]="!msgForm.valid || messageTo === 'users' && !users.length">Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

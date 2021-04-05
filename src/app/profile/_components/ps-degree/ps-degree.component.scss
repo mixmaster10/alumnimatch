@@ -1,0 +1,18 @@
+/* .am-label {
+    margin-top: 8px;
+    text-align: left;
+}
+.am-label:first-child {
+    margin-top: 0px;
+} */
+.mb-2 {
+    margin-bottom: 8px;
+}
+.description {
+    font-size: 16px;
+    text-align: justify;
+    span {
+        color: #09548a;
+        // border-bottom: #09548a 1px solid;
+    }
+}

@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{verified ? 'Edit Profile' : 'Registration'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <p class="description">You can modify the % weight matching you to others for past school info versus current reality info.</p>
+    <ion-item lines="none">
+      <ion-label class="bold-label">Match Weight Slider:</ion-label>
+<!--       <ion-button appAM slot="end" (click)="saveWeights()">Save</ion-button>
+ -->    </ion-item>
+
+    <ion-item mode="md" class="item-weight" lines="none">
+      <ion-label>School Info (SI)</ion-label>
+      <ion-text slot="end">{{weights.ps}}%</ion-text>
+    </ion-item>
+
+    <ion-item mode="md" class="item-weight item-weight-last" lines="none">
+      <ion-label>Current Reality (CL)</ion-label>
+      <ion-text>{{100 - weights.ps}}%</ion-text>
+    </ion-item>
+
+    <p class="description">
+        Swipe the slider circle right or left to change the % weights.
+    </p>
+
+    <ion-item mode="md" lines="none">
+      <ion-range appAM [(ngModel)]="weights.ps" [formControl]="weightControl" (ionChange)="changeWeight($event)"
+       min="0" max="100" mode="md" step="1" snaps="true" ticks="false" class="ion-no-padding">
+        <ion-fab-button (click)="weights.ps = weights.ps + 1;" appAM [disabled]="weights.ps === 0" slot="start">
+          SI
+        </ion-fab-button>
+        <ion-fab-button (click)="weights.ps = weights.ps - 1;" appAM [disabled]="weights.ps === 100" slot="end">
+          CL
+        </ion-fab-button>
+      </ion-range>
+    </ion-item>
+  </ion-list>
+
+  <p class="description">
+    You must answer all the questions in each of the two categories.
+  </p>
+
+  <ion-list>
+    <ion-item appAM mode="md" button (click)="goProfileEdit(0)" lines="none" class="profile-item">
+      <ion-label>Edit Past School Info </ion-label>
+      <ion-icon *ngIf="!completes?.ps" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.ps" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item appAM mode="md" button (click)="goProfileEdit(1)" lines="none" class="profile-item">
+      <ion-label>Edit Current Life Info </ion-label>
+      <ion-icon *ngIf="!completes?.cl" name="md-arrow-round-forward" slot="end"></ion-icon>
+      <ion-icon *ngIf="completes?.cl" name="checkmark-circle" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer *ngIf="!verified" appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button appAM (click)="onSubmit()" expand="block" class="ion-no-margin">Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

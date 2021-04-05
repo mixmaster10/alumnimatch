@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+    <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+    <!-- <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+    <ion-title>Become A Sponsor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-relative">
+
+  <ion-item class="am-control-item" lines="none">
+    <div>
+      <ion-label>Add Discount Code Here</ion-label>
+      <ion-input name="code" [value]="code || ''" (ionInput)="_handleInputChange($event)" type="text" placeholder="Enter code"></ion-input>
+      <ion-button appAM expand="block" (click)="applyCode()">Update Cost</ion-button>
+    </div>
+  </ion-item>
+
+  <ion-item button (click)="showPicker()" class="am-control-item ion-padding" detail="false" lines="none" *ngIf="product === 'leads'">
+    <ion-row justify-content-center align-items-center>
+        <ion-col>
+          <ion-label class="ion-text-wrap">How many leads would you like to purchase?</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>{{leads}} Leads</ion-label>
+        </ion-col>
+    </ion-row>
+  </ion-item>
+
+  <ion-item class="am-control-item ion-padding" lines="none" *ngIf="product === 'company'">
+    <div>
+      <ion-label class="ion-text-wrap">Company page: $9.00 (39 free leads included)</ion-label>
+    </div>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-title>
+      Total: ${{product === 'company' ? '9' : leads * .5}}.00
+    </ion-title>
+  </ion-item>
+  
+
+  <form id="payment-form">
+    <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+    <button appAM [disabled]="!cardComplete" id="submit">
+      <div class="spinner hidden" id="spinner"></div>
+      <span id="button-text">Pay Now</span>
+    </button>
+    <p id="card-error" role="alert"></p>
+    <div id="payment-request-element"><!--Stripe.js injects the Card Element--></div>
+    <p class="result-message hidden">
+      Payment Successful!
+    </p>
+  </form>
+  <!-- <ion-button appAM expand="block" (click)="goToCheckout()">Checkout</ion-button> -->
+</ion-content>

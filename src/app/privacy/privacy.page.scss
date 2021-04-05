@@ -1,0 +1,69 @@
+ion-content {
+    --background:rgb(46, 84, 102);
+}
+.header {
+    font-size:14px;
+    color:rgba(255,255,255, 0.3);
+    font-weight: bold;
+    transform: translateY(-24px);
+    .mark {
+        width:100%;
+        margin-top: 0px;
+        max-width: 160px;
+    }
+}
+.main {
+    // margin-top:-40px;
+    transform: translateY(-36px);
+    padding:0px 12px 12px 12px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+.mainTop1 {
+    background:rgb(233,133,19);
+    font-size:20px;
+    text-align: center;
+    color:#ffffff;
+    padding:10px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding-bottom:6px;
+    font-weight: bold;
+    
+    background: -webkit-gradient(left, rgb(233,133,19),rgb(250,165,68),rgb(233,133,19));
+    background: -o-linear-gradient(left, rgb(233,133,19),rgb(250,165,68), rgb(233,133,19));
+    background: -moz-linear-gradient(left, rgb(233,133,19),rgb(250,165,68), rgb(233,133,19));
+    background: linear-gradient(to left, rgb(233,133,19),rgb(250,165,68), rgb(233,133,19));
+}
+.mainTop2 {
+    background:rgb(233,133,19);
+    font-size:13px;
+    text-align: center;
+    color : rgba(255,255,255,0.5);
+    padding:8px;
+}
+.mainbody {
+    background-color:#ffffff;
+    padding-top:12px;
+    padding-bottom:16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+.cell {
+    padding:10px 10px 0px 16px;
+    word-break: break-all!important;
+    text-align: justify;
+}
+.number {
+    font-size:17px;
+    border-bottom: rgb(233,133,19) 2px dotted;
+    padding-bottom:2px;
+}
+.txt {
+    padding-left:12px;
+    font-size:15px;
+}
+.subtxt {
+    font-size:16px;
+    color:#666;
+}

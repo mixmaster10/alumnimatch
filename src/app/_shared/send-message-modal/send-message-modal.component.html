@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar appAM mode="ios">
+    <ion-title>Send Message</ion-title>
+    <ion-buttons slot="end">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="msgForm">
+    <!-- <ion-item class="am-control-item" lines="none">
+      <ion-input type="text" placeholder="Title" formControlName="title"></ion-input>
+    </ion-item> -->
+    <ion-item class="am-control-item ion-margin-top" lines="none">
+      <ion-textarea placeholder="Type here..." rows="5" maxlength="144" formControlName="content"></ion-textarea> 
+    </ion-item>
+    <ion-item lines="none" class="am-action-item">
+      <ion-button (click)="onSubmit()" class="am-btn-add" size="small" expand="fill" color="success" [disabled]="!msgForm.valid">
+        Send Message
+      </ion-button>
+    </ion-item>
+  </form>
+</ion-content>

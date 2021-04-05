@@ -1,0 +1,30 @@
+<ion-header>
+</ion-header>
+<ion-content class="ion-text-center" no-bounce>
+  <ion-toolbar class="content-toolbar">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="goBack()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Join AlumniMatch!</ion-title>
+  </ion-toolbar>
+  <img class="logo" src="assets/imgs/login/icn_logo_trans.png">
+  <p class="title ion-padding-start ion-padding-end">
+    AlumniMatch is an invite-only networking community for college and high school alumni to connect and be matched together easily. Imagine who YOU might meet on AlumniMatch!
+ </p>
+  
+
+  <ion-item appAM class="ion-padding" lines="none">
+    <ion-label>You agree with our Terms of Use</ion-label>
+    <ion-checkbox slot="start" mode="md" [(ngModel)]="termsAgreed"></ion-checkbox>
+  </ion-item>
+
+   <p class="privacy">
+    Info about our <a (click)="viewPrivacy()">Privacy Policy & Terms</a>
+  </p>
+
+  <p class="subtitle ion-padding-start ion-padding-end">Please choose a social login to begin user registration:</p>
+  <app-social-buttons (scClick)="join($event)"></app-social-buttons>
+ 
+</ion-content>

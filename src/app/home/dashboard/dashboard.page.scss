@@ -1,0 +1,218 @@
+.banner {
+    position: relative;
+    img.banner  {
+        width: 100%;
+        max-height: 30vh;
+        min-height: 180px;
+        //object-fit: cover;
+        opacity: 0.5;
+    }
+    .slogan, .welcome {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 0px;
+        color: #ffffff;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 80%;
+    }
+    .slogan {
+        top: 25%;
+    }
+    .welcome {
+        top: 48%;
+        font-size: 14px;
+    }
+}
+ion-grid.profile-row {
+    height: 100px;
+    transform: translateY(-50%);
+    .me {
+        position: relative;
+        cursor: pointer;
+        .avatar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: white 3px solid;
+            background-color: #fff;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
+        }
+    }
+    .side {
+      cursor: pointer;
+        p {
+            font-size: 12px;
+            margin: 5px 0px 5px 0px;
+            white-space: nowrap;
+            color: white;
+            font-weight: bold;
+        }
+        p.lbl {
+            padding: 3px 0px;
+        }
+        p.vlu {
+            font-size: 16px;
+            font-weight: bolder;
+            padding: 0px;
+        }
+        .side-btn {
+            width: 36px;
+            height: 36px;
+            padding: 6px;
+            border-radius: 50%;
+            border: white 2px solid;
+            box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
+        }
+    }
+}
+.main {
+    transform: translateY(-45px);
+    .position-privacy {
+        ion-row {
+            ion-col:first-child {
+                margin-left: auto;
+                span {
+                    display: inline-block;
+                    width: 36px;
+                    font-weight: bold;
+                }
+            }
+            ion-col:last-child {
+                margin-right: auto;
+            }
+        }
+    }
+    .notic {
+        margin: 0px 8px;
+        padding: 8px 0px;
+        ion-icon {
+            font-size: 28px;
+        }
+        h4 {
+            font-weight: bolder;
+            margin: 4px;
+        }
+        p {
+            font-size: 11px;
+            margin: 0;
+        }
+        ion-col:last-child {
+            border-left: #666 1px solid;
+        }
+        ion-col:first-child {
+            border-right: #666 1px solid;
+        }
+
+        .notifications-banner {
+          cursor: pointer;
+        }
+    }
+    h6.title {
+        margin: 0px 16px;
+        padding: 0px;
+    }
+    p.description {
+        margin: 0px 16px;
+        padding: 0px;
+        font-size: 12px;
+    }
+
+}
+
+.addPost {
+    font-size: 23px;
+    margin-right: 10px;
+  }
+.feed {
+    background: #f2f2f2;
+  }
+  ion-card {
+    background-color: #ffffff;
+    ion-card-header {
+      padding: 10px;
+      ion-card-title {
+        font-size: 16px;
+      }
+    }
+    ion-card-content {
+      padding: 0 10px 10px;
+    }
+    ion-footer {
+      border-top: 1px solid #ebebeb;
+      ion-col {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    ion-icon {
+      color: #acabab;
+      &.active {
+        color: #9a2221;
+      }
+    }
+    button {
+      background-color: transparent;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      ion-note {
+        font-size: 11px;
+        letter-spacing: 0.1px;
+        margin-top: 5px;
+      }
+    }
+    .postType {
+      margin-top: 6px;
+      ion-badge + ion-badge {
+        margin-left: 6px;
+      }
+    }
+  }
+  .h-full {
+    height: 100%;
+  }
+  .loading {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.divider {
+    margin-bottom: 10px;
+      ion-icon{
+          display:inline-block;
+          text-align: center;
+          font-size:28px;
+      }
+      h6{
+          font-size:16px;
+      }
+      i {
+          font-size: 14px;
+      }
+  }
+  #addPost {
+    display:none;
+    position:sticky;
+      animation: fadeIn ease 1s;
+  }
+  @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+
+    .different-alumni {
+      border-radius: 10px;
+      position: absolute;
+      margin: -1% 0 0 -2%;
+      display: inline;
+      font-size: 10px;
+    }

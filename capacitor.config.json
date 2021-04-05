@@ -1,0 +1,29 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "AlumniMatch",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {
+    "preferences": {
+      "ScrollEnabled": "false",
+      "android-minSdkVersion": "22",
+      "android-targetSdkVersion": "29",
+      "BackupWebStorage": "none",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "300",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreen": "screen",
+      "SplashScreenDelay": "3000",
+      "orientation": "portrait",
+      "TwitterConsumerKey": "zommV2daVOCSINT8GnqAqgifQ",
+      "TwitterConsumerSecret": "pud2L6Icqkz4lpekoXbfCkuZnK55Y0Qo0eCd3xYqXGV1LACoy4",
+      "CordovaWebViewEngine": "CDVWKWebViewEngine"
+    }
+  }
+}

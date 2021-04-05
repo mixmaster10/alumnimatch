@@ -1,0 +1,207 @@
+ion-toolbar {
+    padding: 4px !important;
+}
+.question {
+    margin: 0;
+    ion-col {
+        padding: 0;
+        text-align: left;
+    }
+    .number {
+        border-radius: 6px;
+        font-size:14px;
+        padding:1px 6px;
+        color:#ffffff;
+        margin-right: 8px;
+    }
+    .am-label {
+        text-align: left;
+    }
+}
+
+.m-updatePos {
+    text-align: center;
+    position: fixed;
+    width:100%;
+    padding-bottom:0px;
+    bottom:0px;
+    .m-pos-body {
+        background-color:#fff;
+        font-size:15px;
+        padding-left:24px;
+        padding-right:24px;
+    }
+    .m-yourlocation {
+        font-size:16px;
+        font-weight: bold;
+        margin-top:10px;
+        margin-bottom:5px;
+    }
+    .turnPos {
+        width:100%;
+        margin-top:8px;
+        margin-bottom:8px;
+    }
+    .turnBar {
+        width:100%;
+        height:38px;
+        border-radius: 32px;
+        background-color:#eeecec;
+        position:relative;
+    }
+    .turn {
+        width:40%;
+        background-color:#eeecec;
+        border-radius:32px;
+        font-size:20px;
+        padding-top:10px;
+        height: 100%;
+        -moz-box-shadow:    inset 0 0 16px #999;
+        -webkit-box-shadow: inset 0 0 16px #999;
+        box-shadow:         inset 0 0 16px #999;
+    }
+    .turn-off {
+        position: absolute;
+        left:0px;          
+        width:55%;
+        color:#999;
+    }
+    .turn-on {
+        position: absolute;
+        right:0px;
+        width:55%;
+        color:#999;
+    }
+    .active {
+        z-index: 100;
+        color:#fff;
+    }
+    .turn-on.active {
+        background-color:#7fb128;
+        -moz-box-shadow:    inset 0 0 16px #7fb128;
+        -webkit-box-shadow: inset 0 0 16px #7fb128;
+        box-shadow:         inset 0 0 16px #7fb128;
+    }
+    .turn-off.active {
+        background-color:#b12828;
+        -moz-box-shadow:    inset 0 0 16px #8f0606;
+        -webkit-box-shadow: inset 0 0 16px #8f0606;
+        box-shadow:         inset 0 0 16px #8f0606;
+    }
+    .m-cell {
+        margin-top: 5px;
+        padding:3px 10px 0px 0px;
+        text-align: left;
+        position: relative;
+        padding-left:30px;
+    }
+    .m-cell .m-number {
+        background-color:rgb(233,133,19);
+        border-radius: 6px;
+        font-size:14px;
+        padding:1px 6px;
+        color:#ffffff;
+        position: absolute;
+        top:3px;
+        left:2px;
+    }
+    .cell .txt {
+        font-size:14px;
+        display: inline;
+    }
+    ion-select {
+        border-radius: 18px;
+        max-width: 100%;
+        margin-top:8px;
+        margin-bottom: 8px;
+        width:100%;
+        background-color:rgb(64, 121, 148);
+    }
+    .select-ios {
+        background-color:rgb(64, 121, 148);
+        padding: 8px 8px 8px 16px;
+        text-align: left;
+        color:#fff;
+    }
+    .select-md {
+        background-color:rgb(64, 121, 148);
+        padding: 8px 8px 8px 16px; 
+        text-align: left;
+        color:#fff;
+    }
+    .select-ios .select-icon {
+        background-color: #fff;
+        border-radius: 16px;
+        width: 24px;
+        height: 24px;
+        color: #fff;
+    }
+    .select-md .select-icon {
+        background-color: #fff;
+        border-radius: 16px;
+        width: 24px;
+        height: 24px;
+        color: #fff;
+    }
+    .select-ios .select-icon .select-icon-inner {
+        color: rgb(139, 32,32);
+        font-size:24px;
+        margin-left:2px;
+    }
+    .select-md .select-icon .select-icon-inner {
+        color: rgb(139, 32,32);
+        font-size:24px;
+        margin-left:2px;
+        margin-top:-2px;
+    }
+    .select-text {
+        padding-top:2px;
+    }
+    .item-ios.item-block .item-inner {
+        border:none;
+    }
+    .item-md.item-block .item-inner {
+        border:none;
+    }
+    .m-line2 {
+        margin-left:36px;
+    }
+    .m-saveBtn {
+        height:36px !important;
+        background-color:#7fb128;
+        font-size:18px !important;
+        .save-text {
+            font-size: 16px;
+            margin-top: 6px;
+        }
+    }
+    .m-save-map-icon {
+        margin-right:10px;
+        width:24px;
+        height: 24px;
+    }
+    .button-md:hover:not(.disable-hover) {
+        background-color: #7fb128;
+    }
+    .m-updateArea {
+        text-align: center;
+        position: absolute;
+        width:100%;
+        padding-bottom:100px;
+        bottom:0px;
+        padding-left:16px;
+        padding-right:16px;
+    }
+    .m-updateButton {
+        padding:16px;
+        background-color:rgba(255,255,255, 0.9);
+        border-radius: 10px;
+        white-space: nowrap;
+    }
+    .m-updatePosBtn {
+        padding:0px 5px;
+        border-radius: 10px;
+        border:rgb(73, 165, 207) 2px solid;
+        font-weight: bold;
+    }
+}

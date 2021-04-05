@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-title>Your Name</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="nameForm">
+    <ion-label class="am-label">First Name</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-input type="text" placeholder="First Name" formControlName="first_name"></ion-input>
+    </ion-item>
+    <ion-label class="am-label">Last Name</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-input type="text" placeholder="Last Name" formControlName="last_name"></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="am-action-item">
+      <ion-button (click)="onSubmit()" class="am-btn-add" size="small" expand="fill" color="success" [disabled]="!nameForm.valid">
+        Submit
+      </ion-button>
+    </ion-item>
+  </form>
+</ion-content>

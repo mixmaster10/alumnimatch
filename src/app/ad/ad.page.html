@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" icon="md-arrow-back"></ion-back-button>
+
+      <!-- <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+    <ion-title> {{preview ? 'Ad Preview' : 'Advertisement'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!isLoading && !isError" [scrollEvents]="true" #content>
+  <ion-list class="ion-no-padding">
+    <div class="img">
+      <img style="background: #f2f2f2; height: 200px;object-fit: cover;width: 100%;" [src]="ad?.photoUrl || '/assets/imgs/no-image.png'"/>
+      <!-- <ion-spinner name="lines-small"></ion-spinner> -->
+    </div>
+
+    <ion-item (click)="viewSponsor()" lines="full" class="sm-sponsor">
+      <div style="padding-left: 10%;">
+        <img src="{{sponsor?.photoUrl || 'assets/imgs/no-image.png'}}" width="48" height="48" class="sm-sponsor-avatar" onerror="this.onerror=null; this.src='assets/imgs/user.png';" alt="">
+        <div *ngIf="!preview" appAM class="sm-sponsor-match-rate">{{sponsor?.match || 0}}%</div>
+        <!-- <ion-icon name="ios-radio-button-on" class="on-off-icon" [ngClass]="user?.online ? 'online' : 'offline'"></ion-icon> -->
+        <!-- <span class="sm-sponsor-first-name">{{user.first_name || user.last_name}}</span> -->
+      </div>
+      <ion-label class="ion-padding">
+        <h3>{{ ad?.companyName || sponsor?.companyName }}</h3> 
+      </ion-label>    
+    </ion-item>
+
+    
+
+    <!-- <ion-item class="postType" lines="none">
+      <ion-badge color="secondary" appAM>{{ post.type.name }}</ion-badge>
+      <ion-badge color="secondary" appAM>{{ post.category.name }}</ion-badge>
+    </ion-item> -->
+
+    <ion-list-header>
+      <ion-label style="margin: 0" class="ion-text-wrap head ion-no-margin ion-no-padding"> 
+        <h2>{{ ad?.title }} </h2>
+        <p>{{ ad?.created_at | relativeTime }}</p>
+      </ion-label>
+
+    </ion-list-header>
+
+    <!-- <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <h3 class="title">Summary</h3>
+        <p [innerHTML]="post.summary | linkify"></p>
+      </ion-label>
+    </ion-item> -->
+
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap ion-no-padding">
+<!--         <h3 class="title">Description</h3>
+ -->        <p [innerHTML]="ad?.description | linkify"></p>
+      </ion-label>
+    </ion-item>
+
+    <ion-list-header style="min-height: 25px">
+      <ion-label> {{ ad?.leadsUsed?.comments?.length }} Comment{{ad?.leadsUsed?.comments?.length != 1 ? 's' : ''}} </ion-label>
+    </ion-list-header>
+
+    <ion-item lines="none" *ngFor="let comment of ad?.leadsUsed?.comments">
+      <div style="display: flex; margin-top: 6px">
+        <ion-avatar>
+          <img [src]="comment?.user?.avatar || 'assets/imgs/user.png'" onerror="this.onerror=null; this.src='assets/imgs/user.png';"/>
+        </ion-avatar>
+        <ion-label class="ion-text-wrap head">
+          <h2 style="font-size: 14px">
+            {{ comment.user.first_name }} {{ comment.user.last_name }} 
+            <ion-note style="font-size: 11px">{{ comment.created_at | relativeTime }}</ion-note>
+          </h2>
+          <ion-note style="margin-top: 6px; font-size: 13px">{{ comment.comment }}</ion-note>
+        </ion-label>
+      </div>
+    </ion-item>
+    <ion-item lines="none" *ngIf="!ad?.leadsUsed?.comments || ad?.leadsUsed?.comments?.length === 0">
+      <ion-note style="margin-top: 6px"> Be First Comment </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer *ngIf="addCommentClicked" class="ion-no-border">
+  <ion-toolbar>
+    <ion-textarea [autofocus]="isFocused" (ionInput)="_handleMessageInput($event)" name="comment" [value]="comment.comment || ''" clearOnEdit="true" autoGrow rows="1" class="ion-no-margin" placeholder="leave your thoughts here..."></ion-textarea>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="isDisabled" (click)="commentAd()" mode="md" appAm>comment</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer appAM>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col style="border: 2px solid white;">
+        <ion-button *ngIf="!isLiked" [disabled]="preview" appAM expand="block" class="ion-no-margin" style="border-right: 2px solid" (click)="interested()">
+          Interested?
+        </ion-button>
+        <ion-button *ngIf="isLiked" [disabled]="true" appAM expand="block" class="ion-no-margin" style="border-right: 2px solid">
+          You're Interested!
+        </ion-button>
+      </ion-col>
+      <ion-col style="border: 2px solid white;">
+        <ion-button [disabled]="preview" appAM expand="block" class="ion-no-margin"  (click)="addComment()">
+          Add Comment
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+
+  <!-- <ion-row style="border: 2px solid white;">
+    <ion-col>
+      <ion-button [disabled]="preview" appAM expand="block" class="ion-no-margin" style="border-top: 2px solid" >
+        View Sponsor Page
+      </ion-button>
+    </ion-col>
+  </ion-row> -->
+</ion-footer>

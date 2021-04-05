@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Friend Management</ion-title>
+  </ion-toolbar>
+  <ion-toolbar class="segments-toolbar">
+    <ion-segment scrollable [(ngModel)]="fsegment" mode="ios" (ionChange)="segmentChanged($event)">
+      <ion-segment-button mode="ios" value="all" appAM>
+        All
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="requests" appAM>
+        Request
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="suggests" appAM>
+        Suggest
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="visits" appAM>
+        View
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="friends" appAM>
+        Friends
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="pendings" appAM>
+        Pend
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="blocks" appAM>
+        Blocked
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" [ngSwitch]="fsegment">
+  <ion-list *ngSwitchCase="'all'">
+    <div *ngFor="let user of users | matchOrder; let i = index">
+      <app-alumni [user]="user" (profileClick)="viewProfile(user)"></app-alumni>
+      <app-ad *ngIf="ad && ((i % 5 === 0 && i !== 0) || (5 > users.length && i === users.length - 1))" [sponsor]="sponsor" [ad]="ad"></app-ad>
+    </div>
+    <app-alumni-loading *ngIf="load.users === 1;"></app-alumni-loading>
+    <div class="ion-text-center" *ngIf="load.users === 0" (click)="getAllUsers()">
+      <ion-button size="small" appAM class="load-more">Load More</ion-button>
+    </div>
+
+  
+  </ion-list>
+  <ion-list *ngSwitchCase="'requests'">
+    <div *ngFor="let user of requests | matchOrder">
+      <app-alumni [user]="user" (profileClick)="viewProfile(user)"></app-alumni>
+      <ion-grid class="ion-no-padding ion-no-margin">
+        <ion-row>
+          <ion-col class="ion-no-padding ion-no-margin">
+            <ion-item lines="none" class="am-action-item">
+              <ion-button class="am-btn" size="small" expand="block" color="success" shape="outline" (click)="approveFriendRequest(user)">
+                APPROVE
+              </ion-button>
+            </ion-item>
+          </ion-col>
+          <ion-col class="ion-no-padding ion-no-margin">
+            <ion-item lines="none" class="am-action-item">
+              <ion-button class="am-btn" size="small" expand="block" color="danger" shape="outline" (click)="ignoreFriendRequest(user)">
+                IGNORE
+              </ion-button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <app-alumni-loading *ngIf="load.requests === 1;"></app-alumni-loading>
+    <div class="ion-text-center" *ngIf="load.requests === 0" (click)="getFriendRequests()">
+      <ion-button size="small" appAM class="load-more">Load More</ion-button>
+    </div>
+  </ion-list>
+  <ion-list *ngSwitchCase="'suggests'">
+    <div *ngFor="let user of suggests | matchOrder">
+      <app-alumni [user]="user" (profileClick)="viewProfile(user)"></app-alumni>
+      <ion-item lines="none" class="am-action-item">
+        <ion-button class="am-btn" size="small" expand="fill" color="danger" fill="outline" (click)="addAsFriend(user)">
+          Add As Friend
+        </ion-button>
+      </ion-item>
+    </div>
+    <app-alumni-loading *ngIf="load.suggests === 1;"></app-alumni-loading>
+    <div class="ion-text-center" *ngIf="load.suggests === 0" (click)="getSuggests()">
+      <ion-button size="small" appAM class="load-more">Load more</ion-button>
+    </div>
+  </ion-list>
+  <ion-list *ngSwitchCase="'visits'">
+    <app-alumni *ngFor="let user of visits | matchOrder" [user]="user" (profileClick)="viewProfile(user)"></app-alumni>
+    <app-alumni-loading *ngIf="load.visits === 1;"></app-alumni-loading>
+    <div class="ion-text-center" *ngIf="load.visits === 0" (click)="getVisits()">
+      <ion-button size="small" appAM class="load-more">Load More</ion-button>
+    </div>
+  </ion-list>
+  <ion-list *ngSwitchCase="'friends'">
+    <app-alumni *ngFor="let user of friends | matchOrder" [user]="user" (profileClick)="viewProfile(user)"></app-alumni>
+    <app-alumni-loading *ngIf="load.friends === 1;"></app-alumni-loading>
+    <div class="ion-text-center" *ngIf="load.friends === 0" (click)="getFriends()">
+      <ion-button size="small" appAM class="load-more">Load More</ion-button>
+    </div>
+  </ion-list>
+  <ion-list *ngSwitchCase="'pendings'">
+    <app-alumni *ngFor="let user of pendings | matchOrder" [user]="user" (profileClick)="viewProfile(user)"></app-alumni>
+    <app-alumni-loading *ngIf="load.pendings === 1;"></app-alumni-loading>
+    <div class="ion-text-center" *ngIf="load.pendings === 0" (click)="getPendings()">
+      <ion-button size="small" appAM class="load-more">Load More</ion-button>
+    </div>
+  </ion-list>
+  <ion-list *ngSwitchCase="'blocks'">
+    <app-alumni *ngFor="let user of blocks | matchOrder" [user]="user" (profileClick)="unblock(user)"></app-alumni>
+    <app-alumni-loading *ngIf="load.blocks === 1;"></app-alumni-loading>
+    <div class="ion-text-center" *ngIf="load.blocks === 0" (click)="getBlocks()">
+      <ion-button size="small" appAM class="load-more">Load More</ion-button>
+    </div>
+  </ion-list>
+</ion-content>

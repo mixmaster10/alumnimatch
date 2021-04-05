@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{title || 'Choose Options'}}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar mode="md" appAM>
+    <ion-searchbar (input)="getSearchResult(searchBar.value)" mode="ios" #searchBar></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="!multiple">
+    <ion-radio-group #singleSelect>
+      <ion-item *ngFor="let item of filteredItems">
+        <ion-label>{{item}}</ion-label>
+        <ion-radio slot="start" mode="md" [value]="item" [checked]="selectedItem === item" (ionSelect)="selectedItem = item"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-list *ngIf="multiple">
+    <ion-item *ngFor="let item of filteredItems">
+      <ion-label>{{item.name || item.code || item.description }}</ion-label>
+      <ion-checkbox slot="start" mode="md" [(ngModel)]="item.selected"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSelect()" expand="block" class="ion-no-margin" appAM>Choose</ion-button>
+  </ion-toolbar>
+</ion-footer>

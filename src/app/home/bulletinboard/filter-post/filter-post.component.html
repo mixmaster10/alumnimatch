@@ -1,0 +1,93 @@
+<ion-header no-border>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-close"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngIf="step !== 0" mode="md" (click)="_handlePrev()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="isLoading">
+  <app-loading *ngIf="isLoading"></app-loading>
+</ion-content>
+
+<ion-content class="center" *ngIf="!isLoading && isError">
+  <ion-note>{{ isError }}</ion-note>
+</ion-content>
+
+<ion-content *ngIf="!isLoading && !isError">
+  <ion-item-group *ngIf="step === 0">
+    <ion-list class="ion-no-margin ion-no-padding">
+      <ion-item button (click)="chooseFilter('type')" detail="true" lines="full" class="item">
+        <ion-label>
+          <h3 style="font-size: 18px; letter-spacing: 0.5px;">Type</h3>
+          <ion-note style="font-size: 12px; letter-spacing: 0.5px;" class="ion-text-wrap">Filter by the type of post</ion-note>
+        </ion-label>
+      </ion-item>
+      <ion-item button (click)="chooseFilter('network')" detail="true" lines="full" class="item">
+        
+        <ion-label>
+          <h3 style="font-size: 18px; letter-spacing: 0.5px;">Network</h3>
+          <ion-note style="font-size: 12px; letter-spacing: 0.5px;" class="ion-text-wrap">Filter by your alumni networks</ion-note>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+
+  <ion-item-group *ngIf="step === 1">
+    <ion-list class="ion-no-margin ion-no-padding">
+      <ion-item (click)="_handleSelection($event)" *ngFor="let type of postTypes" lines="full" class="item">
+        <ion-checkbox color="danger" value="{{ type.id }}" [checked]="type.selected" slot="start"></ion-checkbox>
+        <ion-label>
+          <h3 style="font-size: 14px; letter-spacing: 0.5px;">{{ type.name }}</h3>
+          <ion-note style="font-size: 12px; letter-spacing: 0.5px;" class="ion-text-wrap">{{ type.shortDescription }}</ion-note>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+
+  <ion-item-group *ngIf="step === 2">
+    <ion-list class="ion-no-margin ion-no-padding">
+      <ion-item (click)="_handleSelection($event)" *ngFor="let type of postTypesCategory" lines="full" class="item">
+        <ion-checkbox  color="danger" value="{{ type.id }}" slot="start"></ion-checkbox>
+        <ion-label>
+          <h3 style="font-size: 14px; letter-spacing: 0.5px;">{{ type.name }}</h3>
+          <ion-note style="font-size: 12px; letter-spacing: 0.5px;" class="ion-text-wrap">{{ type.shortDescription }}</ion-note>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+
+  <ion-item-group *ngIf="step === 3">
+    <ion-list class="ion-no-margin ion-no-padding">
+      <ion-item (click)="_handleSelection($event)" *ngFor="let network of networks" lines="full" class="item">
+        <ion-checkbox color="danger" value="{{ network.college.id }}" [checked]="network.selected" slot="start"></ion-checkbox>
+        <ion-label>
+          <h3>{{ network.college.name }}</h3>
+          <!-- <ion-note style="font-size: 12px; letter-spacing: 0.5px;" class="ion-text-wrap">{{ type.shortDescription }}</ion-note> -->
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-item-group>
+</ion-content>
+
+<ion-footer *ngIf="!isLoading && !isError" appAM class="ion-no-border">
+  <ion-toolbar>
+    <ion-row>
+      <ion-col *ngIf="step === 2 || step === 3" style="border: 2px solid white;">
+        <ion-button  appAM expand="block" class="ion-no-margin" (click)="moreFilters()">More</ion-button>
+      </ion-col>
+      <ion-col style="border: 2px solid white;">
+        <ion-button disabled="{{ (filter.networkIds.length === 0 && filter.postCategoryIds.length === 0) && step !== 1 }}" appAM expand="block" (click)="(step !== 1) ? _handleFilter() : _handleNext()" class="ion-no-margin">{{ step !== 1 ? 'Filter' : 'Next' }}</ion-button>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-buttons> -->
+    <!-- </ion-buttons> -->
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,35 @@
+ion-fab-button {
+    height: 28px;
+    width: 28px;
+}
+ion-range {
+    --height: 36px;
+    --bar-height: 8px;
+    --bar-border-radius: 3px;
+    --knob-size: 16px;
+}
+ion-list {
+    padding: 0;
+    margin: 16px 8px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    .item-weight {
+        border-top: #ddd 1px solid;
+    }
+    .item-weight-last {
+        border-bottom: #ddd 1px solid;
+    }
+}
+.profile-item {
+    ion-icon {
+        color: #fff;
+    }
+}
+.bold-label {
+    font-weight: bold;
+}
+p.description {
+    padding: 16px 16px 0px 16px;
+    margin: 0;
+}

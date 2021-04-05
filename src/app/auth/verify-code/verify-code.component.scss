@@ -1,0 +1,57 @@
+.thumb-img {
+    width: 25%;
+}
+.description {
+    font-size: 16px;
+    text-align: justify;
+    margin-top: 36px;
+    span {
+        color: #09548a;
+        // border-bottom: #09548a 1px solid;
+    }
+}
+.nextBtn {
+    white-space: nowrap;
+    color: #ffffff;
+    font-size: 16px;
+    --background: #9b2121;
+    --background-hover: #9b2121;
+    --border-radius: 0;
+    box-shadow: 3px 3px 3px #925b5b;
+    height: 36px;
+    margin-top: 36px;
+    min-width: 160px;
+    img {
+        width: 16px;
+        margin-left: 8px;
+    }
+    .icon {
+        width: 16px;
+        margin-left: 8px;
+        font-size: 16px;
+    }
+}
+.title-thanks {
+    font-style: italic;
+    color: #09548a;
+}
+.slide-title {
+    font-size: 18px;
+}
+.slide-description {
+    font-size: 14px;
+}
+
+ion-item {
+    --background: #ececec;
+    --border-radius: 32px;
+    --padding-start: 0;
+    ion-input {
+        --color: #09548a;
+        font-size: 16px;
+        --padding-top: 0;
+        --padding-bottom: 0;
+        --padding-start: 16px;
+        --padding-end: 16px;
+    }
+}

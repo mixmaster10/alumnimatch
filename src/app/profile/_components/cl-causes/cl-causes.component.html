@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Causes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p class="am-title">Add a cause you care about and then you will be matched up with others that share the same cause!  </p>
+  <div *ngFor="let item of data; let i = index;">
+    <ion-item class="am-action-item" lines="none">
+      <ion-item class="am-control-item" lines="none">
+        <ion-select [(ngModel)]="modelCauses" (ngModelChange)="setCauses($event)" [selectedText]="causes[item.cause]" multiple="true" okText="CHOOSE" cancelText="CANCEL" placeholder="Select cause." [interfaceOptions]="selectCauseOption">
+          <ion-select-option *ngFor="let item of causes; let i = index;" [value]="i">{{item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-fab-button (click)="removeCause(item.cause)" appAM class="am-control-action" size="small" slot=end>
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label ion-margin-top" position="stacked">On a scale of 1 to 10, how passionate are you about this cause? (10 being VERY passionate)</ion-label>
+      <ion-range [(ngModel)]="data[i]['scale']" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': item.scale === 0}">0</div>
+        <div [ngClass]="{'active': item.scale === 1}">1</div>
+        <div [ngClass]="{'active': item.scale === 2}">2</div>
+        <div [ngClass]="{'active': item.scale === 3}">3</div>
+        <div [ngClass]="{'active': item.scale === 4}">4</div>
+        <div [ngClass]="{'active': item.scale === 5}">5</div>
+        <div [ngClass]="{'active': item.scale === 6}">6</div>
+        <div [ngClass]="{'active': item.scale === 7}">7</div>
+        <div [ngClass]="{'active': item.scale === 8}">8</div>
+        <div [ngClass]="{'active': item.scale === 9}">9</div>
+        <div [ngClass]="{'active': item.scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+  </div>
+  <ion-item lines="none" *ngIf="data.length === 0" class="am-action-item">
+    <ion-button (click)="addCause()" appAM class="am-btn-add" size="small" expand="fill">
+      <ion-icon name="add-circle"></ion-icon> &nbsp;&nbsp; Add A Cause
+    </ion-button>
+  </ion-item>
+  <!-- <ion-item lines="none" class="am-action-item">
+    <ion-button (click)="data = [{}]" class="am-btn-add" size="small" expand="fill" color="danger" fill="outline">
+      Remove this Cause
+    </ion-button>
+  </ion-item> -->
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

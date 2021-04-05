@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="back()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{alumni ? (alumni.first_name + ' ' + alumni.last_name) : 'Messages'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="messages">
+    <ion-grid class="message" *ngFor="let msg of messages">
+      <ion-row>
+        <ion-col size="auto" class="message-alumni" *ngIf="msg.sid === alumni?.id">
+          <app-alumni-sm [user]="alumni"></app-alumni-sm>
+        </ion-col>
+        <ion-col class="message-content">
+          <div class="contents">
+            <h6 class="title" appAM (click)="viewMessage(msg)">{{msg.title}}</h6>
+            <p class="content" *ngIf="msg.content.length > 180 && !msg.read_more">{{msg.content.substring(0, 180)}}&nbsp;&nbsp;&nbsp;<a (click)="msg.read_more = true; markAsRead(msg)" appAM>more</a></p>
+            <p class="content" *ngIf="msg.content.length > 180 && msg.read_more">{{msg.content}}&nbsp;&nbsp;&nbsp;<a (click)="msg.read_more = false" appAM>less</a></p>
+            <p class="content" *ngIf="msg.content.length <= 180">{{msg.content}}</p>
+            <ion-grid class="time">
+              <ion-row class="ion-align-items-center">
+                <ion-col size="auto" class="ion-no-padding">
+                  <img src="assets/icon/icn_msg_in_close.png" width="16" *ngIf="msg.read != 1 && msg.sid === alumni?.id">
+                  <img src="assets/icon/icn_msg_in_open.png" width="16" *ngIf="msg.read == 1 && msg.sid === alumni?.id">
+                </ion-col>
+                <ion-col>
+                  <p>
+                    {{msg.updated_at | date: "dd MMM yyyy h:mm a"}}
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-col>
+        <ion-col size="auto" class="message-alumni" *ngIf="msg.sid === user?.id">
+          <img [src]="user?.avatar || 'assets/imgs/user.png'" width="48" height="48" class="avatar" onerror="this.onerror=null; this.src='assets/imgs/user.png';" alt="">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button appAM size="small" (click)="sendMessage()">
+      <ion-icon name="ios-send"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

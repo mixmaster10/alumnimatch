@@ -1,0 +1,100 @@
+.btn-open {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width:160px;
+    background-image: url('src/assets/icon/polygon.png');
+    background-size: 100% 100%;
+    ion-button {
+        --color: #fff;
+        font-size: 16px;
+        width: 100%;
+        ion-icon {
+            font-size: 14px;
+        }
+    }
+}
+
+agm-map {
+    height: 100%;
+    width: 100%;
+}
+.marker {
+    position: absolute;
+    left: 10px;
+    bottom: -18px;
+    background: var(--ion-color-azul);
+    div.user {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        img.avatar {
+            border-radius: 50%;
+            padding: 4px;
+            background-color: var(--ion-color-primary);
+        }
+        .match-rate {
+            border-radius: 12px;
+            padding: 2px 8px 2px 8px;
+            color: #fff;
+            font-size: 12px;
+            position: absolute;
+            top: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--ion-color-primary);
+        }
+        .triangle {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-4px) rotate(45deg);
+            width: 12px;
+            height: 12px;
+            background-color: var(--ion-color-primary);
+        }
+    }
+}
+.clusterer {
+    color: #fff;
+}
+
+ion-footer {
+    .mini-update {
+        text-align: center;
+        width:100%;
+        min-height: 160px;
+        background-color: white;
+    }
+    .pos-top {
+        background-color:rgb(48, 105, 136);
+        height: auto;
+        min-height: 50px;
+    }
+    .near-title {
+        text-align: left;
+        font-size:18px;
+        color:#fff;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+    .near-list {
+        background-color:#fff;
+        font-size:15px;
+        padding-top:8px;
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+    .btn-update {
+        padding: 0px;
+        --padding-start: 8px;
+        --padding-end: 8px;
+        img {
+            height: 14px;
+            margin-right: 5px;
+        }
+    }
+}

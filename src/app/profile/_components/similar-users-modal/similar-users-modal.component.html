@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{cname}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <app-alumni *ngFor="let user of users | matchOrder" (profileClick)="viewProfile(user)" [user]="user"></app-alumni>
+  <app-alumni-loading *ngIf="is_load === 1;"></app-alumni-loading>
+  <div class="ion-text-center" *ngIf="is_load === 0" (click)="getSimilarUsers()">
+    <ion-button size="small" appAM class="load-more">LOAD MORE</ion-button>
+  </div>
+
+  <div style="text-align: center;" *ngIf="users.length == 0 && is_load != 1">
+    There are no other users in your alumni network with this in common. <br><br>
+    <ion-button appAM (click)="navigateTo('/home/invite-code')">
+      Click here to invite other alumni!
+    </ion-button> 
+  </div>
+</ion-content>

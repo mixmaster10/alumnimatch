@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Choose Your Location</ion-title>
+  </ion-toolbar>
+  <ion-toolbar mode="md" appAM>
+    <ion-searchbar mode="ios" #searchBar></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <agm-map
+    *ngIf="center"
+    [latitude]="center.lat"
+    [longitude]="center.lng"
+    [zoom]="16"
+    [mapTypeId]="'hybrid'"
+    [disableDefaultUI]="true"
+    [disableDoubleClickZoom]="true"
+    (mapReady)="mapReady($event, searchBar)"
+    (mapDblClick)="mapDblClick($event)">
+    <agm-marker
+      *ngIf="position"
+      [latitude]="position.lat"
+      [longitude]="position.lng"
+      [markerDraggable]="false"
+      [zIndex]="1"
+      iconUrl="assets/icon/pin.png"
+    ></agm-marker>
+  </agm-map>
+</ion-content>
+
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM [disabled]="!position">Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

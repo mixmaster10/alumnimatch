@@ -1,0 +1,43 @@
+<!-- <ion-item class="alumni" *ngIf="sponsor">
+  <div slot="start" class="match" (click)="viewSponsor()" appAM>
+    <img [src]="sponsor?.avatar || 'assets/imgs/no-image.png'" class="avatar" onerror="this.onerror=null;this.src='assets/imgs/no-image.png';" alt="">
+    <img src="assets/icon/check_friend.png" class="friend" *ngIf="sponsor.is_friend && sponsor.is_friend == 1">
+    <div class="percent">
+      <div>
+        <ion-icon name="ios-radio-button-on" class="on-off-icon" [ngClass]="sponsor?.online ? 'online' : 'offline'"></ion-icon>
+        <br />
+       <b> {{sponsor?.match}}% </b> </div>
+    </div>
+  </div>
+  <ion-label class="info">
+    <h4 appAM (click)="viewSponsor()">{{sponsor?.first_name}} {{sponsor?.last_name}} <ion-icon *ngIf="detailIcon" name="md-arrow-round-forward" class="ion-float-right"></ion-icon></h4>
+    <ion-grid>
+     
+      <ion-row class="ion-align-items-center" *ngIf="sponsor?.shares != undefined">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="ios-people" appAM></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Shared: {{ sponsor?.shares }}</ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center" *ngIf="!sponsor?.graduated">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="calendar" appAM></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Joined: {{ sponsor?.verified_at | date }}</ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center" *ngIf="sponsor?.graduated">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="calendar" appAM></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Graduated: {{ sponsor?.graduated.year }}</ion-col>
+      </ion-row>
+       <ion-row class="ion-align-items-center" *ngIf="sponsor?.distance != undefined">
+        <ion-col size="auto" class="ion-no-padding">
+          <ion-icon name="ios-pin" appAM></ion-icon>
+        </ion-col>
+        <ion-col class="ion-no-padding">Miles Away: {{ sponsor?.distance | number : '.0-1'}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-label>
+</ion-item>
+ -->

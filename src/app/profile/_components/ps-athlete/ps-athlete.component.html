@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Were You An Athlete?</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p class="am-title" position="stacked">Athletics Questions:</p>
+  <ion-label class="am-label ion-margin-top">Were you an official member within your college’s athletic department, either as a player or staff person?</ion-label>
+  <ion-item class="am-control-item" lines="none">
+    <ion-select (ionChange)="athleteSelectChanged($event)" [ngModel]="data.member" okText="CHOOSE" cancelText="CANCEL" placeholder="Were you an official member within your college’s athletic department?" [interfaceOptions]="selectAthleteOption">
+      <ion-select-option [value]="0">YES - Athlete</ion-select-option>
+      <ion-select-option [value]="1">Yes - Staff</ion-select-option>
+      <ion-select-option [value]="2">No - But big fan</ion-select-option>
+      <ion-select-option [value]="3">NO - Don't care</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <div *ngIf="data.member === 0 || data.member === 1">
+    <ion-label class="am-label">Which athletic sport were you a part of?</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-input type="text" [value]="data.athlete?.name" placeholder="Select athlete team" readonly (click)="selectAthlete(data.athlete)"></ion-input>
+    </ion-item>
+    <ion-label class="am-label">What was your role?</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-select [(ngModel)]="data.position" okText="CHOOSE" cancelText="CANCEL" placeholder="What was your position?" [interfaceOptions]="selectTeamPosOption">
+        <ion-select-option *ngFor="let position of POSITIONS; let i = index;" [value]="i">{{position}}</ion-select-option>=
+      </ion-select>
+    </ion-item>
+  </div>
+  <div *ngIf="data.member !== 3 && data.member !== 2">
+    <ion-label class="am-label ion-margin-top">If you want this information to be public within your college’s network, then make it public. It is default set to private only to other athletes and staffers</ion-label>
+    <ion-item class="am-control-item">
+      <ion-label class="am-label">Athletics Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.privacy" mode="ios"></ion-toggle>
+    </ion-item>
+  </div>
+  
+</ion-content>
+  
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

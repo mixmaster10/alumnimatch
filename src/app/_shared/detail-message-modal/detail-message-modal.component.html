@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar appAM mode="ios">
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon icon-only name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{user.first_name}} {{user.last_name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="message">
+    <div class="title">
+      <span class="label_title" appAM>Title :</span><div class="message_title">{{msg.title}}</div>
+    </div>
+    <div class="message_content">
+      <span>
+        {{msg.content}}
+      </span>
+    </div>
+    <!-- <ion-row class="buttonArea" *ngIf="user.id == msg.sid">
+      <ion-col col-6><div class="btnReply detailBtn" (click)="reply(msg.friend)"><ion-icon name="ios-undo" class="detailIcon"></ion-icon>Reply</div></ion-col>
+      <ion-col col-6><div class="btnTrash detailBtn" (click)="deleteMsg(msg.id)"><ion-icon name="ios-trash" class="detailIcon"></ion-icon>delete</div></ion-col>      
+    </ion-row> -->
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button color="success" expand="block" size="small" (click)="reply()"><ion-icon name="ios-undo" class="detailIcon"></ion-icon> Reply</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="danger" expand="block" size="small" (click)="deleteMsg()"><ion-icon name="ios-trash" class="detailIcon"></ion-icon> Delete</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,7 @@
+<div class="users">
+  <ion-slides [options]="slideOpts">
+    <ion-slide *ngFor="let user of users">
+      <app-alumni-sm [user]="user"></app-alumni-sm>
+    </ion-slide>
+  </ion-slides>
+</div>

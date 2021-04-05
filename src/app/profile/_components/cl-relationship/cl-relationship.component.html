@@ -1,0 +1,562 @@
+<ion-header>
+  <ion-toolbar appAM>
+    <ion-buttons slot="start">
+      <ion-button mode="md" (click)="dismiss()">
+        <ion-icon name="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Romantic Relationship</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p class="am-title">What is your current Relationship Status?</p>
+  <ion-item class="am-control-item ion-margin-bottom" lines="none">
+    <ion-select [(ngModel)]="data.relationship" okText="CHOOSE" cancelText="CANCEL" placeholder="Relationship Status:" [interfaceOptions]="selectRelationshipOption">
+      <ion-select-option *ngFor="let item of relationships; let i = index;" [value]="i">{{item}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <br>
+  <!-- Married -->
+  <div *ngIf="data.relationship === 0"> 
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Is your romantic partner also an alumni from your college?</ion-label>
+      <ion-checkbox mode="md" appAM [(ngModel)]="data.married.is_alumni"></ion-checkbox>
+    </ion-item>
+    <div *ngIf="data.married.is_alumni">
+      <ion-button size="small" expand="block" appAM class="ion-margin-top" (click)="invitePartner()">Invite this person</ion-button>
+      <ion-item class="am-control-item am-control-range-item mb-2 ion-padding-left" lines="none">
+        <ion-label class="am-label ion-margin-top" position="stacked">On scale of 1 to 10, how much do you want to meet other couples that are also both from your college? </ion-label>
+        <ion-range [(ngModel)]="data.married.meet_couple_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 0}">0</div>
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 1}">1</div>
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 2}">2</div>
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 3}">3</div>
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 4}">4</div>
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 5}">5</div>
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 6}">6</div>
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 7}">7</div>
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 8}">8</div>
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 9}">9</div>
+          <div [ngClass]="{'active': data.married.meet_couple_scale === 10}">10</div>
+        </ion-row>
+      </ion-item>
+    </div>
+    <br>
+  </div>
+  <!-- Married or Engaged -->
+  <div *ngIf="data.relationship === 0 || data.relationship === 2">
+    <p class="am-title">How long have you been married?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.married.year" okText="CHOOSE" cancelText="CANCEL" placeholder="How long have you been married?" [interfaceOptions]="selectMarriedYearsOption">
+        <ion-select-option *ngFor="let item of marriedyears; let i = index;" [value]="i">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Married Years Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.married.privacy_married_year" mode="ios"></ion-toggle>
+    </ion-item>
+    <br>
+
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Do you have children?</ion-label>
+      <ion-checkbox mode="md" appAM [(ngModel)]="data.married.have_kids" (ionChange)="data.kids = [{}]"></ion-checkbox>
+    </ion-item>
+    <div *ngIf="data.married.have_kids">
+      <div *ngFor="let kid of data.kids; let i = index;" class="mb-2">
+        <ion-item class="am-control-item" lines="none">
+          <ion-select [(ngModel)]="kid.gender" okText="CHOOSE" cancelText="CANCEL" placeholder="Select gender" [interfaceOptions]="selectGenderOption">
+            <ion-select-option *ngFor="let item of genders; let k = index;" [value]="k">{{item}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="am-action-item">
+          <ion-item class="am-control-item" lines="none">
+            <ion-select [(ngModel)]="kid.age" okText="CHOOSE" cancelText="CANCEL" placeholder="Select age group" [interfaceOptions]="selectAgeOption">
+              <ion-select-option *ngFor="let item of agegroups; let k = index;" [value]="k">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-fab-button (click)="data.kids.splice(i, 1);" appAM class="am-control-action" size="small" slot=end>
+            <ion-icon name="remove"></ion-icon>
+          </ion-fab-button>
+        </ion-item>
+      </div>
+      <ion-item lines="none" class="am-action-item">
+        <ion-button (click)="addKid()" appAM class="am-btn-add" size="small" expand="fill">
+          <ion-icon name="add-circle"></ion-icon> &nbsp;&nbsp;Add Another Child
+        </ion-button>
+      </ion-item>
+      <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+        <ion-label class="am-label ion-margin-top" position="stacked">
+          On a scale of 1 to 10, how much do you want to be matched with other alumni that have children
+           in the same age group as you do?
+        </ion-label>
+        <ion-range [(ngModel)]="data.married.meet_kid_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 0}">0</div>
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 1}">1</div>
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 2}">2</div>
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 3}">3</div>
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 4}">4</div>
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 5}">5</div>
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 6}">6</div>
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 7}">7</div>
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 8}">8</div>
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 9}">9</div>
+          <div [ngClass]="{'active': data.married.meet_kid_scale === 10}">10</div>
+        </ion-row>
+      </ion-item>
+    </div>
+    <br>
+
+    <p class="am-title">
+        On a scale of 1 to 10, how much do you want to be matched with
+        other alumni that are also married?
+    </p>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label" position="stacked"></ion-label>
+      <ion-range [(ngModel)]="data.married.meet_married_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': data.married.meet_married_scale === 0}">0</div>
+        <div [ngClass]="{'active': data.married.meet_married_scale === 1}">1</div>
+        <div [ngClass]="{'active': data.married.meet_married_scale === 2}">2</div>
+        <div [ngClass]="{'active': data.married.meet_married_scale === 3}">3</div>
+        <div [ngClass]="{'active': data.married.meet_married_scale === 4}">4</div>
+        <div [ngClass]="{'active': data.married.meet_married_scale === 5}">5</div>
+        <div [ngClass]="{'active': data.married.meet_married_scale === 6}">6</div>
+        <div [ngClass]="{'active': data.married.meet_married_scale === 7}">7</div>
+        <div [ngClass]="{'active': data.married.meet_married_scale === 8}">8</div>
+        <div [ngClass]="{'active': data.married.meet_married_scale === 9}">9</div>
+        <div [ngClass]="{'active': data.married.meet_married_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+  </div>
+  <!-- Divorced -->
+  <div *ngIf="data.relationship === 1">
+    <ion-item mode="md" class="am-control-item">
+      <ion-label class="am-title ion-padding-end">Do you want to meet other alumni that are also divorced?</ion-label>
+      <ion-checkbox [(ngModel)]="data.single.meet_devorced" mode="md" appAM></ion-checkbox>
+    </ion-item>
+  </div>
+  <!-- Engaged -->
+  <div *ngIf="data.relationship === 2">
+    <p class="am-title">When do you plan on getting married, what month and year?</p>
+    <ion-label class="am-label">We will send an announcement to all of your AlumniMatch friends on the day of your engagement! Congratulations!</ion-label>
+    <ion-item class="am-control-item" lines="none">
+      <ion-datetime [(ngModel)]="data.married.plan_marry_date" displayFormat="MMM DD YYYY" pickerFormat="MMM DD YYYY" max="2050" [min]="getCurrentYear()" placeholder="Select your plan"></ion-datetime>
+    </ion-item>
+    <p class="am-title">Is your fiance from your college?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.married.finance" okText="CHOOSE" cancelText="CANCEL" placeholder="Is your fiance from your college" [interfaceOptions]="selectFinanceOption">
+        <ion-select-option [value]="0">NO</ion-select-option>
+        <ion-select-option [value]="1">YES</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <div *ngIf="data.relationship === 3">
+    <!-- Widowed -->
+  </div>
+  <!-- Single or Divorced wants to meet divorced -->
+  <div *ngIf="data.relationship === 4 || data.relationship === 1 && data.single.meet_devorced">
+    <p class="am-title">
+      On a scale of 1 to 10, how much do you want to be matched with other singles that are also alumni from your college?
+    </p>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label" position="stacked"></ion-label>
+      <ion-range [(ngModel)]="data.single.single_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': data.single.single_scale === 0}">0</div>
+        <div [ngClass]="{'active': data.single.single_scale === 1}">1</div>
+        <div [ngClass]="{'active': data.single.single_scale === 2}">2</div>
+        <div [ngClass]="{'active': data.single.single_scale === 3}">3</div>
+        <div [ngClass]="{'active': data.single.single_scale === 4}">4</div>
+        <div [ngClass]="{'active': data.single.single_scale === 5}">5</div>
+        <div [ngClass]="{'active': data.single.single_scale === 6}">6</div>
+        <div [ngClass]="{'active': data.single.single_scale === 7}">7</div>
+        <div [ngClass]="{'active': data.single.single_scale === 8}">8</div>
+        <div [ngClass]="{'active': data.single.single_scale === 9}">9</div>
+        <div [ngClass]="{'active': data.single.single_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+
+    <p class="am-title">What types of food do you enjoy most when going out on dates?</p>
+    <ion-item class="am-action-item" *ngFor="let food of data.single.foods; let i = index;">
+      <ion-item class="am-control-item" lines="none">
+        <ion-select [(ngModel)]="data.single.foods" [selectedText]="foods[food]" multiple="true" okText="CHOOSE" cancelText="CANCEL" placeholder="Select foods" [interfaceOptions]="selectSingleFoodOption">
+          <ion-select-option *ngFor="let f of foods; let j = index;" [value]="j">{{f}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-fab-button (click)="removeFood(food)" appAM class="am-control-action" size="small" slot=end>
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+    <ion-item lines="none" *ngIf="!data.single.foods || data.single.foods.length === 0" class="am-action-item">
+      
+      <ion-button appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon name="add-circle" class="readjust-item-text"></ion-icon> &nbsp;&nbsp;Add Your Foods
+        <ion-select class="remove-caret" [(ngModel)]="data.single.foods" multiple="true" okText="CHOOSE" cancelText="CANCEL" [interfaceOptions]="selectSingleFoodOption">
+          <ion-select-option *ngFor="let f of foods; let j = index;" [value]="j">{{f}}</ion-select-option>
+        </ion-select>
+      </ion-button>
+    </ion-item>
+
+    <p class="am-title">Please select the ethnicities of those you would like to be matched with for dating?</p>
+    <ion-item class="am-control-item mb-2" *ngFor="let ethnicity of data.single.ethnicity;" lines="none">
+      <ion-item class="am-control-item" lines="none">
+        <ion-select [(ngModel)]="data.single.ethnicity" [selectedText]="ethnicities[ethnicity]" okText="CHOOSE" multiple="true" cancelText="CANCEL" placeholder="Select ethnicity" [interfaceOptions]="selectSingleEthnicityOption">
+          <ion-select-option *ngFor="let e of ethnicities; let j = index;" [value]="j">{{e}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-fab-button (click)="removeEthnicity(ethnicity)" appAM class="am-control-action" size="small" slot=end>
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+    <ion-item lines="none" *ngIf="!data.single.ethnicity || data.single.ethnicity.length === 0" class="am-action-item">
+      <ion-button appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon class="readjust-item-text" name="add-circle"></ion-icon> &nbsp;&nbsp;Add Your Ethnicities
+        <ion-select class="remove-caret" [(ngModel)]="data.single.ethnicity" okText="CHOOSE" multiple="true" cancelText="CANCEL" [interfaceOptions]="selectSingleEthnicityOption">
+          <ion-select-option *ngFor="let e of ethnicities; let j = index;" [value]="j">{{e}}</ion-select-option>
+        </ion-select>
+      </ion-button>
+    </ion-item>
+
+    <p class="am-title">What types of music do you like to see in concerts for dates?</p>
+    <ion-item class="am-control-item mb-2" lines="none" *ngFor="let music of data.single.music;">
+      <ion-item class="am-control-item" lines="none">
+        <ion-select [(ngModel)]="data.single.music" [selectedText]="musics[music]" okText="CHOOSE" multiple="true" cancelText="CANCEL" placeholder="Select type of music?" [interfaceOptions]="selectSingleMusicOption">
+          <ion-select-option *ngFor="let m of musics; let i = index;" [value]="i">{{m}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-fab-button (click)="removeMusic(music)" appAM class="am-control-action" size="small" slot=end>
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+    <ion-item lines="none" *ngIf="!data.single.music || data.single.music.length === 0" class="am-action-item">
+      <ion-button appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon class="readjust-item-text" name="add-circle"></ion-icon> &nbsp;&nbsp;Add Your Music
+        <ion-select class="remove-caret" [(ngModel)]="data.single.music" okText="CHOOSE" multiple="true" cancelText="CANCEL" [interfaceOptions]="selectSingleMusicOption">
+          <ion-select-option *ngFor="let m of musics; let i = index;" [value]="i">{{m}}</ion-select-option>
+        </ion-select>
+      </ion-button>
+    </ion-item>
+
+    <p class="am-title">How often do you drink socially?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.single.drink" okText="CHOOSE" cancelText="CANCEL" placeholder="How often do you drink socially?" [interfaceOptions]="selectSingleDrinkOption">
+        <ion-select-option *ngFor="let drink of drinks; let i = index;" [value]="i">{{drink}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Drink Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.single.privacy_drink" mode="ios"></ion-toggle>
+    </ion-item>
+
+    <p class="am-title">Do you smoke or vape?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.single.smoke" okText="CHOOSE" cancelText="CANCEL" placeholder="Do you smoke or vape?" [interfaceOptions]="selectSingleSmokeOption">
+        <ion-select-option [value]="1">YES</ion-select-option>
+        <ion-select-option [value]="0">NO</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Smoke Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.single.privacy_smoke" mode="ios"></ion-toggle>
+    </ion-item>
+
+    <p class="am-title">
+      How important is physical affection and sex to you?
+    </p>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label" position="stacked"></ion-label>
+      <ion-range [(ngModel)]="data.single.sex_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': data.single_sex_scale === 0}">0</div>
+        <div [ngClass]="{'active': data.single_sex_scale === 1}">1</div>
+        <div [ngClass]="{'active': data.single_sex_scale === 2}">2</div>
+        <div [ngClass]="{'active': data.single_sex_scale === 3}">3</div>
+        <div [ngClass]="{'active': data.single_sex_scale === 4}">4</div>
+        <div [ngClass]="{'active': data.single_sex_scale === 5}">5</div>
+        <div [ngClass]="{'active': data.single_sex_scale === 6}">6</div>
+        <div [ngClass]="{'active': data.single_sex_scale === 7}">7</div>
+        <div [ngClass]="{'active': data.single_sex_scale === 8}">8</div>
+        <div [ngClass]="{'active': data.single_sex_scale === 9}">9</div>
+        <div [ngClass]="{'active': data.single_sex_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+
+    <p class="am-title">Do you have pets?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.single.have_pets" okText="CHOOSE" cancelText="CANCEL" placeholder="Do you have pets?" [interfaceOptions]="selectSigleHavePetsOption">
+        <ion-select-option [value]="1">YES</ion-select-option>
+        <ion-select-option [value]="0">NO</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="data.single.have_pets">
+      <ion-label class="am-label">What type of pet do you own?</ion-label>
+      <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.single.pets" okText="CHOOSE" cancelText="CANCEL" placeholder="Which pet do you have?" [interfaceOptions]="selectSiglePetsOption">
+          <ion-select-option *ngFor="let pet of pets; let i = index;" [value]="i">{{pet}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+        <ion-label class="am-label" position="stacked">How important is liking your pets to a potential romantic relationship?</ion-label>
+        <ion-range [(ngModel)]="data.single.pets_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.single.pets_scale === 0}">0</div>
+          <div [ngClass]="{'active': data.single.pets_scale === 1}">1</div>
+          <div [ngClass]="{'active': data.single.pets_scale === 2}">2</div>
+          <div [ngClass]="{'active': data.single.pets_scale === 3}">3</div>
+          <div [ngClass]="{'active': data.single.pets_scale === 4}">4</div>
+          <div [ngClass]="{'active': data.single.pets_scale === 5}">5</div>
+          <div [ngClass]="{'active': data.single.pets_scale === 6}">6</div>
+          <div [ngClass]="{'active': data.single.pets_scale === 7}">7</div>
+          <div [ngClass]="{'active': data.single.pets_scale === 8}">8</div>
+          <div [ngClass]="{'active': data.single.pets_scale === 9}">9</div>
+          <div [ngClass]="{'active': data.single.pets_scale === 10}">10</div>
+        </ion-row>
+      </ion-item>
+    </div>
+    <div *ngIf="data.single.have_pets === 0">
+      <ion-label class="am-label">Do you like dogs or cats?</ion-label>
+      <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.single.like_pets" okText="CHOOSE" cancelText="CANCEL" placeholder="Do you like dogs or cats?" [interfaceOptions]="selectLikePetsOption">
+          <ion-select-option [value]="0">Both</ion-select-option>
+          <ion-select-option [value]="1">Other pets</ion-select-option>
+          <ion-select-option [value]="2">Doesn't matter</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!--  -->
+    <p class="am-title">What age groups do you want to be matched with?</p>
+    <!-- <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.single.match_age" okText="CHOOSE" cancelText="CANCEL" placeholder="Select age group:" [interfaceOptions]="selectPartnerAgeOption">
+        <ion-select-option *ngFor="let agegroup of partneragegroups; let i = index;" [value]="i">{{agegroup}}</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+
+    <ion-item class="am-control-item mb-2" lines="none" *ngFor="let group of data.single.match_age;">
+      <ion-item class="am-control-item" lines="none">
+        <ion-select [(ngModel)]="data.single.match_age" [selectedText]="partneragegroups[group]" okText="CHOOSE" multiple="true" cancelText="CANCEL" placeholder="Select age group:" [interfaceOptions]="selectPartnerAgeOption">
+          <ion-select-option *ngFor="let agegroup of partneragegroups; let i = index;" [value]="i">{{agegroup}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-fab-button (click)="removeAgeGroup(group)" appAM class="am-control-action" size="small" slot=end>
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+    <ion-item lines="none" *ngIf="!data.single.match_age || data.single.match_age.length === 0" class="am-action-item">
+      <ion-button appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon class="readjust-item-text" name="add-circle"></ion-icon> &nbsp;&nbsp;Add Your Age Groups
+        <ion-select class="remove-caret" [(ngModel)]="data.single.match_age" okText="CHOOSE" multiple="true" cancelText="CANCEL" [interfaceOptions]="selectPartnerAgeOption">
+          <ion-select-option *ngFor="let age of partneragegroups; let i = index;" [value]="i">{{age}}</ion-select-option>
+        </ion-select>
+      </ion-button>
+    </ion-item>
+
+    <p class="am-title">What body type are you looking for?</p>
+    <!-- <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.single.body_type" okText="CHOOSE" cancelText="CANCEL" placeholder="Select body type:" [interfaceOptions]="selectBodyTypeOption">
+        <ion-select-option *ngFor="let bodytype of bodytypes; let i = index;" [value]="i">{{bodytype}}</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+
+    <ion-item class="am-control-item mb-2" lines="none" *ngFor="let type of data.single.body_type;">
+      <ion-item class="am-control-item" lines="none">
+        <ion-select [(ngModel)]="data.single.body_type" [selectedText]="bodytypes[type]" okText="CHOOSE" multiple="true" cancelText="CANCEL" placeholder="Select body types?" [interfaceOptions]="selectBodyTypeOption">
+          <ion-select-option *ngFor="let type of bodytypes; let i = index;" [value]="i">{{type}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-fab-button (click)="removeBodyType(type)" appAM class="am-control-action" size="small" slot=end>
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+    <ion-item lines="none" *ngIf="!data.single.body_type || data.single.body_type.length === 0" class="am-action-item">
+      <ion-button appAM class="am-btn-add" size="small" expand="fill">
+        <ion-icon class="readjust-item-text" name="add-circle"></ion-icon> &nbsp;&nbsp;Add Your Body Types
+        <ion-select class="remove-caret" [(ngModel)]="data.single.body_type" okText="CHOOSE" multiple="true" cancelText="CANCEL" [interfaceOptions]="selectBodyTypeOption">
+          <ion-select-option *ngFor="let type of bodytypes; let i = index;" [value]="i">{{type}}</ion-select-option>
+        </ion-select>
+      </ion-button>
+    </ion-item>
+
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Body Type Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.single.privacy_body_type" mode="ios"></ion-toggle>
+    </ion-item>
+
+    <p class="am-title">How would you describe your own body type?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.single.own_body_type" okText="CHOOSE" cancelText="CANCEL" placeholder="Select body type:" [interfaceOptions]="selectBodyTypeOption">
+        <ion-select-option *ngFor="let bodytype of bodytypes; let i = index;" [value]="i">{{bodytype}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Your Body Type Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.single.privacy_own_body_type" mode="ios"></ion-toggle>
+    </ion-item>
+
+    <p class="am-title">How often do you laugh?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.single.laugh" okText="CHOOSE" cancelText="CANCEL" placeholder="How often do you laugh?" [interfaceOptions]="selectSingleLaughOption">
+        <ion-select-option *ngFor="let count of laughing_counts; let i = index;" [value]="i">{{count}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="am-control-item ion-padding-start">
+      <ion-label>Laugh Privacy</ion-label>
+      <ion-toggle appAM [(ngModel)]="data.single.privacy_laugh" mode="ios"></ion-toggle>
+    </ion-item>
+    <p class="am-title">How important is laughing in a romantic relationship to you?</p>
+    <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+      <ion-label class="am-label" position="stacked"></ion-label>
+      <ion-range [(ngModel)]="data.single.laugh_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+      <ion-row class="miles">
+        <div [ngClass]="{'active': data.single.laugh_scale === 0}">0</div>
+        <div [ngClass]="{'active': data.single.laugh_scale === 1}">1</div>
+        <div [ngClass]="{'active': data.single.laugh_scale === 2}">2</div>
+        <div [ngClass]="{'active': data.single.laugh_scale === 3}">3</div>
+        <div [ngClass]="{'active': data.single.laugh_scale === 4}">4</div>
+        <div [ngClass]="{'active': data.single.laugh_scale === 5}">5</div>
+        <div [ngClass]="{'active': data.single.laugh_scale === 6}">6</div>
+        <div [ngClass]="{'active': data.single.laugh_scale === 7}">7</div>
+        <div [ngClass]="{'active': data.single.laugh_scale === 8}">8</div>
+        <div [ngClass]="{'active': data.single.laugh_scale === 9}">9</div>
+        <div [ngClass]="{'active': data.single.laugh_scale === 10}">10</div>
+      </ion-row>
+    </ion-item>
+
+    <p class="am-title">Have you ever been married before?</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.single.married_before" okText="CHOOSE" cancelText="CANCEL" placeholder="Have you ever been married before?" [interfaceOptions]="selectSigleMarriedOption">
+        <ion-select-option [value]="1">YES</ion-select-option>
+        <ion-select-option [value]="0">NO</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="data.single.married_before">
+      <ion-label class="am-label">How many other marriages have you had?</ion-label>
+      <ion-item class="am-control-item mb-2" lines="none">
+        <ion-select [(ngModel)]="data.single.married_count" okText="CHOOSE" cancelText="CANCEL" placeholder="How many other marriages have you had?" [interfaceOptions]="selectMarrigesOption">
+          <ion-select-option [value]="0">0</ion-select-option>
+          <ion-select-option [value]="1">1</ion-select-option>
+          <ion-select-option [value]="2">2</ion-select-option>
+          <ion-select-option [value]="3">3</ion-select-option>
+          <ion-select-option [value]="4">4</ion-select-option>
+          <ion-select-option [value]="5">5</ion-select-option>
+          <ion-select-option [value]="6">6</ion-select-option>
+          <ion-select-option [value]="7">7</ion-select-option>
+          <ion-select-option [value]="8">8</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <div *ngIf="data.single.married_before === 0">
+      <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+        <ion-label class="am-label" position="stacked">On a scale of 1 to 10 how much do you want to be matched up with other alumni that have the same number of previous marriages as you do?</ion-label>
+        <ion-range [(ngModel)]="data.single.married_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.single.married_scale === 0}">0</div>
+          <div [ngClass]="{'active': data.single.married_scale === 1}">1</div>
+          <div [ngClass]="{'active': data.single.married_scale === 2}">2</div>
+          <div [ngClass]="{'active': data.single.married_scale === 3}">3</div>
+          <div [ngClass]="{'active': data.single.married_scale === 4}">4</div>
+          <div [ngClass]="{'active': data.single.married_scale === 5}">5</div>
+          <div [ngClass]="{'active': data.single.married_scale === 6}">6</div>
+          <div [ngClass]="{'active': data.single.married_scale === 7}">7</div>
+          <div [ngClass]="{'active': data.single.married_scale === 8}">8</div>
+          <div [ngClass]="{'active': data.single.married_scale === 9}">9</div>
+          <div [ngClass]="{'active': data.single.married_scale === 10}">10</div>
+        </ion-row>
+      </ion-item>
+    </div>
+
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Do you have any children?</ion-label>
+      <ion-checkbox mode="md" appAM [(ngModel)]="data.single.have_kids" (ionChange)="data.kids = [{}]"></ion-checkbox>
+    </ion-item>
+    <div *ngIf="data.single.have_kids">
+      <div *ngFor="let kid of data.kids; let i = index;" class="mb-2">
+        <ion-item class="am-control-item" lines="none">
+          <ion-select [(ngModel)]="kid.gender" okText="CHOOSE" cancelText="CANCEL" placeholder="Select gender" [interfaceOptions]="selectGenderOption">
+            <ion-select-option *ngFor="let item of genders; let k = index;" [value]="k">{{item}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="am-action-item">
+          <ion-item class="am-control-item" lines="none">
+            <ion-select [(ngModel)]="kid.age" okText="CHOOSE" cancelText="CANCEL" placeholder="Select age group" [interfaceOptions]="selectAgeOption">
+              <ion-select-option *ngFor="let item of agegroups; let k = index;" [value]="k">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-fab-button (click)="data.kids.splice(i, 1);" appAM class="am-control-action" size="small" slot=end>
+            <ion-icon name="remove"></ion-icon>
+          </ion-fab-button>
+        </ion-item>
+      </div>
+      <ion-item lines="none" class="am-action-item">
+        <ion-button (click)="addKid()" appAM class="am-btn-add" size="small" expand="fill">
+          <ion-icon name="add-circle"></ion-icon> &nbsp;&nbsp;Add Another Child
+        </ion-button>
+      </ion-item>
+      <ion-item class="am-control-item am-control-range-item mb-2" lines="none">
+        <ion-label class="am-label" position="stacked">How much do you want to be matched with others that have similar children as you?</ion-label>
+        <ion-range [(ngModel)]="data.single.kids_scale" min="0" max="10" mode="md" step="1" snaps="true" ticks="false"></ion-range>
+        <ion-row class="miles">
+          <div [ngClass]="{'active': data.single.kids_scale === 0}">0</div>
+          <div [ngClass]="{'active': data.single.kids_scale === 1}">1</div>
+          <div [ngClass]="{'active': data.single.kids_scale === 2}">2</div>
+          <div [ngClass]="{'active': data.single.kids_scale === 3}">3</div>
+          <div [ngClass]="{'active': data.single.kids_scale === 4}">4</div>
+          <div [ngClass]="{'active': data.single.kids_scale === 5}">5</div>
+          <div [ngClass]="{'active': data.single.kids_scale === 6}">6</div>
+          <div [ngClass]="{'active': data.single.kids_scale === 7}">7</div>
+          <div [ngClass]="{'active': data.single.kids_scale === 8}">8</div>
+          <div [ngClass]="{'active': data.single.kids_scale === 9}">9</div>
+          <div [ngClass]="{'active': data.single.kids_scale === 10}">10</div>
+        </ion-row>
+      </ion-item>
+    </div>
+  </div>
+  <!-- Significant Other -->
+  <div *ngIf="data.relationship === 5">
+    <p class="am-title">How long have you been married:</p>
+    <ion-item class="am-control-item mb-2" lines="none">
+      <ion-select [(ngModel)]="data.other.married_year" okText="CHOOSE" cancelText="CANCEL" placeholder="How long have you been married:" [interfaceOptions]="selectMarryYearsOption">
+        <ion-select-option *ngFor="let year of marry_years; let i = index;" [value]="i">{{year}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item mode="md" class="am-control-item title-item">
+      <ion-label class="am-title ion-padding-end">Do you have children?</ion-label>
+      <ion-checkbox mode="md" appAM [(ngModel)]="data.other.have_kids" (ionChange)="data.kids = [{}]"></ion-checkbox>
+    </ion-item>
+    <div *ngIf="data.other.have_kids">
+      <div *ngFor="let kid of data.kids; let i = index;" class="mb-2">
+        <ion-item class="am-control-item" lines="none">
+          <ion-select [(ngModel)]="kid.gender" okText="CHOOSE" cancelText="CANCEL" placeholder="Select gender" [interfaceOptions]="selectGenderOption">
+            <ion-select-option *ngFor="let item of genders; let k = index;" [value]="k">{{item}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="am-action-item">
+          <ion-item class="am-control-item" lines="none">
+            <ion-select [(ngModel)]="kid.age" okText="CHOOSE" cancelText="CANCEL" placeholder="Select age group" [interfaceOptions]="selectAgeOption">
+              <ion-select-option *ngFor="let item of agegroups; let k = index;" [value]="k">{{item}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-fab-button (click)="data.kids.splice(i, 1);" appAM class="am-control-action" size="small" slot=end>
+            <ion-icon name="remove"></ion-icon>
+          </ion-fab-button>
+        </ion-item>
+      </div>
+      <ion-item lines="none" class="am-action-item">
+        <ion-button (click)="addKid()" appAM class="am-btn-add" size="small" expand="fill">
+          <ion-icon name="add-circle"></ion-icon> &nbsp;&nbsp;Add Another Child
+        </ion-button>
+      </ion-item>
+    </div>
+  </div>
+</ion-content>
+  
+<ion-footer appAM class="btn-footer">
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" class="ion-no-margin" appAM>SUBMIT</ion-button>
+  </ion-toolbar>
+</ion-footer>
